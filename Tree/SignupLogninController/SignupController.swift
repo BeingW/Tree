@@ -9,18 +9,13 @@
 import UIKit
 
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
-
-    //MARK: - BackgroundView
-    let backgroundView: UIView = {
-        let backgroundView = UIView();
-        
+    
+    //MARK: - SignupBackgroundImageView
+    let signupBackgroundImageView: UIImageView = {
         let backgroundImage = UIImage(named: "SignupBackground@2x");
-        let imageView = UIImageView(image: backgroundImage);
+        let backgroundImageView = UIImageView(image: backgroundImage);
         
-        backgroundView.addSubview(imageView);
-        imageView.anchor(top: backgroundView.topAnchor, left: backgroundView.leftAnchor, bottom: backgroundView.bottomAnchor, right: backgroundView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        return backgroundView
+        return backgroundImageView
     }()
     
     //MARK: - ProfileButton
@@ -51,10 +46,10 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         return textField;
     }()
     
-    //MARK: - DoTreeButton
+    //MARK: - SignUpButton
     let signupButton: UIButton = {
         let doTreeButton = UIButton(type: .system)
-        let doTreeButtonImage = UIImage(named: "LoginButton@2x")
+        let doTreeButtonImage = UIImage(named: "SignupButton@2x")
         doTreeButton.setBackgroundImage(doTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         doTreeButton.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
         return doTreeButton
@@ -87,22 +82,41 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     }
     
+    //MARK: - DoTreeLoginButton
+    let doTreeLoginButton: UIButton = {
+        let doTreeLoginButton = UIButton()
+        let doTreeLoginButtonImage = UIImage(named: "AlreadyHaveAccount")
+        
+        doTreeLoginButton.setBackgroundImage(doTreeLoginButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        doTreeLoginButton.addTarget(self, action: #selector(doTreeLoginButtonTapped), for: .touchUpInside)
+        return doTreeLoginButton
+    }()
+    
+    @objc func doTreeLoginButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     //MARK: - setViews
     func setViews() {
-        self.view.addSubview(backgroundView);
+        self.view.addSubview(signupBackgroundImageView);
         self.view.addSubview(profileButton);
         self.view.addSubview(userNameTextField);
         self.view.addSubview(signupButton);
+        self.view.addSubview(doTreeLoginButton);
        
-        backgroundView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        signupBackgroundImageView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
         profileButton.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 1).isActive = true;
-        
         profileButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: self.view.frame.height * (1/3), paddingLeft: 0, paddingBottom: self.view.frame.height * (2/3), paddingRight: 0, width: self.view.frame.width/3, height: self.view.frame.width/3)
+
+      userNameTextField.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true
+          userNameTextField.anchor(top: self.profileButton.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: view.frame.width/10)
         
-        userNameTextField.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true
-        userNameTextField.anchor(top: self.profileButton.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: view.frame.width/10)
         signupButton.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true;
         signupButton.anchor(top: self.userNameTextField.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: view.frame.width/10)
+        
+        doTreeLoginButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
+        doTreeLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
     //MARK: - keyboardDismiss

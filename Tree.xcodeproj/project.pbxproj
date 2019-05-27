@@ -9,10 +9,16 @@
 /* Begin PBXBuildFile section */
 		1933FCC4229A679C0061EC64 /* Tree.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1933FCC2229A679C0061EC64 /* Tree.xcdatamodeld */; };
 		197A0D33229B99D400647E9B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D32229B99D400647E9B /* LoginController.swift */; };
-		197A0D36229B9B6C00647E9B /* SignupButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D35229B9B6C00647E9B /* SignupButton@2x.png */; };
-		197A0D3A229B9BC700647E9B /* LoginBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D37229B9BC700647E9B /* LoginBackground@2x.png */; };
-		197A0D3B229B9BC700647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D38229B9BC700647E9B /* HaveAccount.png */; };
-		197A0D3C229B9BC700647E9B /* UserNameTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D39229B9BC700647E9B /* UserNameTextField@2x.png */; };
+		197A0D54229BB31300647E9B /* SignupButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D35229B9B6C00647E9B /* SignupButton@2x.png */; };
+		197A0D55229BB31300647E9B /* AlreadyHaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F3233322969304009F54D3 /* AlreadyHaveAccount.png */; };
+		197A0D56229BB31300647E9B /* UserNameTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F3233422969304009F54D3 /* UserNameTextField@2x.png */; };
+		197A0D57229BB31300647E9B /* ProfileImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B8F22954F41007011F7 /* ProfileImage@2x.png */; };
+		197A0D58229BB31300647E9B /* SignupBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B8E22954F41007011F7 /* SignupBackground@2x.png */; };
+		197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5A229BB38900647E9B /* LoginBackground@2x.png */; };
+		197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5B229BB38900647E9B /* HaveAccount.png */; };
+		197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5C229BB38900647E9B /* LoginButton@2x.png */; };
+		197A0D61229BBD0F00647E9B /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D60229BBD0F00647E9B /* DiaryTableViewController.swift */; };
+		197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D63229BED3800647E9B /* CustomNavigationController.swift */; };
 		19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B752295291C007011F7 /* AppDelegate.swift */; };
 		19AC1B782295291C007011F7 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B772295291C007011F7 /* SignupController.swift */; };
 		19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B792295291C007011F7 /* Main.storyboard */; };
@@ -20,20 +26,17 @@
 		19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */; };
 		19AC1B8922954265007011F7 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8822954265007011F7 /* Extention.swift */; };
 		19AC1B8C2295440D007011F7 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8B2295440D007011F7 /* Diary.swift */; };
-		19AC1B9022954F41007011F7 /* SignupBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B8E22954F41007011F7 /* SignupBackground@2x.png */; };
-		19AC1B9122954F41007011F7 /* ProfileImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B8F22954F41007011F7 /* ProfileImage@2x.png */; };
-		19F3233622969304009F54D3 /* AlreadyHaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F3233322969304009F54D3 /* AlreadyHaveAccount.png */; };
-		19F3233722969304009F54D3 /* UserNameTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F3233422969304009F54D3 /* UserNameTextField@2x.png */; };
-		19F323392296995B009F54D3 /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F323382296995B009F54D3 /* LoginButton@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1933FCC3229A679C0061EC64 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
 		197A0D32229B99D400647E9B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		197A0D35229B9B6C00647E9B /* SignupButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignupButton@2x.png"; sourceTree = "<group>"; };
-		197A0D37229B9BC700647E9B /* LoginBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBackground@2x.png"; sourceTree = "<group>"; };
-		197A0D38229B9BC700647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
-		197A0D39229B9BC700647E9B /* UserNameTextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserNameTextField@2x.png"; sourceTree = "<group>"; };
+		197A0D5A229BB38900647E9B /* LoginBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBackground@2x.png"; sourceTree = "<group>"; };
+		197A0D5B229BB38900647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
+		197A0D5C229BB38900647E9B /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
+		197A0D60229BBD0F00647E9B /* DiaryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
+		197A0D63229BED3800647E9B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		19AC1B722295291C007011F7 /* Tree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AC1B752295291C007011F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19AC1B772295291C007011F7 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
@@ -47,7 +50,6 @@
 		19AC1B8F22954F41007011F7 /* ProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileImage@2x.png"; sourceTree = "<group>"; };
 		19F3233322969304009F54D3 /* AlreadyHaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlreadyHaveAccount.png; sourceTree = "<group>"; };
 		19F3233422969304009F54D3 /* UserNameTextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserNameTextField@2x.png"; sourceTree = "<group>"; };
-		19F323382296995B009F54D3 /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,16 +72,22 @@
 			path = SignupLogninController;
 			sourceTree = "<group>";
 		};
-		197A0D34229B9B0500647E9B /* LoginControllerImages */ = {
+		197A0D59229BB35A00647E9B /* LoginControllerImages */ = {
 			isa = PBXGroup;
 			children = (
-				197A0D38229B9BC700647E9B /* HaveAccount.png */,
-				197A0D37229B9BC700647E9B /* LoginBackground@2x.png */,
-				197A0D39229B9BC700647E9B /* UserNameTextField@2x.png */,
-				19F323382296995B009F54D3 /* LoginButton@2x.png */,
+				197A0D5B229BB38900647E9B /* HaveAccount.png */,
+				197A0D5A229BB38900647E9B /* LoginBackground@2x.png */,
+				197A0D5C229BB38900647E9B /* LoginButton@2x.png */,
 			);
-			name = LoginControllerImages;
-			path = SignupController;
+			path = LoginControllerImages;
+			sourceTree = "<group>";
+		};
+		197A0D62229BED2000647E9B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				197A0D63229BED3800647E9B /* CustomNavigationController.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		19AC1B692295291C007011F7 = {
@@ -101,6 +109,8 @@
 		19AC1B742295291C007011F7 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
+				197A0D60229BBD0F00647E9B /* DiaryTableViewController.swift */,
+				197A0D62229BED2000647E9B /* Utils */,
 				197A0D31229B99AF00647E9B /* SignupLogninController */,
 				19AC1B8D22954EE7007011F7 /* Resource */,
 				19AC1B8A229543DF007011F7 /* Model */,
@@ -134,7 +144,7 @@
 		19AC1B8D22954EE7007011F7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				197A0D34229B9B0500647E9B /* LoginControllerImages */,
+				197A0D59229BB35A00647E9B /* LoginControllerImages */,
 				19AC1B9222954F48007011F7 /* SignupControllerImages */,
 			);
 			path = Resource;
@@ -212,18 +222,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				197A0D3A229B9BC700647E9B /* LoginBackground@2x.png in Resources */,
-				19F3233622969304009F54D3 /* AlreadyHaveAccount.png in Resources */,
+				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
+				197A0D54229BB31300647E9B /* SignupButton@2x.png in Resources */,
+				197A0D55229BB31300647E9B /* AlreadyHaveAccount.png in Resources */,
+				197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */,
+				197A0D56229BB31300647E9B /* UserNameTextField@2x.png in Resources */,
+				197A0D57229BB31300647E9B /* ProfileImage@2x.png in Resources */,
+				197A0D58229BB31300647E9B /* SignupBackground@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
-				197A0D3B229B9BC700647E9B /* HaveAccount.png in Resources */,
+				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
 				19AC1B7D2295291D007011F7 /* Assets.xcassets in Resources */,
-				19AC1B9022954F41007011F7 /* SignupBackground@2x.png in Resources */,
-				19F323392296995B009F54D3 /* LoginButton@2x.png in Resources */,
-				19AC1B9122954F41007011F7 /* ProfileImage@2x.png in Resources */,
-				19F3233722969304009F54D3 /* UserNameTextField@2x.png in Resources */,
 				19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */,
-				197A0D3C229B9BC700647E9B /* UserNameTextField@2x.png in Resources */,
-				197A0D36229B9B6C00647E9B /* SignupButton@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +246,8 @@
 				19AC1B782295291C007011F7 /* SignupController.swift in Sources */,
 				197A0D33229B99D400647E9B /* LoginController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
+				197A0D61229BBD0F00647E9B /* DiaryTableViewController.swift in Sources */,
+				197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */,
 				19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */,
 				19AC1B8C2295440D007011F7 /* Diary.swift in Sources */,
 				1933FCC4229A679C0061EC64 /* Tree.xcdatamodeld in Sources */,

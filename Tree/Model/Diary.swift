@@ -18,6 +18,7 @@ class Diary {
         self.userName = userName ?? "";
         
         //self.post?.id ?? ""
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
