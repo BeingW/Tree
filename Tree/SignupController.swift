@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     //MARK: - BackgroundView
     let backgroundView: UIView = {
@@ -41,7 +41,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: - userNameTextField
     let userNameTextField: UITextField = {
         let textField = UITextField();
-        
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
         textField.leftView = paddingView
         textField.leftViewMode = .always
@@ -62,10 +61,30 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }()
     
     @objc func doTreeButtonTapped() {
-        self.userDiary.userName = userNameTextField.text
-        self.userDiary.profilePicture = profileButton.imageView?.image
         
-        print("\(userDiary.userName) \n \(userDiary.profilePicture)")
+        var loginIsSucceed: Bool = false;
+        guard let userName: String = userNameTextField.text else {return}
+        guard let userProfilePicture: UIImage = profileButton.imageView?.image else {return}
+        
+        if userName != "" && userProfilePicture != nil {
+            //profilePicture And userName are texted
+            
+            loginIsSucceed == true;
+        } else {
+            if userName != "" {
+                //only userName is texted
+            } else if userProfilePicture != nil {
+                //only userProfilePicture is texted
+            } else {
+                //both of them are not texted
+            }
+            loginIsSucceed == false;
+        }
+        
+        if loginIsSucceed == true {
+            
+        }
+        
     }
     
     //MARK: - setViews
@@ -102,6 +121,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         setViews()
         
+        print("userName \(userNameTextField.text)", " profileImage \(profileButton.imageView?.image)")
     }
     
     //MARK: - userDiary instance
