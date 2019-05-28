@@ -203,7 +203,7 @@
 											"top": 738,
 											"width": 287,
 											"height": 13,
-											"text": "+doTreeLoginButton: UIButton",
+											"text": "+goToLoginButton: UIButton",
 											"horizontalAlignment": 0
 										},
 										{
@@ -310,6 +310,23 @@
 										},
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAFq/BdKwKv8OUI=",
+											"_parent": {
+												"$ref": "AAAAAAFq9yuAElQwzdI="
+											},
+											"model": {
+												"$ref": "AAAAAAFq/BdKqqv5s74="
+											},
+											"font": "Arial;13;0",
+											"left": 573,
+											"top": 836,
+											"width": 287,
+											"height": 13,
+											"text": "+goToLoginButtonTapped()",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAFq9z0oHVXk8dg=",
 											"_parent": {
 												"$ref": "AAAAAAFq9yuAElQwzdI="
@@ -319,7 +336,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 573,
-											"top": 836,
+											"top": 851,
 											"width": 287,
 											"height": 13,
 											"text": "+imagePicekrController()",
@@ -336,7 +353,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 573,
-											"top": 851,
+											"top": 866,
 											"width": 287,
 											"height": 13,
 											"text": "+touchesBegan(_: Set<UITouch>, _: UIEvent?)",
@@ -353,7 +370,7 @@
 											},
 											"font": "Arial;13;2",
 											"left": 573,
-											"top": 866,
+											"top": 881,
 											"width": 287,
 											"height": 13,
 											"text": "+textFieldShouldReturn(_: UITextField): Boolean",
@@ -364,7 +381,7 @@
 									"left": 568,
 									"top": 771,
 									"width": 297,
-									"height": 113
+									"height": 128
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -404,7 +421,7 @@
 							"left": 568,
 							"top": 648,
 							"width": 297,
-							"height": 236,
+							"height": 251,
 							"nameCompartment": {
 								"$ref": "AAAAAAFq9yuAElQqcbE="
 							},
@@ -1066,7 +1083,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 585,
+									"left": 583,
 									"top": 628,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1087,8 +1104,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 574,
-									"top": 638,
+									"left": 571,
+									"top": 637,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1108,7 +1125,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 608,
+									"left": 606,
 									"top": 609,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1127,7 +1144,7 @@
 								"$ref": "AAAAAAFq9yuAEVQpXh0="
 							},
 							"lineStyle": 1,
-							"points": "616:647;579:604",
+							"points": "613:647;578:604",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFq9zUqMVWaYzY="
@@ -1160,7 +1177,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 594,
+									"left": 592,
 									"top": 590,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1181,7 +1198,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 581,
+									"left": 579,
 									"top": 598,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1202,7 +1219,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 619,
+									"left": 617,
 									"top": 575,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1221,7 +1238,7 @@
 								"$ref": "AAAAAAFq9yuAEVQpXh0="
 							},
 							"lineStyle": 1,
-							"points": "643:647;572:532",
+							"points": "640:647;571:532",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFq9zVFrFWrE3c="
@@ -1254,7 +1271,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 794,
+									"left": 795,
 									"top": 599,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -1275,8 +1292,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 781,
-									"top": 591,
+									"left": 782,
+									"top": 592,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1296,7 +1313,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 819,
+									"left": 820,
 									"top": 614,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -1315,7 +1332,7 @@
 								"$ref": "AAAAAAFq9yuAEVQpXh0="
 							},
 							"lineStyle": 1,
-							"points": "787:647;827:580",
+							"points": "789:647;827:580",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFq9zVY2FW8Nvs="
@@ -1773,7 +1790,7 @@
 									},
 									"font": "Arial;13;0",
 									"left": 504,
-									"top": 741,
+									"top": 746,
 									"width": 63.21630859375,
 									"height": 13,
 									"alpha": 3.462718541014272,
@@ -1795,8 +1812,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 480,
-									"top": 789,
+									"left": 479,
+									"top": 793,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1816,8 +1833,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 479,
-									"top": 745,
+									"left": 480,
+									"top": 749,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -1837,8 +1854,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 541,
-									"top": 775,
+									"left": 540,
+									"top": 779,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -1859,7 +1876,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 538,
-									"top": 788,
+									"top": 792,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -1880,7 +1897,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 545,
-									"top": 747,
+									"top": 752,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -1900,8 +1917,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 419,
-									"top": 775,
+									"left": 418,
+									"top": 778,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -1920,8 +1937,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 421,
-									"top": 789,
+									"left": 420,
+									"top": 791,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -1941,7 +1958,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 414,
-									"top": 748,
+									"top": 750,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -1986,7 +2003,7 @@
 								"$ref": "AAAAAAFq9yuAEVQpXh0="
 							},
 							"lineStyle": 1,
-							"points": "567:766;393:767",
+							"points": "567:771;393:769",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFq90e+rlZLVnw="
@@ -2171,7 +2188,7 @@
 											"top": 716,
 											"width": 279.53173828125,
 											"height": 13,
-											"text": "+doTreeButton: UIButton",
+											"text": "+loginButton: UIButton",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2188,7 +2205,7 @@
 											"top": 731,
 											"width": 279.53173828125,
 											"height": 13,
-											"text": "+signupTreeButton: UIButton",
+											"text": "+goToSignupButton: UIButton",
 											"horizontalAlignment": 0
 										}
 									],
@@ -2256,7 +2273,7 @@
 											"top": 784,
 											"width": 279.53173828125,
 											"height": 13,
-											"text": "+doTreeButtonTapped(): void",
+											"text": "+loginButtonTapped(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2273,7 +2290,7 @@
 											"top": 799,
 											"width": 279.53173828125,
 											"height": 13,
-											"text": "+signupTreeButtonTapped(): void",
+											"text": "+goToSignupButtonTapped(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2589,7 +2606,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 904,
-									"top": 770,
+									"top": 774,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2609,8 +2626,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 904,
-									"top": 785,
+									"left": 905,
+									"top": 789,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -2631,7 +2648,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 903,
-									"top": 741,
+									"top": 745,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -2649,7 +2666,7 @@
 								"$ref": "AAAAAAFq+Qo0U1oCDvM="
 							},
 							"lineStyle": 1,
-							"points": "943:762;865:763",
+							"points": "943:765;865:768",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFq+RuZq2DH7rk="
@@ -3066,7 +3083,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFq9yuAEFQnXc4="
 							},
-							"name": "doTreeLoginButton",
+							"name": "goToLoginButton",
 							"type": "UIButton"
 						},
 						{
@@ -3145,6 +3162,14 @@
 									"direction": "return"
 								}
 							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFq/BdKqqv5s74=",
+							"_parent": {
+								"$ref": "AAAAAAFq9yuAEFQnXc4="
+							},
+							"name": "goToLoginButtonTapped"
 						},
 						{
 							"_type": "UMLOperation",
@@ -3387,7 +3412,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFq+Qo0U1oAW5g="
 							},
-							"name": "doTreeButton",
+							"name": "loginButton",
 							"type": "UIButton"
 						},
 						{
@@ -3396,7 +3421,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFq+Qo0U1oAW5g="
 							},
-							"name": "signupTreeButton",
+							"name": "goToSignupButton",
 							"type": "UIButton"
 						}
 					],
@@ -3434,7 +3459,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFq+Qo0U1oAW5g="
 							},
-							"name": "doTreeButtonTapped",
+							"name": "loginButtonTapped",
 							"parameters": [
 								{
 									"_type": "UMLParameter",
@@ -3453,7 +3478,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFq+Qo0U1oAW5g="
 							},
-							"name": "signupTreeButtonTapped",
+							"name": "goToSignupButtonTapped",
 							"parameters": [
 								{
 									"_type": "UMLParameter",

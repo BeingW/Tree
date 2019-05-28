@@ -34,29 +34,29 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return userNameTexField
     }()
     
-    //MARK: - DoTreeButtonView
-    let doTreeButton: UIButton = {
+    //MARK: - LoginButtonView
+    let loginButton: UIButton = {
         let doTreeButton = UIButton()
         let doTreeButtoBackgroundImage = UIImage(named: "LoginButton@2x")
         doTreeButton.setBackgroundImage(doTreeButtoBackgroundImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        doTreeButton.addTarget(self, action: #selector(doTreeButtonTapped), for: .touchUpInside)
+        doTreeButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return doTreeButton
     }()
     
-    @objc func doTreeButtonTapped() {
+    @objc func loginButtonTapped() {
         self.present(diaryTableViewController, animated: true, completion: nil)
     }
     
-    //MARK: - SignupTreeButtonView
-    let signupTreeButton: UIButton = {
+    //MARK: - GoToSignupButtonView
+    let goToSignupButton: UIButton = {
         let signupTreeButton = UIButton()
         let signupTreeButtonImage = UIImage(named: "HaveAccount")
         signupTreeButton.setBackgroundImage(signupTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        signupTreeButton.addTarget(self, action: #selector(signupTreeButtonTapped), for: .touchUpInside)
+        signupTreeButton.addTarget(self, action: #selector(goToSignupButtonTapped), for: .touchUpInside)
         return signupTreeButton
     }()
     
-    @objc func signupTreeButtonTapped() {
+    @objc func goToSignupButtonTapped() {
         let signupController = SignupController()
         self.navigationController?.pushViewController(signupController, animated: true)
     }
@@ -84,16 +84,16 @@ class LoginController: UIViewController, UITextFieldDelegate {
     func setViews() {
         self.userNameTextField.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
         self.userNameTextField.heightAnchor.constraint(equalToConstant: view.frame.width / 10).isActive = true
-        self.doTreeButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
-        self.doTreeButton.heightAnchor.constraint(equalToConstant: view.frame.width / 10).isActive = true
-        let userNameDoTeeStackview = UIStackView(arrangedSubviews: [userNameTextField, doTreeButton])
+        self.loginButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
+        self.loginButton.heightAnchor.constraint(equalToConstant: view.frame.width / 10).isActive = true
+        let userNameDoTeeStackview = UIStackView(arrangedSubviews: [userNameTextField, loginButton])
         userNameDoTeeStackview.axis = .vertical
         userNameDoTeeStackview.spacing = view.frame.height/30
         
         self.view.addSubview(loginBackgroundImageView)
         self.view.addSubview(userNameDoTeeStackview)
         userNameDoTeeStackview.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(signupTreeButton)
+        self.view.addSubview(goToSignupButton)
         
         //loginBackground
         loginBackgroundImageView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -103,8 +103,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         userNameDoTeeStackview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         
         //signup
-        signupTreeButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
-        signupTreeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        goToSignupButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
+        goToSignupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     
     }
     
