@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1933FCC4229A679C0061EC64 /* Tree.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1933FCC2229A679C0061EC64 /* Tree.xcdatamodeld */; };
+		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
 		197A0D33229B99D400647E9B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D32229B99D400647E9B /* LoginController.swift */; };
 		197A0D54229BB31300647E9B /* SignupButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D35229B9B6C00647E9B /* SignupButton@2x.png */; };
 		197A0D55229BB31300647E9B /* AlreadyHaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 19F3233322969304009F54D3 /* AlreadyHaveAccount.png */; };
@@ -25,11 +25,11 @@
 		19AC1B7D2295291D007011F7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B7C2295291D007011F7 /* Assets.xcassets */; };
 		19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */; };
 		19AC1B8922954265007011F7 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8822954265007011F7 /* Extention.swift */; };
-		19AC1B8C2295440D007011F7 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8B2295440D007011F7 /* Diary.swift */; };
+		19AC1B8C2295440D007011F7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8B2295440D007011F7 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1933FCC3229A679C0061EC64 /* User.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = User.xcdatamodel; sourceTree = "<group>"; };
+		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
 		197A0D32229B99D400647E9B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		197A0D35229B9B6C00647E9B /* SignupButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignupButton@2x.png"; sourceTree = "<group>"; };
 		197A0D5A229BB38900647E9B /* LoginBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBackground@2x.png"; sourceTree = "<group>"; };
@@ -45,7 +45,7 @@
 		19AC1B7F2295291D007011F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		19AC1B812295291D007011F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19AC1B8822954265007011F7 /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
-		19AC1B8B2295440D007011F7 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		19AC1B8B2295440D007011F7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		19AC1B8E22954F41007011F7 /* SignupBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignupBackground@2x.png"; sourceTree = "<group>"; };
 		19AC1B8F22954F41007011F7 /* ProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileImage@2x.png"; sourceTree = "<group>"; };
 		19F3233322969304009F54D3 /* AlreadyHaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlreadyHaveAccount.png; sourceTree = "<group>"; };
@@ -86,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				197A0D63229BED3800647E9B /* CustomNavigationController.swift */,
+				195629E9229D173400103F8C /* ConvertingDataAndImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -120,7 +121,6 @@
 				19AC1B7C2295291D007011F7 /* Assets.xcassets */,
 				19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */,
 				19AC1B812295291D007011F7 /* Info.plist */,
-				1933FCC2229A679C0061EC64 /* Tree.xcdatamodeld */,
 			);
 			path = Tree;
 			sourceTree = "<group>";
@@ -136,7 +136,7 @@
 		19AC1B8A229543DF007011F7 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				19AC1B8B2295440D007011F7 /* Diary.swift */,
+				19AC1B8B2295440D007011F7 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -246,11 +246,11 @@
 				19AC1B782295291C007011F7 /* SignupController.swift in Sources */,
 				197A0D33229B99D400647E9B /* LoginController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
+				195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */,
 				197A0D61229BBD0F00647E9B /* DiaryTableViewController.swift in Sources */,
 				197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */,
 				19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */,
-				19AC1B8C2295440D007011F7 /* Diary.swift in Sources */,
-				1933FCC4229A679C0061EC64 /* Tree.xcdatamodeld in Sources */,
+				19AC1B8C2295440D007011F7 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,19 +455,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		1933FCC2229A679C0061EC64 /* Tree.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				1933FCC3229A679C0061EC64 /* User.xcdatamodel */,
-			);
-			currentVersion = 1933FCC3229A679C0061EC64 /* User.xcdatamodel */;
-			path = Tree.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 19AC1B6A2295291C007011F7 /* Project object */;
 }
