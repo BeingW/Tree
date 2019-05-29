@@ -10,6 +10,8 @@ import UIKit
 
 class DiaryTableViewController: UIViewController {
     
+    var user = User(profilePicture: nil, userName: "")
+    
     var isProgramFirstOpen: Bool = true
     
     let button: UIButton = UIButton(type: .system)
@@ -38,6 +40,7 @@ class DiaryTableViewController: UIViewController {
          }
         
         print(isProgramFirstOpen)
+        print("user info \(user.getUserName()) \(user.getProfilePicture())")
     }
     
     @objc func buttonTapped() {

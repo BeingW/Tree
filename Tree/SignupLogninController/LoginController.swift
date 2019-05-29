@@ -36,11 +36,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     //MARK: - LoginButtonView
     let loginButton: UIButton = {
-        let doTreeButton = UIButton()
+        let loginButton = UIButton()
         let doTreeButtoBackgroundImage = UIImage(named: "LoginButton@2x")
-        doTreeButton.setBackgroundImage(doTreeButtoBackgroundImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        doTreeButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
-        return doTreeButton
+        loginButton.setBackgroundImage(doTreeButtoBackgroundImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+        return loginButton
     }()
     
     @objc func loginButtonTapped() {
@@ -49,11 +49,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     //MARK: - GoToSignupButtonView
     let goToSignupButton: UIButton = {
-        let signupTreeButton = UIButton()
-        let signupTreeButtonImage = UIImage(named: "HaveAccount")
-        signupTreeButton.setBackgroundImage(signupTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        signupTreeButton.addTarget(self, action: #selector(goToSignupButtonTapped), for: .touchUpInside)
-        return signupTreeButton
+        let goToSignupButton = UIButton()
+        let goToSignupButtonImage = UIImage(named: "HaveAccount")
+        goToSignupButton.setBackgroundImage(goToSignupButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        goToSignupButton.addTarget(self, action: #selector(goToSignupButtonTapped), for: .touchUpInside)
+        return goToSignupButton
     }()
     
     @objc func goToSignupButtonTapped() {

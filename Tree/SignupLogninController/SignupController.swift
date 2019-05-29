@@ -10,6 +10,8 @@ import UIKit
 
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    var user = User(profilePicture: nil, userName: "")
+    
     //MARK: - SignupBackgroundImageView
     let signupBackgroundImageView: UIImageView = {
         let backgroundImage = UIImage(named: "SignupBackground@2x");
@@ -58,28 +60,52 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     @objc func signupButtonTapped() {
         
         var loginIsSucceed: Bool = false;
-        guard let userName: String = userNameTextField.text else {return}
-        guard let userProfilePicture: UIImage = profileButton.imageView?.image else {return}
+        var alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        let converting = ConvertingDataAndImage()
+        let diaryViewController = DiaryTableViewController()
         
-        if userName != "" && userProfilePicture != nil {
-            //profilePicture And userName are texted
+        guard let userName = userNameTextField.text else { return }
+        
+        //1.profileImage 와 userProfilePicture 가 입력 되었는지 확인한다.
+        if userName != "" && profileButton.imageView?.image != nil {
+            guard let userProfilePicture = profileButton.imageView?.image else {return}
+            guard let profileImageId = converting.convertingFromImageToUniqueUrl(image: userProfilePicture) else { return }
             
-            loginIsSucceed == true;
-        } else {
-            if userName != "" {
-                //only userName is texted
-            } else if userProfilePicture != nil {
-                //only userProfilePicture is texted
-            } else {
-                //both of them are not texted
-            }
-            loginIsSucceed == false;
+            //입력이 되었다면
+            //1.1. user class 객체를 만든다.
+            self.user = User(profilePicture: profileImageId, userName: userName)
+            //1.2. user 객체의 속성들을 db 에 저장한다.
+            //1.3. user 객체와 db에 성공적으로 저장 되었다면 loginSucceed 를 true 한다. 반대의 경우 false
+            loginIsSucceed = true
+        } else if userName == "" && profileButton.imageView?.image != nil {
+                //아이디를 입력해 달라는 팝업 메시지를 띄운다.
+                let userNameAlertTitle = "Please type your name."
+                alertController = UIAlertController(title: userNameAlertTitle, message: "", preferredStyle: .alert)
+                alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            loginIsSucceed = false;
+        } else if userName != "" && profileButton.imageView?.image == nil {
+                //이미지를 입력해 달라는 팝업 메시지를 띄운다.
+                let userProfileAlertTitle = "Please take in your image."
+                alertController = UIAlertController(title: userProfileAlertTitle, message: "", preferredStyle: .alert)
+                alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            loginIsSucceed = false;
+        } else if userName == "" && profileButton.imageView?.image == nil {
+                //아이디와 프로파일 이미지를 넣어달라는 팝업 메시지를 띄운다.
+                let userNameAndProfileAlertTitle = "Please enter your name and image."
+                alertController = UIAlertController(title: userNameAndProfileAlertTitle, message: "", preferredStyle: .alert)
+                alertController.addAction(alertAction)
+            present(alertController, animated: true, completion: nil)
+            loginIsSucceed = false;
         }
         
         if loginIsSucceed == true {
-            
-        }
-        
+            diaryViewController.user = self.user
+            diaryViewController.isProgramFirstOpen = false
+            self.present(diaryViewController, animated: true, completion: nil)
+            }
     }
     
     //MARK: - GoToLoginButton
@@ -139,7 +165,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     //MARK: - userDiary instance
-    let userDiary: Diary = Diary(profilePicture: nil, userName: nil)
+    let userDiary: User = User(profilePicture: nil, userName: nil)
     
     //MARK: - ImagePicker
     let imagePickerController: UIImagePickerController = {
