@@ -78,6 +78,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         setViews()
         
         diaryTableViewController.isProgramFirstOpen = false
+        
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     //MARK: - SetUIViews

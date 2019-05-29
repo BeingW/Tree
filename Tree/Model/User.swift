@@ -12,10 +12,12 @@ import UIKit
 class User {
     private var profilePicture: String?
     private var userName: String?
+    var diary: [DiaryPage?]
     
     init(profilePicture: String?, userName: String?) {
         self.profilePicture = profilePicture ?? "";
         self.userName = userName ?? "";
+        self.diary = [nil]
     }
     
     required init?(coder aDecoder: NSCoder) {

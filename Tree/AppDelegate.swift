@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         
-        window?.rootViewController = DiaryTableViewController()
+        window?.rootViewController = MainTapBarController()
         
         return true
     }

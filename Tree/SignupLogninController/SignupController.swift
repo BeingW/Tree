@@ -102,9 +102,9 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
         
         if loginIsSucceed == true {
-            diaryViewController.user = self.user
-            diaryViewController.isProgramFirstOpen = false
-            self.present(diaryViewController, animated: true, completion: nil)
+            //diaryViewController.user = self.user
+            //diaryViewController.isProgramFirstOpen = false
+            //self.present(diaryViewController, animated: true, completion: nil)
             }
     }
     
