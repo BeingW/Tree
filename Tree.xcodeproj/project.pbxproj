@@ -16,7 +16,6 @@
 		196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240C0229EB052009472C9 /* AlreadyHaveAccount.png */; };
 		196240C8229EB052009472C9 /* UserNameTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240C1229EB052009472C9 /* UserNameTextField@2x.png */; };
 		196240C9229EB052009472C9 /* SignupBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240C2229EB052009472C9 /* SignupBackground@2x.png */; };
-		196240CB229EC52A009472C9 /* MainTapBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196240CA229EC52A009472C9 /* MainTapBarController.swift */; };
 		196240CF229EE415009472C9 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196240CE229EE415009472C9 /* DiaryTableViewController.swift */; };
 		197A0D33229B99D400647E9B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D32229B99D400647E9B /* LoginController.swift */; };
 		197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5A229BB38900647E9B /* LoginBackground@2x.png */; };
@@ -42,7 +41,6 @@
 		196240C0229EB052009472C9 /* AlreadyHaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlreadyHaveAccount.png; sourceTree = "<group>"; };
 		196240C1229EB052009472C9 /* UserNameTextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserNameTextField@2x.png"; sourceTree = "<group>"; };
 		196240C2229EB052009472C9 /* SignupBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignupBackground@2x.png"; sourceTree = "<group>"; };
-		196240CA229EC52A009472C9 /* MainTapBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTapBarController.swift; sourceTree = "<group>"; };
 		196240CE229EE415009472C9 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		197A0D32229B99D400647E9B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		197A0D5A229BB38900647E9B /* LoginBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBackground@2x.png"; sourceTree = "<group>"; };
@@ -147,7 +145,6 @@
 		19AC1B742295291C007011F7 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
-				196240CA229EC52A009472C9 /* MainTapBarController.swift */,
 				197A0D31229B99AF00647E9B /* SignupLogninController */,
 				196240B9229EA7FD009472C9 /* DiaryTableViewController */,
 				19AC1B8A229543DF007011F7 /* Model */,
@@ -276,7 +273,6 @@
 				197A0D33229B99D400647E9B /* LoginController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
 				196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */,
-				196240CB229EC52A009472C9 /* MainTapBarController.swift in Sources */,
 				195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */,
 				197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */,
 				19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */,

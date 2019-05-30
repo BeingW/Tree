@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 class User {
-    private var profilePicture: String?
-    private var userName: String?
+    
+    private var profilePicture: String
+    private var userName: String
     var diary: [DiaryPage?]
     
     init(profilePicture: String?, userName: String?) {
@@ -40,5 +41,30 @@ class User {
     func changeProfilePicture(profilePicture: String) -> String {
         self.profilePicture = profilePicture
         return self.profilePicture ?? ""
+    }
+    
+    let array: Array = [0]
+    
+    func addNewPage(diaryPage: DiaryPage) -> Int {
+        
+        self.diary.append(diaryPage)
+        
+        let count = self.diary.count
+        
+        var i = 0
+        
+        while i < count && diaryPage == self.diary[i]! {
+            i += 1
+        }
+        
+        return i
+    }
+    
+    func deleteAllDiaryPage() {
+        self.diary.removeAll()
+    }
+    
+    func deleteDiaryPageAt(index: Int) {
+        self.diary.remove(at: index)
     }
 }

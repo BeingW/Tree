@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         
-        window?.rootViewController = MainTapBarController()
+        window?.rootViewController = LoginController()
         
         return true
     }
