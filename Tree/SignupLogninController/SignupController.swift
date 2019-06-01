@@ -10,6 +10,7 @@ import UIKit
 
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    var mainTabBarController = MainTabBarController()
     var user = User(profilePicture: nil, userName: "")
     
     //MARK: - SignupBackgroundImageView
@@ -63,7 +64,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         var alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         let converting = ConvertingDataAndImage()
-        let diaryViewController = DiaryTableViewController()
         
         guard let userName = userNameTextField.text else { return }
         
@@ -102,10 +102,13 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
         
         if loginIsSucceed == true {
-            //diaryViewController.user = self.user
-            //diaryViewController.isProgramFirstOpen = false
-            //self.present(diaryViewController, animated: true, completion: nil)
-            }
+            self.mainTabBarController.isAppFirstOpen = false
+            
+            UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
+            
+            self.dismiss(animated: true, completion: nil)
+        }
+        
     }
     
     //MARK: - GoToLoginButton

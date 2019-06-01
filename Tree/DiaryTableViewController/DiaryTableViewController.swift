@@ -12,8 +12,6 @@ class DiaryTableViewController: UIViewController {
     
     var user = User(profilePicture: nil, userName: "")
     
-    var isProgramFirstOpen: Bool = true
-    
     let uinavigationItem: UINavigationItem = {
        let uinavigationItem = UINavigationItem(title: "Tree")
         uinavigationItem.largeTitleDisplayMode = .always
@@ -90,8 +88,6 @@ class DiaryTableViewController: UIViewController {
         let seperateViewHeight = recordViewHeight / 10
         
         recordTopSeperateView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: seperateViewHeight)
-        
-        
     }
     
     let button: UIButton = UIButton(type: .system)
@@ -108,27 +104,6 @@ class DiaryTableViewController: UIViewController {
         
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         
-        
-        
-        
-         if isProgramFirstOpen == true {
-            DispatchQueue.main.async {
-                let loginController = LoginController()
-                
-                let loginNavController = UINavigationController(rootViewController: loginController)
-                
-                self.present(loginNavController, animated: true, completion: nil)
-            }
-         }
-        
-        let diaryNavController = UINavigationController(rootViewController: self)
-        self.present(diaryNavController, animated: true, completion: nil)
-        
-          navigationBar()
-        
-        self.navigationController?.isNavigationBarHidden = false
-        
-        print(isProgramFirstOpen)
         print("user info \(user.getUserName()) \(user.getProfilePicture())")
     }
     

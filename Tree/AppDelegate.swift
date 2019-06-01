@@ -17,9 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         
-        window?.rootViewController = LoginController()
+        window?.rootViewController = MainTabBarController()
         
-        return true
+        return true 
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

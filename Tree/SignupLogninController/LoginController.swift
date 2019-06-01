@@ -10,8 +10,7 @@ import UIKit
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
-    //MARK: - DiaryTableViewController Instance
-    let diaryTableViewController = DiaryTableViewController()
+    var mainTabBarController = MainTabBarController()
     
     //MARK: - LoginBackgroundView
     let loginBackgroundImageView: UIImageView = {
@@ -44,7 +43,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
     }()
     
     @objc func loginButtonTapped() {
-        self.present(diaryTableViewController, animated: true, completion: nil)
+        self.mainTabBarController.isAppFirstOpen = false
+        
+        UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: - GoToSignupButtonView
@@ -58,6 +61,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     @objc func goToSignupButtonTapped() {
         let signupController = SignupController()
+        signupController.mainTabBarController = self.mainTabBarController
         self.navigationController?.pushViewController(signupController, animated: true)
     }
     
@@ -76,8 +80,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         setViews()
-        
-        diaryTableViewController.isProgramFirstOpen = false
         
         self.navigationController?.isNavigationBarHidden = true
     }
