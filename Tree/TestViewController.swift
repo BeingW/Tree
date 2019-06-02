@@ -10,20 +10,21 @@ import UIKit
 
 class TestViewController: UIViewController {
     
+    //view 들이 메모리에 로드 된 후에 불려짐
     override func viewDidLoad() {
         super.viewDidLoad()
         print("viewDidLoad")
         
     }
     
-    //해당 viewController 메모리 할당 후에 view 가 로드되기 전 들어옴
+    //해당 viewController 메모리 할당 후에 그 다음으로
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         print("Nottify viewController viewWill")
     }
     
-    //해당 viewController 메모리 할당 후에 view 가 로드 된 후에 들어옴
+    //해당 viewController 메모리 할당 후에 viewWillAppear 다음
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         

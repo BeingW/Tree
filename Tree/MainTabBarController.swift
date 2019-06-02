@@ -12,14 +12,19 @@ class MainTabBarController: UITabBarController {
 
     var isAppFirstOpen = true
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func loadView() {
+        super.loadView()
         let diaryTableViewcontroller = DiaryTableViewController()
         
         let diaryNavController = UINavigationController(rootViewController: diaryTableViewcontroller)
-            
+        
         viewControllers = [diaryNavController]
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,7 +35,7 @@ class MainTabBarController: UITabBarController {
                 let loginController = LoginController()
                 let loginNavContrroller = UINavigationController(rootViewController: loginController)
                 loginController.mainTabBarController = self
-                self.present(loginNavContrroller, animated: true, completion: nil)
+                self.present(loginNavContrroller, animated: false, completion: nil)
             }
         }
     }
