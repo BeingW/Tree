@@ -11,19 +11,12 @@ import UIKit
 class MainTabBarController: UITabBarController {
 
     var isAppFirstOpen = true
-    
-    override func loadView() {
-        super.loadView()
-        let diaryTableViewcontroller = DiaryTableViewController()
-        
-        let diaryNavController = UINavigationController(rootViewController: diaryTableViewcontroller)
-        
-        viewControllers = [diaryNavController]
-    }
+    var diaryTableViewController = DiaryTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTabViewControllers()
        
     }
     
@@ -38,6 +31,12 @@ class MainTabBarController: UITabBarController {
                 self.present(loginNavContrroller, animated: false, completion: nil)
             }
         }
+    }
+    
+    func setTabViewControllers() {
+        let diaryNavController = UINavigationController(rootViewController: self.diaryTableViewController)
+        
+        viewControllers = [diaryNavController]
     }
     
     

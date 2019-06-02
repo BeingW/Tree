@@ -11,6 +11,7 @@ import UIKit
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     var mainTabBarController = MainTabBarController()
+    var diaryTableViewController = DiaryTableViewController()
     var user = User(profilePicture: nil, userName: "")
     
     //MARK: - SignupBackgroundImageView
@@ -103,10 +104,14 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         if loginIsSucceed == true {
             self.mainTabBarController.isAppFirstOpen = false
+            self.mainTabBarController.diaryTableViewController.user = self.user
             
             UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
             
+            mainTabBarController.setTabViewControllers()
+            
             self.dismiss(animated: true, completion: nil)
+            
         }
         
     }

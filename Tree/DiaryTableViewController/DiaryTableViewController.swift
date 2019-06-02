@@ -12,18 +12,30 @@ class DiaryTableViewController: UIViewController {
     
     var user = User(profilePicture: nil, userName: "")
     
-    let uinavigationItem: UINavigationItem = {
-       let uinavigationItem = UINavigationItem(title: "Tree")
-        uinavigationItem.largeTitleDisplayMode = .always
-        return uinavigationItem
-    }()
-    
     func navigationBar() {
-        let thisUINavigtionBar = self.navigationController?.navigationBar
-        let thisUINavigationItem = self.navigationController?.navigationItem
         
-        thisUINavigationItem?.title = "Tree"
-        thisUINavigtionBar?.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 35, weight: .bold)]
+        let thisUINavigtionBar = self.navigationController?.navigationBar
+        let leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarProfileIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(leftNavigationBarItemTapped))
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarCameraIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rigthNavigationBarItemTapped))
+        
+        let titleItme = UINavigationItem(title: "Tree")
+        
+        
+        thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBar@2x"), for: .default)
+        thisUINavigtionBar?.topItem?.title = "Tree"
+        thisUINavigtionBar?.backItem?.leftBarButtonItem = leftBarButtonItem
+        thisUINavigtionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
+        
+        thisUINavigtionBar?.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white]
+        
+    }
+    
+    @objc func leftNavigationBarItemTapped() {
+        print("left NavigationBar")
+    }
+    
+    @objc func rigthNavigationBarItemTapped() {
+        print("Right NavigationBar")
     }
     
     let recordTopSeperateView: UIView = {
@@ -103,6 +115,8 @@ class DiaryTableViewController: UIViewController {
         button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
         
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
+        self.navigationBar()
         
         print("user info \(user.getUserName()) \(user.getProfilePicture())")
     }

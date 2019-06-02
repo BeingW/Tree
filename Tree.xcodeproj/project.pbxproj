@@ -22,6 +22,13 @@
 		197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5B229BB38900647E9B /* HaveAccount.png */; };
 		197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5C229BB38900647E9B /* LoginButton@2x.png */; };
 		197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D63229BED3800647E9B /* CustomNavigationController.swift */; };
+		19900E3522A28423008C4BDF /* NavigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E2E22A28423008C4BDF /* NavigationBar@2x.png */; };
+		19900E3622A28423008C4BDF /* EditIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E2F22A28423008C4BDF /* EditIcon@2x.png */; };
+		19900E3722A28423008C4BDF /* CommentIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3022A28423008C4BDF /* CommentIcon@2x.png */; };
+		19900E3822A28423008C4BDF /* NavigationBarProfileIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3122A28423008C4BDF /* NavigationBarProfileIcon@2x.png */; };
+		19900E3922A28423008C4BDF /* SelectedleafIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3222A28423008C4BDF /* SelectedleafIcon@2x.png */; };
+		19900E3A22A28423008C4BDF /* NavigationBarCameraIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3322A28423008C4BDF /* NavigationBarCameraIcon@2x.png */; };
+		19900E3B22A28423008C4BDF /* ShareIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3422A28423008C4BDF /* ShareIcon@2x.png */; };
 		19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B752295291C007011F7 /* AppDelegate.swift */; };
 		19AC1B782295291C007011F7 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B772295291C007011F7 /* SignupController.swift */; };
 		19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B792295291C007011F7 /* Main.storyboard */; };
@@ -49,6 +56,13 @@
 		197A0D5B229BB38900647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
 		197A0D5C229BB38900647E9B /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		197A0D63229BED3800647E9B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		19900E2E22A28423008C4BDF /* NavigationBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBar@2x.png"; sourceTree = "<group>"; };
+		19900E2F22A28423008C4BDF /* EditIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EditIcon@2x.png"; sourceTree = "<group>"; };
+		19900E3022A28423008C4BDF /* CommentIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CommentIcon@2x.png"; sourceTree = "<group>"; };
+		19900E3122A28423008C4BDF /* NavigationBarProfileIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBarProfileIcon@2x.png"; sourceTree = "<group>"; };
+		19900E3222A28423008C4BDF /* SelectedleafIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SelectedleafIcon@2x.png"; sourceTree = "<group>"; };
+		19900E3322A28423008C4BDF /* NavigationBarCameraIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBarCameraIcon@2x.png"; sourceTree = "<group>"; };
+		19900E3422A28423008C4BDF /* ShareIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShareIcon@2x.png"; sourceTree = "<group>"; };
 		19AC1B722295291C007011F7 /* Tree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AC1B752295291C007011F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19AC1B772295291C007011F7 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
@@ -84,6 +98,13 @@
 		196240BA229EB052009472C9 /* DiaryTableViewControllerImages */ = {
 			isa = PBXGroup;
 			children = (
+				19900E3022A28423008C4BDF /* CommentIcon@2x.png */,
+				19900E2F22A28423008C4BDF /* EditIcon@2x.png */,
+				19900E2E22A28423008C4BDF /* NavigationBar@2x.png */,
+				19900E3322A28423008C4BDF /* NavigationBarCameraIcon@2x.png */,
+				19900E3122A28423008C4BDF /* NavigationBarProfileIcon@2x.png */,
+				19900E3222A28423008C4BDF /* SelectedleafIcon@2x.png */,
+				19900E3422A28423008C4BDF /* ShareIcon@2x.png */,
 				196240BB229EB052009472C9 /* ProfileIcon@2x.png */,
 				196240BC229EB052009472C9 /* PostTextField@2x.png */,
 			);
@@ -252,17 +273,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19900E3A22A28423008C4BDF /* NavigationBarCameraIcon@2x.png in Resources */,
 				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
 				196240C4229EB052009472C9 /* PostTextField@2x.png in Resources */,
 				196240C3229EB052009472C9 /* ProfileIcon@2x.png in Resources */,
 				197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */,
+				19900E3922A28423008C4BDF /* SelectedleafIcon@2x.png in Resources */,
 				196240C5229EB052009472C9 /* SignupButton@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
+				19900E3522A28423008C4BDF /* NavigationBar@2x.png in Resources */,
 				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
+				19900E3622A28423008C4BDF /* EditIcon@2x.png in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
 				19AC1B7D2295291D007011F7 /* Assets.xcassets in Resources */,
+				19900E3822A28423008C4BDF /* NavigationBarProfileIcon@2x.png in Resources */,
+				19900E3722A28423008C4BDF /* CommentIcon@2x.png in Resources */,
 				196240C9229EB052009472C9 /* SignupBackground@2x.png in Resources */,
 				196240C8229EB052009472C9 /* UserNameTextField@2x.png in Resources */,
+				19900E3B22A28423008C4BDF /* ShareIcon@2x.png in Resources */,
 				196240C6229EB052009472C9 /* ProfileImage@2x.png in Resources */,
 				19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */,
 			);
