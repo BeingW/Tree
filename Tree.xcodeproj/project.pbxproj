@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		190BFB2222A3BF1700341872 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
 		196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196240B7229E4AFE009472C9 /* DiaryPage.swift */; };
 		196240C3229EB052009472C9 /* ProfileIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240BB229EB052009472C9 /* ProfileIcon@2x.png */; };
@@ -22,13 +23,12 @@
 		197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5B229BB38900647E9B /* HaveAccount.png */; };
 		197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5C229BB38900647E9B /* LoginButton@2x.png */; };
 		197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D63229BED3800647E9B /* CustomNavigationController.swift */; };
-		19900E3522A28423008C4BDF /* NavigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E2E22A28423008C4BDF /* NavigationBar@2x.png */; };
 		19900E3622A28423008C4BDF /* EditIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E2F22A28423008C4BDF /* EditIcon@2x.png */; };
 		19900E3722A28423008C4BDF /* CommentIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3022A28423008C4BDF /* CommentIcon@2x.png */; };
 		19900E3822A28423008C4BDF /* NavigationBarProfileIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3122A28423008C4BDF /* NavigationBarProfileIcon@2x.png */; };
 		19900E3922A28423008C4BDF /* SelectedleafIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3222A28423008C4BDF /* SelectedleafIcon@2x.png */; };
-		19900E3A22A28423008C4BDF /* NavigationBarCameraIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3322A28423008C4BDF /* NavigationBarCameraIcon@2x.png */; };
 		19900E3B22A28423008C4BDF /* ShareIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E3422A28423008C4BDF /* ShareIcon@2x.png */; };
+		19900E4122A37027008C4BDF /* NavigationBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 19900E4022A37027008C4BDF /* NavigationBackground@2x.png */; };
 		19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B752295291C007011F7 /* AppDelegate.swift */; };
 		19AC1B782295291C007011F7 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B772295291C007011F7 /* SignupController.swift */; };
 		19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B792295291C007011F7 /* Main.storyboard */; };
@@ -41,6 +41,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
 		196240B7229E4AFE009472C9 /* DiaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
 		196240BB229EB052009472C9 /* ProfileIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileIcon@2x.png"; sourceTree = "<group>"; };
@@ -56,13 +57,12 @@
 		197A0D5B229BB38900647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
 		197A0D5C229BB38900647E9B /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		197A0D63229BED3800647E9B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
-		19900E2E22A28423008C4BDF /* NavigationBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBar@2x.png"; sourceTree = "<group>"; };
 		19900E2F22A28423008C4BDF /* EditIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EditIcon@2x.png"; sourceTree = "<group>"; };
 		19900E3022A28423008C4BDF /* CommentIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CommentIcon@2x.png"; sourceTree = "<group>"; };
 		19900E3122A28423008C4BDF /* NavigationBarProfileIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBarProfileIcon@2x.png"; sourceTree = "<group>"; };
 		19900E3222A28423008C4BDF /* SelectedleafIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SelectedleafIcon@2x.png"; sourceTree = "<group>"; };
-		19900E3322A28423008C4BDF /* NavigationBarCameraIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBarCameraIcon@2x.png"; sourceTree = "<group>"; };
 		19900E3422A28423008C4BDF /* ShareIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ShareIcon@2x.png"; sourceTree = "<group>"; };
+		19900E4022A37027008C4BDF /* NavigationBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NavigationBackground@2x.png"; sourceTree = "<group>"; };
 		19AC1B722295291C007011F7 /* Tree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AC1B752295291C007011F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19AC1B772295291C007011F7 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
@@ -91,6 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				196240CE229EE415009472C9 /* DiaryTableViewController.swift */,
+				190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */,
 			);
 			path = DiaryTableViewController;
 			sourceTree = "<group>";
@@ -98,10 +99,9 @@
 		196240BA229EB052009472C9 /* DiaryTableViewControllerImages */ = {
 			isa = PBXGroup;
 			children = (
+				19900E4022A37027008C4BDF /* NavigationBackground@2x.png */,
 				19900E3022A28423008C4BDF /* CommentIcon@2x.png */,
 				19900E2F22A28423008C4BDF /* EditIcon@2x.png */,
-				19900E2E22A28423008C4BDF /* NavigationBar@2x.png */,
-				19900E3322A28423008C4BDF /* NavigationBarCameraIcon@2x.png */,
 				19900E3122A28423008C4BDF /* NavigationBarProfileIcon@2x.png */,
 				19900E3222A28423008C4BDF /* SelectedleafIcon@2x.png */,
 				19900E3422A28423008C4BDF /* ShareIcon@2x.png */,
@@ -273,7 +273,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				19900E3A22A28423008C4BDF /* NavigationBarCameraIcon@2x.png in Resources */,
 				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
 				196240C4229EB052009472C9 /* PostTextField@2x.png in Resources */,
 				196240C3229EB052009472C9 /* ProfileIcon@2x.png in Resources */,
@@ -281,7 +280,7 @@
 				19900E3922A28423008C4BDF /* SelectedleafIcon@2x.png in Resources */,
 				196240C5229EB052009472C9 /* SignupButton@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
-				19900E3522A28423008C4BDF /* NavigationBar@2x.png in Resources */,
+				19900E4122A37027008C4BDF /* NavigationBackground@2x.png in Resources */,
 				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
 				19900E3622A28423008C4BDF /* EditIcon@2x.png in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
@@ -314,6 +313,7 @@
 				197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */,
 				19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */,
 				19AC1B8C2295440D007011F7 /* User.swift in Sources */,
+				190BFB2222A3BF1700341872 /* DiaryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

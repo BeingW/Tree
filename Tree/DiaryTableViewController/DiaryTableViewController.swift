@@ -8,35 +8,35 @@
 
 import UIKit
 
-class DiaryTableViewController: UIViewController {
+class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var user = User(profilePicture: nil, userName: "")
     
+    let diaryTableView = UITableView()
+    
+    let diaryTableCellId = "diaryCellId"
+    
+    //MARK: - NavigationBar
     func navigationBar() {
         
         let thisUINavigtionBar = self.navigationController?.navigationBar
-        let leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarProfileIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(leftNavigationBarItemTapped))
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarCameraIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rigthNavigationBarItemTapped))
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarProfileIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
         
         let titleItme = UINavigationItem(title: "Tree")
         
-        thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBar@2x"), for: .default)
         thisUINavigtionBar?.topItem?.title = "Tree"
-        thisUINavigtionBar?.backItem?.leftBarButtonItem = leftBarButtonItem
+        thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackground@2x"), for: .default)
         thisUINavigtionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
         
         thisUINavigtionBar?.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white]
         
     }
     
-    @objc func leftNavigationBarItemTapped() {
-        print("left NavigationBar")
+    @objc func rightNavigationBarItemTapped() {
+        print("right NavigationBar")
     }
     
-    @objc func rigthNavigationBarItemTapped() {
-        print("Right NavigationBar")
-    }
-    
+    //MARK: - RecordView
     let recordTopSeperateView: UIView = {
         let recordTopSeperateView = UIView()
         recordTopSeperateView.backgroundColor = .lightGray
@@ -53,6 +53,7 @@ class DiaryTableViewController: UIViewController {
         let recordLabel = UILabel()
         recordLabel.text = "Post about I am"
         recordLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        recordLabel.textColor = .lightGray
         return recordLabel
     }()
     
@@ -85,7 +86,7 @@ class DiaryTableViewController: UIViewController {
         print("recordButtonTapped")
     }
     
-    func setviews() {
+    func setViews() {
         self.view.addSubview(recordTopSeperateView)
         self.view.addSubview(recordView)
             self.recordView.addSubview(recordLabel)
@@ -94,34 +95,53 @@ class DiaryTableViewController: UIViewController {
         self.view.addSubview(recordBottomSeperateView)
         self.view.addSubview(recordButton)
         
+        let safeLayoutArea = self.view.safeAreaLayoutGuide
+        let seperateViewHeight = 5
         let recordViewHeight = view.frame.height / 4.3
-        let recordViewWidth = view.frame.width
-        let seperateViewHeight = recordViewHeight / 10
-        
-        recordTopSeperateView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: seperateViewHeight)
-    }
+        let labeHeigth = recordView.frame.height / 5
+        let tumbNailImageViewLegnth = recordView.frame.width / 5
     
-    let button: UIButton = UIButton(type: .system)
+        recordTopSeperateView.anchor(top: safeLayoutArea.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: CGFloat(seperateViewHeight))
+        recordView.anchor(top: recordTopSeperateView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: recordViewHeight)
+        recordLabel.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        recordContentImageView.anchor(top: recordLabel.bottomAnchor, left: recordView.leftAnchor, bottom: recordView.bottomAnchor, right: recordView.rightAnchor, paddingTop: 15, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 0, height: 0)
+        recordTumbnailImageView.anchor(top: recordContentImageView.topAnchor, left: recordContentImageView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: tumbNailImageViewLegnth, height: tumbNailImageViewLegnth)
+        recordButton.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: recordView.bottomAnchor, right: recordView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        recordBottomSeperateView.anchor(top: recordView.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: CGFloat(seperateViewHeight))
+        
+        self.view.addSubview(diaryTableView)
+        diaryTableView.anchor(top: recordBottomSeperateView.bottomAnchor, left: self.view.leftAnchor, bottom: safeLayoutArea.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        //diaryTableView.rowHeight = self.view.frame.height / 2.2
+        
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        button.setTitle("Tree", for: .normal)
         
-        view.addSubview(button)
-        button.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 500, height: 100)
-        button.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0).isActive = true
-        button.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 0).isActive = true
+        navigationBar()
+        setViews()
         
-        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        self.diaryTableView.delegate = self
+        self.diaryTableView.dataSource = self
         
-        self.navigationBar()
+        diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
         
         print("user info \(user.getUserName()) \(user.getProfilePicture())")
     }
     
-    @objc func buttonTapped() {
-        self.dismiss(animated: true, completion: nil)
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
+        
+        return cell
+    }
+    
+    
     
 }
