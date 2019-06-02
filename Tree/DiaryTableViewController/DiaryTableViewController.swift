@@ -20,7 +20,6 @@ class DiaryTableViewController: UIViewController {
         
         let titleItme = UINavigationItem(title: "Tree")
         
-        
         thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBar@2x"), for: .default)
         thisUINavigtionBar?.topItem?.title = "Tree"
         thisUINavigtionBar?.backItem?.leftBarButtonItem = leftBarButtonItem
