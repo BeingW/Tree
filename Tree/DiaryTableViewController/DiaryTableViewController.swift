@@ -78,12 +78,12 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let recordButton: UIButton = {
         let recordButton = UIButton()
         recordButton.setTitle("", for: .normal)
-        recordButton.addTarget(self, action: #selector(reocrdButtonTapped), for: .touchUpInside)
+        recordButton.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         return recordButton
     }()
 
-    @objc func reocrdButtonTapped() {
-        print("recordButtonTapped")
+    @objc func recordButtonTapped() {
+        self.navigationController?.pushViewController(DiaryPostController(), animated: true)
     }
     
     func setViews() {
@@ -125,6 +125,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.diaryTableView.delegate = self
         self.diaryTableView.dataSource = self
+        self.diaryTableView.estimatedRowHeight = 450
         
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
         

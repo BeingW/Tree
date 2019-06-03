@@ -36,6 +36,14 @@
 		19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */; };
 		19AC1B8922954265007011F7 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8822954265007011F7 /* Extention.swift */; };
 		19AC1B8C2295440D007011F7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B8B2295440D007011F7 /* User.swift */; };
+		19C66E9522A4CDC000467E00 /* DiaryPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19C66E9422A4CDC000467E00 /* DiaryPostController.swift */; };
+		19C66E9D22A4E04A00467E00 /* Photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9722A4E04A00467E00 /* Photo.png */; };
+		19C66E9E22A4E04A00467E00 /* Camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9822A4E04A00467E00 /* Camera.png */; };
+		19C66E9F22A4E04A00467E00 /* Location.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9922A4E04A00467E00 /* Location.png */; };
+		19C66EA022A4E04A00467E00 /* Voice.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9A22A4E04A00467E00 /* Voice.png */; };
+		19C66EA122A4E04A00467E00 /* ToolBoxView.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9B22A4E04A00467E00 /* ToolBoxView.png */; };
+		19C66EA222A4E04A00467E00 /* toolBoxButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9C22A4E04A00467E00 /* toolBoxButton.png */; };
+		19C66EA422A4E0F000467E00 /* ProfileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66EA322A4E0F000467E00 /* ProfileIcon.png */; };
 		19F79A9922A220AF00EAF51F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9822A220AF00EAF51F /* MainTabBarController.swift */; };
 		19F79A9B22A24E1A00EAF51F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9A22A24E1A00EAF51F /* TestViewController.swift */; };
 /* End PBXBuildFile section */
@@ -72,6 +80,14 @@
 		19AC1B812295291D007011F7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		19AC1B8822954265007011F7 /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
 		19AC1B8B2295440D007011F7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		19C66E9422A4CDC000467E00 /* DiaryPostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPostController.swift; sourceTree = "<group>"; };
+		19C66E9722A4E04A00467E00 /* Photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photo.png; sourceTree = "<group>"; };
+		19C66E9822A4E04A00467E00 /* Camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Camera.png; sourceTree = "<group>"; };
+		19C66E9922A4E04A00467E00 /* Location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Location.png; sourceTree = "<group>"; };
+		19C66E9A22A4E04A00467E00 /* Voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Voice.png; sourceTree = "<group>"; };
+		19C66E9B22A4E04A00467E00 /* ToolBoxView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolBoxView.png; sourceTree = "<group>"; };
+		19C66E9C22A4E04A00467E00 /* toolBoxButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolBoxButton.png; sourceTree = "<group>"; };
+		19C66EA322A4E0F000467E00 /* ProfileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileIcon.png; sourceTree = "<group>"; };
 		19F79A9822A220AF00EAF51F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		19F79A9A22A24E1A00EAF51F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +108,7 @@
 			children = (
 				196240CE229EE415009472C9 /* DiaryTableViewController.swift */,
 				190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */,
+				19C66E9422A4CDC000467E00 /* DiaryPostController.swift */,
 			);
 			path = DiaryTableViewController;
 			sourceTree = "<group>";
@@ -207,11 +224,26 @@
 		19AC1B8D22954EE7007011F7 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				19C66E9622A4DF6000467E00 /* DiaryPostControllerImages */,
 				196240BA229EB052009472C9 /* DiaryTableViewControllerImages */,
 				196240BD229EB052009472C9 /* SignupControllerImages */,
 				197A0D59229BB35A00647E9B /* LoginControllerImages */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		19C66E9622A4DF6000467E00 /* DiaryPostControllerImages */ = {
+			isa = PBXGroup;
+			children = (
+				19C66EA322A4E0F000467E00 /* ProfileIcon.png */,
+				19C66E9822A4E04A00467E00 /* Camera.png */,
+				19C66E9922A4E04A00467E00 /* Location.png */,
+				19C66E9722A4E04A00467E00 /* Photo.png */,
+				19C66E9C22A4E04A00467E00 /* toolBoxButton.png */,
+				19C66E9B22A4E04A00467E00 /* ToolBoxView.png */,
+				19C66E9A22A4E04A00467E00 /* Voice.png */,
+			);
+			path = DiaryPostControllerImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,10 +315,17 @@
 				19900E4122A37027008C4BDF /* NavigationBackground@2x.png in Resources */,
 				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
 				19900E3622A28423008C4BDF /* EditIcon@2x.png in Resources */,
+				19C66E9E22A4E04A00467E00 /* Camera.png in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
+				19C66EA122A4E04A00467E00 /* ToolBoxView.png in Resources */,
+				19C66EA222A4E04A00467E00 /* toolBoxButton.png in Resources */,
 				19AC1B7D2295291D007011F7 /* Assets.xcassets in Resources */,
+				19C66EA022A4E04A00467E00 /* Voice.png in Resources */,
+				19C66EA422A4E0F000467E00 /* ProfileIcon.png in Resources */,
 				19900E3822A28423008C4BDF /* NavigationBarProfileIcon@2x.png in Resources */,
+				19C66E9F22A4E04A00467E00 /* Location.png in Resources */,
 				19900E3722A28423008C4BDF /* CommentIcon@2x.png in Resources */,
+				19C66E9D22A4E04A00467E00 /* Photo.png in Resources */,
 				196240C9229EB052009472C9 /* SignupBackground@2x.png in Resources */,
 				196240C8229EB052009472C9 /* UserNameTextField@2x.png in Resources */,
 				19900E3B22A28423008C4BDF /* ShareIcon@2x.png in Resources */,
@@ -305,6 +344,7 @@
 				19F79A9922A220AF00EAF51F /* MainTabBarController.swift in Sources */,
 				19AC1B782295291C007011F7 /* SignupController.swift in Sources */,
 				19F79A9B22A24E1A00EAF51F /* TestViewController.swift in Sources */,
+				19C66E9522A4CDC000467E00 /* DiaryPostController.swift in Sources */,
 				197A0D33229B99D400647E9B /* LoginController.swift in Sources */,
 				196240CF229EE415009472C9 /* DiaryTableViewController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
