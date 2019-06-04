@@ -12,11 +12,10 @@ class MainTabBarController: UITabBarController {
 
     var isAppFirstOpen = true
     var diaryTableViewController = DiaryTableViewController()
+    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setTabViewControllers()
        
     }
     
@@ -34,7 +33,12 @@ class MainTabBarController: UITabBarController {
     }
     
     func setTabViewControllers() {
+        
+        self.diaryTableViewController.user = self.user!
+        
         let diaryNavController = UINavigationController(rootViewController: self.diaryTableViewController)
+        
+        //print("\(user?.getUserName())")
         
         viewControllers = [diaryNavController]
     }

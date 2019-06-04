@@ -104,7 +104,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         if loginIsSucceed == true {
             self.mainTabBarController.isAppFirstOpen = false
-            self.mainTabBarController.diaryTableViewController.user = self.user
+            self.mainTabBarController.user = user
             
             UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
             

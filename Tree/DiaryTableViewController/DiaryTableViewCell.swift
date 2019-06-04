@@ -13,6 +13,14 @@ class DiaryTableViewCell: UITableViewCell {
     var diarypage: DiaryPage? {
         didSet {
             dateLabel.text = diarypage?.getDate()
+            titleLable.text = diarypage?.getTitle()
+            diaryTextView.text = diarypage?.getContents()
+            
+            let covertingData = ConvertingDataAndImage()
+            guard let imageUrl = diarypage?.getImage() else {return}
+            guard let unwrappedImage = covertingData.convertingFromUniqueUrlToImage(uniqueId: imageUrl) else {return}
+            
+            diaryImageView.image = unwrappedImage
         }
     }
     
@@ -140,6 +148,8 @@ class DiaryTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setviews()
+        
+        print("\(self.frame.height)")
         
     }
     

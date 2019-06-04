@@ -10,7 +10,13 @@ import UIKit
 
 class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var user = User(profilePicture: nil, userName: "")
+    var user: User? {
+        didSet {
+            self.diaryTableView.reloadData()
+        }
+    }
+    
+    let diaryPostController = DiaryPostController()
     
     let diaryTableView = UITableView()
     
@@ -22,7 +28,6 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let thisUINavigtionBar = self.navigationController?.navigationBar
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarProfileIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
         
-        let titleItme = UINavigationItem(title: "Tree")
         
         thisUINavigtionBar?.topItem?.title = "Tree"
         thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackground@2x"), for: .default)
@@ -83,7 +88,11 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }()
 
     @objc func recordButtonTapped() {
-        self.navigationController?.pushViewController(DiaryPostController(), animated: true)
+        self.diaryPostController.user = self.user
+        self.diaryPostController.diaryTableViewcontroller = self
+        let diaryPostNavController = UINavigationController(rootViewController: diaryPostController)
+        self.navigationController?.present(diaryPostNavController, animated: true, completion: nil)
+        
     }
     
     func setViews() {
@@ -116,29 +125,39 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        let safeArea = self.view.safeAreaLayoutGuide
         
         navigationBar()
         setViews()
         
         self.diaryTableView.delegate = self
         self.diaryTableView.dataSource = self
-        self.diaryTableView.estimatedRowHeight = 450
+        self.diaryTableView.estimatedRowHeight = safeArea.layoutFrame.height * 1.7/3
         
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
         
-        print("user info \(user.getUserName()) \(user.getProfilePicture())")
+        print("\(user?.getUserName())")
+        
     }
     
+    
+    //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return self.user?.diary.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
+        
+        if let user = self.user {
+            cell.diarypage = user.diary[indexPath.item]
+        }
         
         return cell
     }

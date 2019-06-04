@@ -43,9 +43,11 @@ class User {
         return self.profilePicture ?? ""
     }
     
-    let array: Array = [0]
-    
     func addNewPage(diaryPage: DiaryPage) -> Int {
+        
+        if self.diary[0] == nil {
+            self.diary.removeAll()
+        }
         
         self.diary.append(diaryPage)
         

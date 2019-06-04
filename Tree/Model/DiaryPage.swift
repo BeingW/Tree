@@ -14,11 +14,20 @@ class DiaryPage {
     private var contents: String?
     private var images: [String?]
     
-    init(title: String?, date: String, contents: String?) {
-        self.title = title
-        self.date = date
-        self.contents = contents
-        self.images = [nil]
+    init(title: String?, contents: String?, images: [String?]) {
+        self.title = title ?? ""
+        self.contents = contents ?? ""
+        self.images = images 
+        
+        let dateFormatter = DateFormatter()
+        
+        dateFormatter.dateFormat = "yyyy/MM/dd, hh:mm"
+        
+        let today = NSDate()
+        
+        let dateString = dateFormatter.string(from: today as Date)
+        
+        self.date = dateString
     }
     
     func getTitle() -> String {
@@ -33,6 +42,13 @@ class DiaryPage {
     func getContents() -> String {
         guard let contents = self.contents else {return ""}
         return contents
+    }
+    
+    func getImage() -> String {
+        guard let imageUrl = self.images.first else { return ""}
+        guard let unwrappedImageUrl = imageUrl else {return ""}
+        
+        return unwrappedImageUrl
     }
     
     func getImages() -> [String?] {
@@ -97,7 +113,7 @@ extension DiaryPage {
         
         var isIqual: Bool
         
-        if leftDiaryPage == rigthDiaryPage {
+        if leftDiaryPage.date == rigthDiaryPage.date {
             isIqual = true
         } else {
             isIqual = false
