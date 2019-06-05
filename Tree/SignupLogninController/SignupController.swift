@@ -11,10 +11,9 @@ import UIKit
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     var mainTabBarController = MainTabBarController()
-    var diaryTableViewController = DiaryTableViewController()
     var user = User(profilePicture: nil, userName: "")
     
-    //MARK: - SignupBackgroundImageView
+    //MARK: - UIViews
     let signupBackgroundImageView: UIImageView = {
         let backgroundImage = UIImage(named: "SignupBackground@2x");
         let backgroundImageView = UIImageView(image: backgroundImage);
@@ -22,7 +21,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         return backgroundImageView
     }()
     
-    //MARK: - ProfileButton
     let profileButton: UIButton = {
         let profileButtonImage = UIImage(named: "ProfileImage@2x")
         let profileButton = UIButton(type: .system)
@@ -37,7 +35,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
-    //MARK: - userNameTextField
     let userNameTextField: UITextField = {
         let textField = UITextField();
         let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
@@ -50,7 +47,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         return textField;
     }()
     
-    //MARK: - SignUpButton
     let signupButton: UIButton = {
         let doTreeButton = UIButton(type: .system)
         let doTreeButtonImage = UIImage(named: "SignupButton@2x")
@@ -116,7 +112,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     }
     
-    //MARK: - GoToLoginButton
     let goToLoginButton: UIButton = {
         let doTreeLoginButton = UIButton()
         let doTreeLoginButtonImage = UIImage(named: "AlreadyHaveAccount")
@@ -171,9 +166,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         print("userName \(userNameTextField.text)", " profileImage \(profileButton.imageView?.image)")
     }
-    
-    //MARK: - userDiary instance
-    let userDiary: User = User(profilePicture: nil, userName: nil)
     
     //MARK: - ImagePicker
     let imagePickerController: UIImagePickerController = {

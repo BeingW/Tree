@@ -31,10 +31,16 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     
     //MARK: - NavigationBar
     func navigationBar() {
-        let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
         
-        self.navigationController?.navigationBar.topItem?.title = "Tree"
-        self.navigationController?.navigationBar.topItem?.rightBarButtonItem = rightBarButtonItem
+        let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
+        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        //self.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        guard let userName = self.user?.getUserName() else {return}
+        
+        self.navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
+       // self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        self.navigationItem.title = "\(userName)"
+        
     }
     
     @objc func postButtonTapped() {
@@ -56,7 +62,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         self.user?.addNewPage(diaryPage: diaryPage)
         
         self.diaryTableViewcontroller?.user = self.user
-        self.dismiss(animated: true, completion: nil)
+        self.navigationController?.popViewController(animated: true)
         
     }
     
@@ -95,6 +101,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         return textView
     }()
     
+    //MARK: - OptionButtons Part
     let plusButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "toolBoxButton"), for: .normal)
@@ -169,8 +176,6 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         
         navigationBar()
         
-        print("\(user?.getUserName())")
-        
     }
     
     func setViews() {
@@ -192,12 +197,24 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         self.postContainerView.addSubview(plusButton)
         self.postContainerView.addSubview(toolBoxView)
         
+        //PostView
         postView.anchor(top: postContainerView.topAnchor, left: postContainerView.leftAnchor, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        plusButton.anchor(top: nil, left: nil, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 35, height: 35)
-        toolBoxView.anchor(top: nil, left: nil, bottom: plusButton.centerYAnchor, right: plusButton.centerXAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -13, paddingRight: -14, width: buttonContainerImageViewWidth, height: buttonContainerImageViewHight)
         
-        self.toolBoxView.addSubview(buttonContainerImageView)
-        buttonContainerImageView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            //In PostView
+            self.postView.addSubview(profileImageView)
+            self.postView.addSubview(diaryTitleTextField)
+            self.postView.addSubview(diaryContentTextView)
+        
+            profileImageView.anchor(top: postView.topAnchor, left: postView.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
+            diaryTitleTextField.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            diaryTitleTextField.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor, constant: 0).isActive = true
+            diaryContentTextView.anchor(top: profileImageView.bottomAnchor, left: postView.leftAnchor, bottom: postView.bottomAnchor, right: postView.rightAnchor, paddingTop: 8, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: 0, height: 0)
+        
+        //Plus Button
+            plusButton.anchor(top: nil, left: nil, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 35, height: 35)
+        
+        //Tool box
+        toolBoxView.anchor(top: nil, left: nil, bottom: plusButton.centerYAnchor, right: plusButton.centerXAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -13, paddingRight: -14, width: buttonContainerImageViewWidth, height: buttonContainerImageViewHight)
         
         imageLibraryButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: buttonWidth, height: buttonWidth)
         let buttonStakView = UIStackView(arrangedSubviews: [imageLibraryButton, takePhotoButton, recordLibraryButton, takeLocationButton])
@@ -205,24 +222,16 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         buttonStakView.distribution = .fillEqually
         buttonStakView.spacing = 10
         
-        toolBoxView.addSubview(buttonStakView)
-        buttonStakView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            //In ToolBoxView
+            self.toolBoxView.addSubview(buttonContainerImageView)
+            self.toolBoxView.addSubview(buttonStakView)
+            buttonContainerImageView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        
-        self.postView.addSubview(profileImageView)
-        self.postView.addSubview(diaryTitleTextField)
-        self.postView.addSubview(diaryContentTextView)
-        
-        profileImageView.anchor(top: postView.topAnchor, left: postView.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
-        diaryTitleTextField.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        diaryTitleTextField.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor, constant: 0).isActive = true
-        diaryContentTextView.anchor(top: profileImageView.bottomAnchor, left: postView.leftAnchor, bottom: postView.bottomAnchor, right: postView.rightAnchor, paddingTop: 8, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: 0, height: 0)
-        
-
+            buttonStakView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         //ContentContainerView
-        view.addSubview(contentContainerSeperatorView)
-        view.addSubview(contentContainerView)
+        self.view.addSubview(contentContainerSeperatorView)
+        self.view.addSubview(contentContainerView)
         contentContainerView.addSubview(diaryImageView)
         
         contentContainerSeperatorView.anchor(top: postContainerView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: nil, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)

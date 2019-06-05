@@ -26,14 +26,15 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     func navigationBar() {
         
         let thisUINavigtionBar = self.navigationController?.navigationBar
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationBarProfileIcon@2x")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationProfileIcon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
+        guard let userName = self.user?.getUserName() else {return}
         
-        
-        thisUINavigtionBar?.topItem?.title = "Tree"
-        thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackground@2x"), for: .default)
+        thisUINavigtionBar?.topItem?.title = "\(userName)"
+        thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
         thisUINavigtionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
-        
         thisUINavigtionBar?.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white]
+        //self.navigationController?.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        self.navigationController?.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         
     }
     
@@ -64,13 +65,13 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let recordContentImageView: UIImageView = {
         let recordContentImageView = UIImageView()
-        recordContentImageView.image = UIImage(named: "PostTextField@2x")
+        recordContentImageView.image = UIImage(named: "PostTextField")
         return recordContentImageView
     }()
     
     let recordTumbnailImageView: UIImageView = {
         let recordTumbnailImageView = UIImageView()
-        recordTumbnailImageView.image = UIImage(named: "ProfileIcon@2x")
+        recordTumbnailImageView.image = UIImage(named: "ProfileIcon")
         return recordTumbnailImageView
     }()
     
@@ -90,8 +91,9 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @objc func recordButtonTapped() {
         self.diaryPostController.user = self.user
         self.diaryPostController.diaryTableViewcontroller = self
-        let diaryPostNavController = UINavigationController(rootViewController: diaryPostController)
-        self.navigationController?.present(diaryPostNavController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(diaryPostController, animated: true)
+        //let diaryPostNavController = UINavigationController(rootViewController: diaryPostController)
+        //self.navigationController?.present(diaryPostNavController, animated: true, completion: nil)
         
     }
     
@@ -106,13 +108,13 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let safeLayoutArea = self.view.safeAreaLayoutGuide
         let seperateViewHeight = 5
-        let recordViewHeight = view.frame.height / 4.3
+        let recordViewHeight = view.frame.height / 4
         let labeHeigth = recordView.frame.height / 5
         let tumbNailImageViewLegnth = recordView.frame.width / 5
     
-        recordTopSeperateView.anchor(top: safeLayoutArea.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: CGFloat(seperateViewHeight))
-        recordView.anchor(top: recordTopSeperateView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: recordViewHeight)
-        recordLabel.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        recordTopSeperateView.anchor(top: safeLayoutArea.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
+        recordView.anchor(top: recordTopSeperateView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: safeLayoutArea.layoutFrame.height / 4)
+        recordLabel.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: 0, height: 20)
         recordContentImageView.anchor(top: recordLabel.bottomAnchor, left: recordView.leftAnchor, bottom: recordView.bottomAnchor, right: recordView.rightAnchor, paddingTop: 15, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 0, height: 0)
         recordTumbnailImageView.anchor(top: recordContentImageView.topAnchor, left: recordContentImageView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: tumbNailImageViewLegnth, height: tumbNailImageViewLegnth)
         recordButton.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: recordView.bottomAnchor, right: recordView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -148,6 +150,17 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        /*
+        var numberOfRows: Int
+        
+        if self.user?.diary[0] == nil {
+            numberOfRows = 0
+        } else {
+            numberOfRows = self.user?.diary.count ?? 0
+        }
+         */
+        
         return self.user?.diary.count ?? 0
     }
     

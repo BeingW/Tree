@@ -18,7 +18,7 @@ class User {
     init(profilePicture: String?, userName: String?) {
         self.profilePicture = profilePicture ?? "";
         self.userName = userName ?? "";
-        self.diary = [nil]
+        self.diary = []
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,10 +44,6 @@ class User {
     }
     
     func addNewPage(diaryPage: DiaryPage) -> Int {
-        
-        if self.diary[0] == nil {
-            self.diary.removeAll()
-        }
         
         self.diary.append(diaryPage)
         

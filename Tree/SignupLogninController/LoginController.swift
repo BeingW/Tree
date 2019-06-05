@@ -12,7 +12,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     var mainTabBarController = MainTabBarController()
     
-    //MARK: - LoginBackgroundView
+    //MARK: - UIViews
     let loginBackgroundImageView: UIImageView = {
         let backgroundImage = UIImage(named: "LoginBackground@2x")
         let loginBackgroundView = UIImageView(image: backgroundImage)
@@ -20,7 +20,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return loginBackgroundView
     }()
     
-    //MARK: - UserNameTextField
     let userNameTextField: UITextField = {
        let userNameTexField = UITextField()
         let userNameBackgroundImage = UIImage(named: "UserNameTextField@2x")
@@ -33,7 +32,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return userNameTexField
     }()
     
-    //MARK: - LoginButtonView
     let loginButton: UIButton = {
         let loginButton = UIButton()
         let doTreeButtoBackgroundImage = UIImage(named: "LoginButton@2x")
@@ -50,7 +48,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         self.dismiss(animated: true, completion: nil)
     }
     
-    //MARK: - GoToSignupButtonView
     let goToSignupButton: UIButton = {
         let goToSignupButton = UIButton()
         let goToSignupButtonImage = UIImage(named: "HaveAccount")
@@ -73,15 +70,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    //MARK: - ViewDidLoad
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setViews()
-        
-        self.navigationController?.isNavigationBarHidden = true
     }
     
     //MARK: - SetUIViews
@@ -109,9 +97,16 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //signup
         goToSignupButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
         goToSignupButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    
+        
     }
     
-    
+    //MARK: - ViewDidLoad
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setViews()
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
     
 }

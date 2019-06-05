@@ -32,7 +32,7 @@ class DiaryTableViewCell: UITableViewCell {
     
     let profileImageView: UIImageView = {
         let profileImageView = UIImageView()
-        profileImageView.image = UIImage(named: "ProfileIcon@2x")
+        profileImageView.image = UIImage(named: "ProfileIcon")
         return profileImageView
     }()
     
@@ -51,7 +51,7 @@ class DiaryTableViewCell: UITableViewCell {
     
     let editButton: UIButton = {
         let editButton = UIButton()
-        editButton.setImage(UIImage(named: "EditIcon@2x")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        editButton.setImage(UIImage(named: "SetButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
         return editButton
     }()
     
@@ -80,21 +80,21 @@ class DiaryTableViewCell: UITableViewCell {
     //MARK: - diaryOptionButtonStackView
     let commentButton: UIButton = {
         let commentButton = UIButton()
-        commentButton.setImage(UIImage(named: "CommentIcon@2x"), for: .normal)
+        commentButton.setImage(UIImage(named: "CommentIcon"), for: .normal)
         commentButton.setAttributedTitle(NSAttributedString(string: " Comment"), for: .normal)
         return commentButton
     }()
     
     let favoriteButton: UIButton = {
         let favoriteButton = UIButton()
-        favoriteButton.setImage(UIImage(named: "SelectedleafIcon@2x"), for: .normal)
+        favoriteButton.setImage(UIImage(named: "FavoriteIcon"), for: .normal)
         favoriteButton.setAttributedTitle(NSAttributedString(string: " Favorite"), for: .normal)
         return favoriteButton
     }()
 
     let shareButton: UIButton = {
         let shareButton = UIButton()
-        shareButton.setImage(UIImage(named: "ShareIcon@2x"), for: .normal)
+        shareButton.setImage(UIImage(named: "ShareIcon"), for: .normal)
         shareButton.setAttributedTitle(NSAttributedString(string: " Share"), for: .normal)
         return shareButton
     }()
