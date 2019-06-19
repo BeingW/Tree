@@ -35,7 +35,6 @@ class FMDBQueue {
                 } catch {
                     print("\(file) should be error")
                 }
-                
             }
             
         }
@@ -45,12 +44,20 @@ class FMDBQueue {
         return fmdb
     }()
     
-    init() {
-        
+    //db 가 성공적으로 연결이 되었다면 db를 연다.
+    init(fileName: String, identifier: String) {
+        self.fileName = fileName
+        self.fileIdentifier = identifier
+        if fmdb.goodConnection == true {
+            fmdb.open()
+        }
     }
     
+    //db 가 열려있다면 db를 닫는다.
     deinit {
-        
+        if fmdb.isOpen == true{
+            fmdb.close()
+        }
     }
     
 }
