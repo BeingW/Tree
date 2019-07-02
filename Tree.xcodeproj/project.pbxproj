@@ -3,12 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		190BFB2222A3BF1700341872 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */; };
-		194ED36322B7C5B7000E5716 /* FMDBQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBQueue.swift */; };
+		191C250B22CB2E5600500F80 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 191C250A22CB2E5600500F80 /* libsqlite3.tbd */; };
+		191C253122CB324A00500F80 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C252722CB324A00500F80 /* FMDatabaseQueue.m */; };
+		191C253222CB324A00500F80 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C252822CB324A00500F80 /* FMDatabase.m */; };
+		191C253422CB324A00500F80 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C252B22CB324A00500F80 /* FMResultSet.m */; };
+		191C253522CB324A00500F80 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C252E22CB324A00500F80 /* FMDatabasePool.m */; };
+		191C253622CB324A00500F80 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C253022CB324A00500F80 /* FMDatabaseAdditions.m */; };
+		191C253822CB345700500F80 /* FMDatabase.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252C22CB324A00500F80 /* FMDatabase.h */; };
+		191C253922CB345700500F80 /* FMDatabaseAdditions.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252622CB324A00500F80 /* FMDatabaseAdditions.h */; };
+		191C253A22CB345700500F80 /* FMDatabasePool.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252922CB324A00500F80 /* FMDatabasePool.h */; };
+		191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252D22CB324A00500F80 /* FMDatabaseQueue.h */; };
+		191C253C22CB345700500F80 /* FMDB.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252F22CB324A00500F80 /* FMDB.h */; };
+		191C253D22CB345700500F80 /* FMResultSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252522CB324A00500F80 /* FMResultSet.h */; };
+		193C79EB22CAFE8700A50A73 /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 193C79EA22CAFE8700A50A73 /* Tree.db */; };
+		193C79ED22CB022D00A50A73 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193C79EC22CB022D00A50A73 /* UserDAO.swift */; };
+		194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBHelper.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
 		196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196240B7229E4AFE009472C9 /* DiaryPage.swift */; };
 		196240C5229EB052009472C9 /* SignupButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240BE229EB052009472C9 /* SignupButton@2x.png */; };
@@ -46,12 +60,26 @@
 		19C66EA422A4E0F000467E00 /* ProfileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66EA322A4E0F000467E00 /* ProfileIcon.png */; };
 		19F79A9922A220AF00EAF51F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9822A220AF00EAF51F /* MainTabBarController.swift */; };
 		19F79A9B22A24E1A00EAF51F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9A22A24E1A00EAF51F /* TestViewController.swift */; };
-		BBF6E4B0B843BB18163AA26F /* Pods_Tree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84099EEEA607BFB14E5A58DF /* Pods_Tree.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
-		194ED36222B7C5B7000E5716 /* FMDBQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBQueue.swift; sourceTree = "<group>"; };
+		191C250A22CB2E5600500F80 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		191C252522CB324A00500F80 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		191C252622CB324A00500F80 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		191C252722CB324A00500F80 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		191C252822CB324A00500F80 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		191C252922CB324A00500F80 /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		191C252B22CB324A00500F80 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		191C252C22CB324A00500F80 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		191C252D22CB324A00500F80 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		191C252E22CB324A00500F80 /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		191C252F22CB324A00500F80 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
+		191C253022CB324A00500F80 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		191C253722CB326200500F80 /* Bridgining-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridgining-Header.h"; sourceTree = "<group>"; };
+		193C79EA22CAFE8700A50A73 /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
+		193C79EC22CB022D00A50A73 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
+		194ED36222B7C5B7000E5716 /* FMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBHelper.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
 		196240B7229E4AFE009472C9 /* DiaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
 		196240BE229EB052009472C9 /* SignupButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignupButton@2x.png"; sourceTree = "<group>"; };
@@ -91,9 +119,6 @@
 		19C66EA322A4E0F000467E00 /* ProfileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileIcon.png; sourceTree = "<group>"; };
 		19F79A9822A220AF00EAF51F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		19F79A9A22A24E1A00EAF51F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
-		74B12300889882BB29986BFF /* Pods-Tree.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tree.release.xcconfig"; path = "Target Support Files/Pods-Tree/Pods-Tree.release.xcconfig"; sourceTree = "<group>"; };
-		84099EEEA607BFB14E5A58DF /* Pods_Tree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CF1BF87D5686DB326A342B11 /* Pods-Tree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tree.debug.xcconfig"; path = "Target Support Files/Pods-Tree/Pods-Tree.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,19 +126,47 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BBF6E4B0B843BB18163AA26F /* Pods_Tree.framework in Frameworks */,
+				191C250B22CB2E5600500F80 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		194ED36122B7C592000E5716 /* FMDB */ = {
+		191C250922CB2E5600500F80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				194ED36222B7C5B7000E5716 /* FMDBQueue.swift */,
+				191C250A22CB2E5600500F80 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		193C79F022CB176700A50A73 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				191C252C22CB324A00500F80 /* FMDatabase.h */,
+				191C252822CB324A00500F80 /* FMDatabase.m */,
+				191C252622CB324A00500F80 /* FMDatabaseAdditions.h */,
+				191C253022CB324A00500F80 /* FMDatabaseAdditions.m */,
+				191C252922CB324A00500F80 /* FMDatabasePool.h */,
+				191C252E22CB324A00500F80 /* FMDatabasePool.m */,
+				191C252D22CB324A00500F80 /* FMDatabaseQueue.h */,
+				191C252722CB324A00500F80 /* FMDatabaseQueue.m */,
+				191C252F22CB324A00500F80 /* FMDB.h */,
+				191C252522CB324A00500F80 /* FMResultSet.h */,
+				191C252B22CB324A00500F80 /* FMResultSet.m */,
+				191C253722CB326200500F80 /* Bridgining-Header.h */,
 			);
 			path = FMDB;
+			sourceTree = "<group>";
+		};
+		194ED36122B7C592000E5716 /* FMDBHelper */ = {
+			isa = PBXGroup;
+			children = (
+				194ED36222B7C5B7000E5716 /* FMDBHelper.swift */,
+				193C79EC22CB022D00A50A73 /* UserDAO.swift */,
+			);
+			path = FMDBHelper;
 			sourceTree = "<group>";
 		};
 		196240B9229EA7FD009472C9 /* DiaryTableViewController */ = {
@@ -185,8 +238,7 @@
 			children = (
 				19AC1B742295291C007011F7 /* Tree */,
 				19AC1B732295291C007011F7 /* Products */,
-				2B87BC7A7DFE0FEFDA37FD2B /* Pods */,
-				2EE827E3DC2FFEFB134ED833 /* Frameworks */,
+				191C250922CB2E5600500F80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -201,8 +253,9 @@
 		19AC1B742295291C007011F7 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
+				193C79F022CB176700A50A73 /* FMDB */,
 				19F79A9822A220AF00EAF51F /* MainTabBarController.swift */,
-				194ED36122B7C592000E5716 /* FMDB */,
+				194ED36122B7C592000E5716 /* FMDBHelper */,
 				197A0D31229B99AF00647E9B /* SignupLogninController */,
 				196240B9229EA7FD009472C9 /* DiaryTableViewController */,
 				19AC1B8A229543DF007011F7 /* Model */,
@@ -215,6 +268,7 @@
 				19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */,
 				19AC1B812295291D007011F7 /* Info.plist */,
 				19F79A9A22A24E1A00EAF51F /* TestViewController.swift */,
+				193C79EA22CAFE8700A50A73 /* Tree.db */,
 			);
 			path = Tree;
 			sourceTree = "<group>";
@@ -261,23 +315,6 @@
 			path = DiaryPostControllerImages;
 			sourceTree = "<group>";
 		};
-		2B87BC7A7DFE0FEFDA37FD2B /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				CF1BF87D5686DB326A342B11 /* Pods-Tree.debug.xcconfig */,
-				74B12300889882BB29986BFF /* Pods-Tree.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		2EE827E3DC2FFEFB134ED833 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				84099EEEA607BFB14E5A58DF /* Pods_Tree.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -285,11 +322,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19AC1B842295291D007011F7 /* Build configuration list for PBXNativeTarget "Tree" */;
 			buildPhases = (
-				C19DCD228B1E0B275C04BA1C /* [CP] Check Pods Manifest.lock */,
 				19AC1B6E2295291C007011F7 /* Sources */,
 				19AC1B6F2295291C007011F7 /* Frameworks */,
 				19AC1B702295291C007011F7 /* Resources */,
-				3423689DD43633AC1E90C1A6 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -312,7 +347,7 @@
 				TargetAttributes = {
 					19AC1B712295291C007011F7 = {
 						CreatedOnToolsVersion = 10.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -344,6 +379,7 @@
 				196240C5229EB052009472C9 /* SignupButton@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
 				19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */,
+				193C79EB22CAFE8700A50A73 /* Tree.db in Resources */,
 				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
 				19C66E9E22A4E04A00467E00 /* Camera.png in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
@@ -369,67 +405,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		3423689DD43633AC1E90C1A6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tree/Pods-Tree-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Tree/Pods-Tree-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tree/Pods-Tree-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C19DCD228B1E0B275C04BA1C /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Tree-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		19AC1B6E2295291C007011F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191C253822CB345700500F80 /* FMDatabase.h in Sources */,
+				191C253922CB345700500F80 /* FMDatabaseAdditions.h in Sources */,
+				191C253A22CB345700500F80 /* FMDatabasePool.h in Sources */,
+				191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */,
+				191C253C22CB345700500F80 /* FMDB.h in Sources */,
+				191C253D22CB345700500F80 /* FMResultSet.h in Sources */,
 				19F79A9922A220AF00EAF51F /* MainTabBarController.swift in Sources */,
 				19AC1B782295291C007011F7 /* SignupController.swift in Sources */,
-				194ED36322B7C5B7000E5716 /* FMDBQueue.swift in Sources */,
+				191C253522CB324A00500F80 /* FMDatabasePool.m in Sources */,
+				194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */,
 				19F79A9B22A24E1A00EAF51F /* TestViewController.swift in Sources */,
+				191C253222CB324A00500F80 /* FMDatabase.m in Sources */,
 				19C66E9522A4CDC000467E00 /* DiaryPostController.swift in Sources */,
+				191C253422CB324A00500F80 /* FMResultSet.m in Sources */,
 				197A0D33229B99D400647E9B /* LoginController.swift in Sources */,
 				196240CF229EE415009472C9 /* DiaryTableViewController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
 				196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */,
+				191C253122CB324A00500F80 /* FMDatabaseQueue.m in Sources */,
 				195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */,
 				197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */,
 				19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */,
 				19AC1B8C2295440D007011F7 /* User.swift in Sources */,
+				193C79ED22CB022D00A50A73 /* UserDAO.swift in Sources */,
 				190BFB2222A3BF1700341872 /* DiaryTableViewCell.swift in Sources */,
+				191C253622CB324A00500F80 /* FMDatabaseAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -573,7 +579,6 @@
 		};
 		19AC1B852295291D007011F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CF1BF87D5686DB326A342B11 /* Pods-Tree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -586,7 +591,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "JK-L.Tree";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tree/FMDB/Bridgining-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -595,7 +600,6 @@
 		};
 		19AC1B862295291D007011F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 74B12300889882BB29986BFF /* Pods-Tree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -608,7 +612,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "JK-L.Tree";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Tree/FMDB/Bridgining-Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
