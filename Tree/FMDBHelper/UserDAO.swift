@@ -135,7 +135,7 @@ class UserDAO: FMDBHelper {
                 
                 //4.입력받을 데이터를 넣을 쿼리를 작성한다.
                 insertQuery = "INSERT INTO user_diarypage_relation (diarypage_id, user_id) VALUES (?, ?)"
-                parmeters.append("D0000")
+                parmeters.append("NULL")
                 parmeters.append(userId)
                 //5.쿼리를 작동한다.
                 try db.executeUpdate(insertQuery, values: parmeters)

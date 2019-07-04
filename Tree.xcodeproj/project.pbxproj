@@ -43,6 +43,7 @@
 		197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5B229BB38900647E9B /* HaveAccount.png */; };
 		197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5C229BB38900647E9B /* LoginButton@2x.png */; };
 		197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D63229BED3800647E9B /* CustomNavigationController.swift */; };
+		1988567422CDC75300AD0778 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988567322CDC75300AD0778 /* Image.swift */; };
 		19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B752295291C007011F7 /* AppDelegate.swift */; };
 		19AC1B782295291C007011F7 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B772295291C007011F7 /* SignupController.swift */; };
 		19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B792295291C007011F7 /* Main.storyboard */; };
@@ -100,6 +101,7 @@
 		197A0D5B229BB38900647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
 		197A0D5C229BB38900647E9B /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		197A0D63229BED3800647E9B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		1988567322CDC75300AD0778 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		19AC1B722295291C007011F7 /* Tree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AC1B752295291C007011F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19AC1B772295291C007011F7 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				19AC1B8B2295440D007011F7 /* User.swift */,
 				196240B7229E4AFE009472C9 /* DiaryPage.swift */,
+				1988567322CDC75300AD0778 /* Image.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -411,6 +414,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				191C253822CB345700500F80 /* FMDatabase.h in Sources */,
+				1988567422CDC75300AD0778 /* Image.swift in Sources */,
 				191C253922CB345700500F80 /* FMDatabaseAdditions.h in Sources */,
 				191C253A22CB345700500F80 /* FMDatabasePool.h in Sources */,
 				191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */,

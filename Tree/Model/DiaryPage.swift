@@ -21,7 +21,7 @@ class DiaryPage {
         
         let dateFormatter = DateFormatter()
         
-        dateFormatter.dateFormat = "yyyy/MM/dd, hh:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
         
         let today = NSDate()
         
