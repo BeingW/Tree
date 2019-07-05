@@ -18,7 +18,7 @@ class DiaryTableViewCell: UITableViewCell {
             
             let covertingData = ConvertingDataAndImage()
             guard let imageUrl = diarypage?.getImage() else {return}
-            guard let unwrappedImage = covertingData.convertingFromUniqueUrlToImage(uniqueId: imageUrl) else {return}
+            guard let unwrappedImage = covertingData.convertingFromUrlToImage(uniqueId: imageUrl) else {return}
             
             diaryImageView.image = unwrappedImage
         }

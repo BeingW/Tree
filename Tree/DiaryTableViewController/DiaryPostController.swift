@@ -50,7 +50,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         let imageUrl: String?
         
         if let imageContents = self.diaryImageView.image {
-            imageUrl = ConvertingDataAndImage().convertingFromImageToUniqueUrl(image: imageContents)
+            imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: imageContents)
         } else {
             imageUrl = ""
         }

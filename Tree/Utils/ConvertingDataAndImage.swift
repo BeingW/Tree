@@ -10,7 +10,7 @@ import UIKit
 
 struct ConvertingDataAndImage {
     
-    func convertingFromImageToUniqueUrl(image: UIImage) -> String? {
+    func convertingFromImageToUrl(image: UIImage) -> String? {
         //1. UIImage 를 입력받는다.
         //2. Image 의 고유아이디를 만든다(확장자와 같이)
         let uuid = UUID().uuidString
@@ -35,7 +35,7 @@ struct ConvertingDataAndImage {
         return uuidWithTypeOfFile
     }
 
-    func convertingFromUniqueUrlToImage(uniqueId: String) -> UIImage? {
+    func convertingFromUrlToImage(uniqueId: String) -> UIImage? {
         
         var imageData: UIImage?
         

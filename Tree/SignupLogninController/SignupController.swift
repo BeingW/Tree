@@ -11,7 +11,12 @@ import UIKit
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     var mainTabBarController = MainTabBarController()
-    var user = User(profilePicture: nil, userName: "")
+    var user = User(userName: "", userPassword: "", profilePicture: "")
+    let imagePickerController: UIImagePickerController = {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.allowsEditing = true;
+        return imagePickerController
+    }()
     
     //MARK: - UIViews
     let signupBackgroundImageView: UIImageView = {
@@ -30,9 +35,29 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         return profileButton
     }()
     
+    /*
+     함수명: profileButtonTapped
+     기능: 핸드폰의 사진 앱 안에서 사진을 선택해 가져온다.
+     작성일자: 2019.07.05
+     */
     @objc func profileButtonTapped() {
+    //1.imagePickerController delegate 에 UIImagePickerControllerDelegate & UINavigationControllerDelegate 를 상속받고 있는 SignupController 를 넣어 활성화 시킨다.
         self.imagePickerController.delegate = self
+    //2.imagePickerController 함수를 실행한다.
         self.present(imagePickerController, animated: true, completion: nil)
+    }
+    //3.사진앱으로 이동한다.
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        var selectedPhoto: UIImage?
+        //3.1.사진을 선택한다.
+        selectedPhoto = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+        //3.2.사진을 동그라미 버튼에 씌운다.
+        self.profileButton.setImage(selectedPhoto?.withRenderingMode(.alwaysOriginal), for: .normal)
+        //3.3.동그라미의 외각을 조정한다.
+        profileButton.layer.cornerRadius = profileButton.frame.width/2
+        profileButton.layer.masksToBounds = true;
+        //3.4.화면을 dismiss 한다.
+        self.dismiss(animated: true, completion: nil)
     }
     
     let userNameTextField: UITextField = {
@@ -47,65 +72,64 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         return textField;
     }()
     
+    let userPasswordTextField: UITextField = {
+        let textField = UITextField();
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        textField.leftView = paddingView
+        textField.leftViewMode = .always
+        
+        let image = UIImage(named: "UserNameTextField@2x")
+        textField.background = image
+        
+        return textField;
+    }()
+    
     let signupButton: UIButton = {
         let doTreeButton = UIButton(type: .system)
         let doTreeButtonImage = UIImage(named: "SignupButton@2x")
         doTreeButton.setBackgroundImage(doTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        doTreeButton.addTarget(self, action: #selector(signupButtonTapped), for: .touchUpInside)
+        doTreeButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return doTreeButton
     }()
     
-    @objc func signupButtonTapped() {
-        
+    /*
+     함수명: signUpButtonTapped
+     기능: 회원가입한다.
+     작성일자: 2019.07.05
+     */
+    @objc func signUpButtonTapped() {
+        guard let userName = userNameTextField.text else {return}
+        guard let userPassword = userPasswordTextField.text else {return}
+        let userProfileImage = profileButton.imageView?.image
         var loginIsSucceed: Bool = false;
-        var alertController = UIAlertController(title: "", message: "", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Please check signup information", message: "", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
         let converting = ConvertingDataAndImage()
         
-        guard let userName = userNameTextField.text else { return }
-        
-        //1.profileImage 와 userProfilePicture 가 입력 되었는지 확인한다.
-        if userName != "" && profileButton.imageView?.image != nil {
-            guard let userProfilePicture = profileButton.imageView?.image else {return}
-            guard let profileImageId = converting.convertingFromImageToUniqueUrl(image: userProfilePicture) else { return }
-            
-            //입력이 되었다면
-            //1.1. user class 객체를 만든다.
-            self.user = User(profilePicture: profileImageId, userName: userName)
-            //1.2. user 객체의 속성들을 db 에 저장한다.
-            //1.3. user 객체와 db에 성공적으로 저장 되었다면 loginSucceed 를 true 한다. 반대의 경우 false
+        //1.모든 유저정보가 입력됐을 때.
+        if userName != "" && userPassword != "" && userProfileImage != nil {
+            guard let userProfilePicture = userProfileImage else {return}
+            guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
+            //1.1. user 객체를 만든다.
+            self.user = User(userName: userName, userPassword: userPassword, profilePicture: profileImageUrl)
+            //1.2. loginSucced 를 true 로 한다.
             loginIsSucceed = true
-        } else if userName == "" && profileButton.imageView?.image != nil {
-                //아이디를 입력해 달라는 팝업 메시지를 띄운다.
-                let userNameAlertTitle = "Please type your name."
-                alertController = UIAlertController(title: userNameAlertTitle, message: "", preferredStyle: .alert)
-                alertController.addAction(alertAction)
-            present(alertController, animated: true, completion: nil)
-            loginIsSucceed = false;
-        } else if userName != "" && profileButton.imageView?.image == nil {
-                //이미지를 입력해 달라는 팝업 메시지를 띄운다.
-                let userProfileAlertTitle = "Please take in your image."
-                alertController = UIAlertController(title: userProfileAlertTitle, message: "", preferredStyle: .alert)
-                alertController.addAction(alertAction)
-            present(alertController, animated: true, completion: nil)
-            loginIsSucceed = false;
-        } else if userName == "" && profileButton.imageView?.image == nil {
-                //아이디와 프로파일 이미지를 넣어달라는 팝업 메시지를 띄운다.
-                let userNameAndProfileAlertTitle = "Please enter your name and image."
-                alertController = UIAlertController(title: userNameAndProfileAlertTitle, message: "", preferredStyle: .alert)
-                alertController.addAction(alertAction)
-            present(alertController, animated: true, completion: nil)
-            loginIsSucceed = false;
+        //2.입력이 하나라도 안됐다면.
+        } else {
+            //2.1.입력정보를 확인해 달라는 메시지를 띄운다.
+            self.present(alertController, animated: true, completion: nil)
+            //2.2.loginIsSucced 를 false 로 한다.
+            loginIsSucceed = false
         }
-        
+        //3.loginIsSucceed 가 true 라면
         if loginIsSucceed == true {
             self.mainTabBarController.isAppFirstOpen = false
             self.mainTabBarController.user = user
             
-            UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
-            
+            //UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
+            //3.1.mainTabBarController 의 기본페이지로 이동한다.
             mainTabBarController.setTabViewControllers()
-            
             self.dismiss(animated: true, completion: nil)
             
         }
@@ -115,12 +139,16 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     let goToLoginButton: UIButton = {
         let doTreeLoginButton = UIButton()
         let doTreeLoginButtonImage = UIImage(named: "AlreadyHaveAccount")
-        
         doTreeLoginButton.setBackgroundImage(doTreeLoginButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         doTreeLoginButton.addTarget(self, action: #selector(goToLoginButtonTapped), for: .touchUpInside)
         return doTreeLoginButton
     }()
     
+    /*
+     함수명: goToLoginButtonTapped
+     기능: 계정이 있다면, LoginController 로 되돌아간다.
+     작성일자: 2019.07.05
+     */
     @objc func goToLoginButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -167,25 +195,9 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         print("userName \(userNameTextField.text)", " profileImage \(profileButton.imageView?.image)")
     }
     
-    //MARK: - ImagePicker
-    let imagePickerController: UIImagePickerController = {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.allowsEditing = true;
-        return imagePickerController
-    }()
+
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        var selectedPhoto: UIImage?
-        
-        selectedPhoto = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        
-        self.profileButton.setImage(selectedPhoto?.withRenderingMode(.alwaysOriginal), for: .normal)
-        
-        profileButton.layer.cornerRadius = profileButton.frame.width/2
-        profileButton.layer.masksToBounds = true;
-        
-        self.dismiss(animated: true, completion: nil)
-    }
+
 
 
 }

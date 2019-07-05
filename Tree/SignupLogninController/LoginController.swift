@@ -32,6 +32,18 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return userNameTexField
     }()
     
+    let userPasswordTextField: UITextField = {
+        let userNameTexField = UITextField()
+        let userNameBackgroundImage = UIImage(named: "UserNameTextField@2x")
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
+        userNameTexField.leftView = paddingView
+        userNameTexField.leftViewMode = .always
+        
+        userNameTexField.background = userNameBackgroundImage
+        
+        return userNameTexField
+    }()
+    
     let loginButton: UIButton = {
         let loginButton = UIButton()
         let doTreeButtoBackgroundImage = UIImage(named: "LoginButton@2x")
@@ -40,12 +52,35 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return loginButton
     }()
     
+    /*
+     함수명: loginButtonTapped
+     기능: 로그인 한다.
+     작성일자: 2019.07.05
+     */
     @objc func loginButtonTapped() {
-        self.mainTabBarController.isAppFirstOpen = false
-        
-        UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
-        
-        self.dismiss(animated: true, completion: nil)
+        //1.userName 을 가져온다.
+        guard let userName = self.userNameTextField.text else {return}
+        //2.userPassword 을 가져온다.
+        guard let userPassword = self.userPasswordTextField.text else {return}
+        //3.가입한 user 객체를 가져온다.
+        let user = User(userName: "Jae", userPassword: "zpzp900", profilePicture: "String")
+        //4.가입한 user 정보를 가져온다.
+        let signedUserName = user.getUserName()
+        let signedUserPassword = user.getUserPassword()
+        //5.입력한 user 정보과 가입된 user 정보가 같다면
+        if userName == signedUserName && userPassword == signedUserPassword {
+            //5.1.mainTabBarController 의 isAppFirstOpen 을 false 로 한다.
+            self.mainTabBarController.isAppFirstOpen = false
+            //5.2.mainTabBarController 의 기본페이지로 이동한다.
+            self.mainTabBarController.user = user
+            self.mainTabBarController.setTabViewControllers()
+            self.dismiss(animated: true, completion: nil)
+        //6.다르다면, 입력정보를 확인해 달라는 메시지를 띄운다.
+        } else {
+            let alertController = UIAlertController(title: "Please check login information", message: "", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
+        }
     }
     
     let goToSignupButton: UIButton = {
@@ -56,9 +91,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return goToSignupButton
     }()
     
+    /*
+     함수명: goToSignupButtonTapped
+     기능: 계정이 없으면, SignupPage 로 이동한다.
+     작성일자: 2019.07.05
+     */
     @objc func goToSignupButtonTapped() {
+        //1.SignupController 객체를 생성한다.
         let signupController = SignupController()
+        //2.SignupController 객체의 mainTabBarController 객체에 자신의 mainTabBarController 객체를 넣는다.
         signupController.mainTabBarController = self.mainTabBarController
+        //3.SignupController로 push 이동한다.
         self.navigationController?.pushViewController(signupController, animated: true)
     }
     

@@ -10,15 +10,17 @@ import Foundation
 import UIKit
 
 class User {
-    
-    private var profilePicture: String
     private var userName: String
+    private var userPassword: String
+    private var profilePicture: String
+
     var diary: [DiaryPage?]
     
-    init(profilePicture: String?, userName: String?) {
-        self.profilePicture = profilePicture ?? "";
-        self.userName = userName ?? "";
-        self.diary = []
+    init(userName: String, userPassword: String, profilePicture: String) {
+        self.userName = userName
+        self.userPassword = userPassword
+        self.profilePicture = profilePicture
+        self.diary = [nil]
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -26,23 +28,48 @@ class User {
     }
     
     func getUserName() -> String {
-        return userName ?? ""
+        return userName
+    }
+    
+    func getUserPassword() -> String {
+        return userPassword
     }
     
     func getProfilePicture() -> String {
-        return profilePicture ?? ""
+        return profilePicture
     }
     
+    /*
+     함수명: chageUserName
+     기능: user객체의 userName 을 수정한다.
+     작성일자: 2019.07.05
+     */
     func chageUserName(userName: String) -> String {
         self.userName = userName
-        return self.userName ?? ""
+        return self.userName
     }
     
+    /*
+     함수명: chageUserPassword
+     기능: user객체의 userPassword 을 수정한다.
+     작성일자: 2019.07.05
+     */
+    func chageUserPassword(userPassword: String) -> String {
+        self.userPassword = userPassword
+        return self.userPassword
+    }
+    
+    /*
+     함수명: changeProfilePicture
+     기능: user객체의 profilePicture 을 수정한다.
+     작성일자: 2019.07.05
+     */
     func changeProfilePicture(profilePicture: String) -> String {
         self.profilePicture = profilePicture
-        return self.profilePicture ?? ""
+        return self.profilePicture
     }
     
+    /*
     func addNewPage(diaryPage: DiaryPage) -> Int {
         
         self.diary.append(diaryPage)
@@ -57,6 +84,7 @@ class User {
         
         return i
     }
+ 
     
     func deleteAllDiaryPage() {
         self.diary.removeAll()
@@ -65,4 +93,5 @@ class User {
     func deleteDiaryPageAt(index: Int) {
         self.diary.remove(at: index)
     }
+     */
 }
