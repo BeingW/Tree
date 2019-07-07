@@ -10,15 +10,15 @@ import Foundation
 import UIKit
 
 class User {
-    private var userName: String
-    private var userPassword: String
+    private var name: String
+    private var password: String
     private var profilePicture: String
 
     var diary: [DiaryPage?]
     
     init(userName: String, userPassword: String, profilePicture: String) {
-        self.userName = userName
-        self.userPassword = userPassword
+        self.name = userName
+        self.password = userPassword
         self.profilePicture = profilePicture
         self.diary = [nil]
     }
@@ -28,11 +28,11 @@ class User {
     }
     
     func getUserName() -> String {
-        return userName
+        return name
     }
     
     func getUserPassword() -> String {
-        return userPassword
+        return password
     }
     
     func getProfilePicture() -> String {
@@ -45,8 +45,8 @@ class User {
      작성일자: 2019.07.05
      */
     func chageUserName(userName: String) -> String {
-        self.userName = userName
-        return self.userName
+        self.name = userName
+        return self.name
     }
     
     /*
@@ -55,8 +55,8 @@ class User {
      작성일자: 2019.07.05
      */
     func chageUserPassword(userPassword: String) -> String {
-        self.userPassword = userPassword
-        return self.userPassword
+        self.password = userPassword
+        return self.password
     }
     
     /*

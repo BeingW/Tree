@@ -11,101 +11,60 @@ import Foundation
 class DiaryPage {
     private var title: String?
     private var date: String
-    private var contents: String?
-    private var images: [String?]
+    private var text: String?
+    private var images: [Image?]
     
-    init(title: String?, contents: String?, images: [String?]) {
+    init(title: String?, contents: String?, images: [Image?]) {
         self.title = title ?? ""
-        self.contents = contents ?? ""
+        self.text = contents ?? ""
         self.images = images 
         
         let dateFormatter = DateFormatter()
-        
         dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
-        
         let today = NSDate()
-        
         let dateString = dateFormatter.string(from: today as Date)
         
         self.date = dateString
     }
     
-    func getTitle() -> String {
-        guard let title = self.title else {return ""}
-        return title
+    func getTitle() -> String? {
+        return self.title
     }
     
-    func getDate() -> String {
-        return date
+    func getDate() -> String? {
+        return self.date
     }
     
-    func getContents() -> String {
-        guard let contents = self.contents else {return ""}
-        return contents
+    func getText() -> String? {
+        return self.text
     }
     
-    func getImage() -> String {
-        guard let imageUrl = self.images.first else { return ""}
-        guard let unwrappedImageUrl = imageUrl else {return ""}
-        
-        return unwrappedImageUrl
+    func getImageAt(index: Int) -> Image? {
+        return self.images[index]
     }
     
-    func getImages() -> [String?] {
+    func getImages() -> [Image?] {
         return images
     }
     
-    func writeTitle(title: String) -> String {
+    func editTitle(title: String) -> String? {
         self.title = title
-        return self.title!
+        return self.title
     }
     
-    func writeDate() -> String {
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "yyyy/MM/dd, hh:mm"
-        
-        let today = NSDate()
-        
-        let dateString = dateFormatter.string(from: today as Date)
-        
-        return dateString
+    func editText(text: String) -> String? {
+        self.text = text
+        return self.text
     }
     
-    func writeContents(contents: String) -> String {
-        self.contents = contents
-        return self.contents!
-    }
-    
-    func postImages(images: [String]) -> [String] {
-        var i = 0
-        let count = self.images.count
-        
-        self.images.removeAll()
-        
-        while i < count {
-            self.images.append(images[i])
-            i += 1
-        }
-        
-        return self.images as! [String]
-    }
-    
-    func deleteTitle() {
-        self.title = ""
-    }
-    
-    func deleteContents() {
-        self.contents = ""
+    func deleteImageAt(index: Int){
+        self.images.remove(at: index)
     }
     
     func deleteAllImages() {
         self.images.removeAll()
     }
     
-    func deleteImageAt(index: Int){
-        self.images.remove(at: index)
-    }
 }
 
 extension DiaryPage {

@@ -57,7 +57,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         
         let imageStrings = [imageUrl]
         
-        let diaryPage = DiaryPage(title: title, contents: textContents, images: imageStrings)
+        //let diaryPage = DiaryPage(title: title, contents: textContents, images: imageStrings)
         
         self.user?.addNewPage(diaryPage: diaryPage)
         
