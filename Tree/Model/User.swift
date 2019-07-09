@@ -10,18 +10,7 @@ import Foundation
 import UIKit
 
 class User {
-<<<<<<< HEAD
-    private var name: String
-    private var password: String
-    private var profilePicture: String
 
-    var diary: [DiaryPage?]
-    
-    init(userName: String, userPassword: String, profilePicture: String) {
-        self.name = userName
-        self.password = userPassword
-        self.profilePicture = profilePicture
-=======
     private var name: String?
     private var password: String?
     private var profilePictureUrl: String?
@@ -32,7 +21,7 @@ class User {
         self.name = name
         self.password = password
         self.profilePictureUrl = profilePictureUrl
->>>>>>> working
+
         self.diary = [nil]
     }
     
@@ -40,19 +29,11 @@ class User {
         fatalError("init(coder:) has not been implemented")
     }
     
-<<<<<<< HEAD
-    func getUserName() -> String {
-        return name
-    }
-    
-    func getUserPassword() -> String {
-=======
     func getName() -> String? {
         return name
     }
     
     func getPassword() -> String? {
->>>>>>> working
         return password
     }
     
@@ -66,13 +47,8 @@ class User {
      작성일자: 2019.07.05
      수정일자:
      */
-<<<<<<< HEAD
-    func chageUserName(userName: String) -> String {
-        self.name = userName
-=======
     func editName(name: String) -> String?{
         self.name = name
->>>>>>> working
         return self.name
     }
     
@@ -82,13 +58,8 @@ class User {
      작성일자: 2019.07.05
      수정일자:
      */
-<<<<<<< HEAD
-    func chageUserPassword(userPassword: String) -> String {
-        self.password = userPassword
-=======
     func editPassword(password: String) -> String?{
         self.password = password
->>>>>>> working
         return self.password
     }
     

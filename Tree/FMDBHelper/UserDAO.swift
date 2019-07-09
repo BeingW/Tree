@@ -18,6 +18,7 @@ class UserDAO: FMDBHelper {
      함수명: makeUserId
      기능: 중복되지 않는 user_id 를 만들어 반환한다.
      작성일자: 2019.07.02
+     수정일자:
      */
     func makeUserId() -> String {
         //1. 변수들을 초기화 한다.
@@ -28,7 +29,7 @@ class UserDAO: FMDBHelper {
         var userId: String = ""
         
         do{
-            let selectQuery = "SELECT user_id FROM user ORDER BY user_id ASC"
+            let selectQuery = "SELECT user_id FROM user"
             let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
             //2.user_id 가 있다면 끝까지 반복한다.
             while resultSet.next() {
@@ -82,6 +83,7 @@ class UserDAO: FMDBHelper {
      함수명: fetchData
      기능: DB 에서 user data 를 가져와 user class 에 넣어 생성한 후 반환한다.
      작성일자: 2019.07.02
+     수정일자: 2019.07.09
      */
     func fetchData() -> User {
         var userName: String = ""
@@ -115,6 +117,7 @@ class UserDAO: FMDBHelper {
      함수명: insertData
      기능: 입력한 user Data 를 user, user_diarypage_relation Table 에 넣는다.
      작성일자: 2019.07.02
+     수정일자: 2019.07.09
      */
     func insertData(userName: String, userPassword: String, userProfilePicture: String) {
         //1. userName, userPassword, userProfilePicture 을 입력받는다.
@@ -157,6 +160,7 @@ class UserDAO: FMDBHelper {
      함수명: updateData
      기능: 특정 user table 을 수정한다.
      작성일자: 2019.07.02
+     수정일자: 2019.07.09
      */
     func updateData(userId: String, userName: String?, userPassword: String?, userProfilePictureUrl: String?) {
         //1. userId, userName, userProfile 을 입력받는다.
@@ -211,6 +215,7 @@ class UserDAO: FMDBHelper {
      함수명: deleteData
      기능: 특정 user table 을 지우고, 그에 따른 모든 데이터를 지운다(회원탈퇴).
      작성일자: 2019.07.02
+     수정일자: 2019.07.09
      */
     func deleteData(userId: String) {
         let paragmaQuery = "PRAGMA foreign_keys=on"

@@ -14,15 +14,10 @@ class DiaryPage {
     private var text: String?
     private var images: [Image?]
     
-<<<<<<< HEAD
-    init(title: String?, contents: String?, images: [Image?]) {
-        self.title = title ?? ""
-        self.text = contents ?? ""
-=======
+
     init(title: String?, text: String?, images: [Image?]) {
         self.title = title ?? ""
         self.text = text ?? ""
->>>>>>> working
         self.images = images 
         
         let dateFormatter = DateFormatter()
@@ -33,11 +28,7 @@ class DiaryPage {
     }
     
     func getTitle() -> String? {
-<<<<<<< HEAD
-        return self.title
-=======
         return title
->>>>>>> working
     }
     
     func getDate() -> String? {
@@ -45,57 +36,40 @@ class DiaryPage {
     }
     
     func getText() -> String? {
-<<<<<<< HEAD
         return self.text
     }
     
     func getImageAt(index: Int) -> Image? {
         return self.images[index]
-=======
-        return text
-    }
-    
-    func getImageAt(index: Int) -> Image? {
-        
-        return images[index]
->>>>>>> working
     }
     
     func getImages() -> [Image?] {
         return images
     }
     
-<<<<<<< HEAD
-=======
     /*
      함수명: editTitle
      기능: 다이어리 제목을 수정한다.
      작성일자: 2019.07.09
      수정일자:
      */
->>>>>>> working
     func editTitle(title: String) -> String? {
         self.title = title
         return self.title
     }
     
-<<<<<<< HEAD
-=======
+
     /*
-     함수명: editTitle
+     함수명: editText
      기능: 다이어리 글을 수정한다.
      작성일자: 2019.07.09
      수정일자:
      */
->>>>>>> working
     func editText(text: String) -> String? {
         self.text = text
         return self.text
     }
     
-<<<<<<< HEAD
-    func deleteImageAt(index: Int){
-=======
     /*
      함수명: editImageAt
      기능: 특정 Image 를 수정한다.
@@ -116,7 +90,6 @@ class DiaryPage {
      수정일자:
      */
     func deleteImageAt(index: Int) {
->>>>>>> working
         self.images.remove(at: index)
     }
     
@@ -129,10 +102,6 @@ class DiaryPage {
     func deleteAllImages(){
         self.images.removeAll()
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> working
 }
 
 extension DiaryPage {
