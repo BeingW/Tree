@@ -27,7 +27,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let thisUINavigtionBar = self.navigationController?.navigationBar
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationProfileIcon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
-        guard let userName = self.user?.getUserName() else {return}
+        guard let userName = self.user?.getName() else {return}
         
         thisUINavigtionBar?.topItem?.title = "\(userName)"
         thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
@@ -143,7 +143,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
         
-        print("\(user?.getUserName())")
+        print("\(user?.getName())")
         
     }
     

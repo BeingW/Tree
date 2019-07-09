@@ -14,7 +14,7 @@ class DiaryTableViewCell: UITableViewCell {
         didSet {
             dateLabel.text = diarypage?.getDate()
             titleLable.text = diarypage?.getTitle()
-            diaryTextView.text = diarypage?.getContents()
+            diaryTextView.text = diarypage?.getText()
             
             let covertingData = ConvertingDataAndImage()
             guard let imageUrl = diarypage?.getImage() else {return}

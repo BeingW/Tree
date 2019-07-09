@@ -9,17 +9,36 @@
 import UIKit
 
 class Image {
-    private var image: UIImage?
-    private var imageUid: String?
-    private var imageType: String?
-    private var imageSize: CGSize?
+    private var url: String?
+    private var width: Int?
+    private var height: Int?
+    private var createdDate: String?
     
-    init(image: UIImage, imageUid: String, imageType: String, imageSize: CGSize) {
-        self.image = image
-        self.imageUid = imageUid
-        self.imageType = imageType
-        self.imageSize = imageSize
+    init(url: String, width: Int, height: Int, createdDate: String) {
+        self.url = url
+        self.width = width
+        self.height = height
+        self.createdDate = createdDate
     }
     
+    func editImageUrl(url: String) -> String? {
+        self.url = url
+        return url
+    }
+    
+    func editWidth(width: Int) -> Int? {
+        self.width = width
+        return width
+    }
+    
+    func editHeight(height: Int) -> Int? {
+        self.height = height
+        return height
+    }
+    
+    func editCreateDate(date: String) -> String? {
+        self.createdDate = date
+        return createdDate
+    }
     
 }
