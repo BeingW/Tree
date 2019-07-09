@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 class User {
+<<<<<<< HEAD
     private var name: String
     private var password: String
     private var profilePicture: String
@@ -20,6 +21,18 @@ class User {
         self.name = userName
         self.password = userPassword
         self.profilePicture = profilePicture
+=======
+    private var name: String?
+    private var password: String?
+    private var profilePictureUrl: String?
+
+    var diary: [DiaryPage?]
+    
+    init(name: String?, password: String?, profilePictureUrl: String?) {
+        self.name = name
+        self.password = password
+        self.profilePictureUrl = profilePictureUrl
+>>>>>>> working
         self.diary = [nil]
     }
     
@@ -27,46 +40,87 @@ class User {
         fatalError("init(coder:) has not been implemented")
     }
     
+<<<<<<< HEAD
     func getUserName() -> String {
         return name
     }
     
     func getUserPassword() -> String {
+=======
+    func getName() -> String? {
+        return name
+    }
+    
+    func getPassword() -> String? {
+>>>>>>> working
         return password
     }
     
-    func getProfilePicture() -> String {
-        return profilePicture
+    func getProfilePictureUrl() -> String? {
+        return profilePictureUrl
     }
     
     /*
-     함수명: chageUserName
+     함수명: editName
      기능: user객체의 userName 을 수정한다.
      작성일자: 2019.07.05
+     수정일자:
      */
+<<<<<<< HEAD
     func chageUserName(userName: String) -> String {
         self.name = userName
+=======
+    func editName(name: String) -> String?{
+        self.name = name
+>>>>>>> working
         return self.name
     }
     
     /*
-     함수명: chageUserPassword
+     함수명: editPassword
      기능: user객체의 userPassword 을 수정한다.
      작성일자: 2019.07.05
+     수정일자:
      */
+<<<<<<< HEAD
     func chageUserPassword(userPassword: String) -> String {
         self.password = userPassword
+=======
+    func editPassword(password: String) -> String?{
+        self.password = password
+>>>>>>> working
         return self.password
     }
     
     /*
-     함수명: changeProfilePicture
+     함수명: editProfilePictureUrl
      기능: user객체의 profilePicture 을 수정한다.
      작성일자: 2019.07.05
+     수정일자:
      */
-    func changeProfilePicture(profilePicture: String) -> String {
-        self.profilePicture = profilePicture
-        return self.profilePicture
+    func editProfilePictureUrl(url: String) -> String?{
+        self.profilePictureUrl = url
+        return self.profilePictureUrl
+    }
+    
+    /*
+     함수명: deleteDiaryPageAt
+     기능: 특정한 DiaryPage 를 지운다.
+     작성일자: 2019.07.09
+     수정일자:
+     */
+    func deleteDiaryPageAt(index: Int) {
+        self.diary.remove(at: index)
+    }
+    
+    /*
+     함수명: deleteDiaryPageAt
+     기능: 특정한 DiaryPage 를 지운다.
+     작성일자: 2019.07.09
+     수정일자:
+     */
+    func deleteDiary() {
+        self.diary.removeAll()
     }
     
     /*
@@ -84,14 +138,6 @@ class User {
         
         return i
     }
- 
+ */
     
-    func deleteAllDiaryPage() {
-        self.diary.removeAll()
-    }
-    
-    func deleteDiaryPageAt(index: Int) {
-        self.diary.remove(at: index)
-    }
-     */
 }

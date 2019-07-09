@@ -28,7 +28,7 @@ class UserDAO: FMDBHelper {
         var userId: String = ""
         
         do{
-            let selectQuery = "SELECT user_id FROM user"
+            let selectQuery = "SELECT user_id FROM user ORDER BY user_id ASC"
             let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
             //2.user_id 가 있다면 끝까지 반복한다.
             while resultSet.next() {
@@ -86,6 +86,7 @@ class UserDAO: FMDBHelper {
     func fetchData() -> User {
         var userName: String = ""
         var userProfilePicture: String = ""
+        var userPassword: String = ""
         var user: User
         
         do {
@@ -93,8 +94,10 @@ class UserDAO: FMDBHelper {
             let selectQuery = "SELECT * FROM user"
             let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
             //2.userName 과 userProfilePictrue 을 저장해 놓는다.
-            userName = resultSet.string(forColumn: "user_name")!
-            userProfilePicture = resultSet.string(forColumn: "user_profilepicture")!
+            
+            userName = resultSet.string(forColumn: "user_name") ?? ""
+            userPassword = resultSet.string(forColumn: "user_password") ?? ""
+            userProfilePicture = resultSet.string(forColumn: "user_profilePicture_url") ?? ""
             
         } catch let error as NSError {
             self.fmdb.rollback()
@@ -103,7 +106,7 @@ class UserDAO: FMDBHelper {
             print("========================================")
         }
         //3.저장해 놓은 data로 user class 를 만든다.
-        user = User(profilePicture: userProfilePicture, userName: userName)
+        user = User(name: userName, password: userPassword, profilePictureUrl: userProfilePicture)
         //4.user class 를 반환한다.
         return user
     }
@@ -113,8 +116,8 @@ class UserDAO: FMDBHelper {
      기능: 입력한 user Data 를 user, user_diarypage_relation Table 에 넣는다.
      작성일자: 2019.07.02
      */
-    func insertData(userName: String, userProfilePicture: String) {
-        //1. userName 과 userProfilePicture 을 입력받는다.
+    func insertData(userName: String, userPassword: String, userProfilePicture: String) {
+        //1. userName, userPassword, userProfilePicture 을 입력받는다.
         //2. makeUserId 함수를 실행시켜 userId를 만든다.
         let userId = makeUserId()
         var insertQuery: String = ""
@@ -125,9 +128,10 @@ class UserDAO: FMDBHelper {
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
                 //4.입력받을 데이터를 넣을 쿼리를 작성한다.
-                insertQuery = "INSERT INTO user (user_id, user_name, user_profilepicture) VALUES (?, ?, ?)"
+                insertQuery = "INSERT INTO user (user_id, user_name, user_password, user_profilepicture) VALUES (?, ?, ?, ?)"
                 parmeters.append(userId)
                 parmeters.append(userName)
+                parmeters.append(userPassword)
                 parmeters.append(userProfilePicture)
                 //5.쿼리를 작동한다.
                 try db.executeUpdate(insertQuery, values: parmeters)
@@ -135,7 +139,7 @@ class UserDAO: FMDBHelper {
                 
                 //4.입력받을 데이터를 넣을 쿼리를 작성한다.
                 insertQuery = "INSERT INTO user_diarypage_relation (diarypage_id, user_id) VALUES (?, ?)"
-                parmeters.append("NULL")
+                parmeters.append("D0000")
                 parmeters.append(userId)
                 //5.쿼리를 작동한다.
                 try db.executeUpdate(insertQuery, values: parmeters)
@@ -154,45 +158,77 @@ class UserDAO: FMDBHelper {
      기능: 특정 user table 을 수정한다.
      작성일자: 2019.07.02
      */
-    func updateData(userId: String, userName: String?, userProfilePicture: String?) {
+    func updateData(userId: String, userName: String?, userPassword: String?, userProfilePictureUrl: String?) {
         //1. userId, userName, userProfile 을 입력받는다.
         var parmeters = [Any]()
         var updateQuery: String = ""
-        //2.userName 이 nil 이 아니면, userId 컬럼을 수정한다.
-        if userName != nil {
-            guard let userName = userName else {return}
-            do {
-                //2.1.userName을 수정할 쿼리를 작성한다.
-                updateQuery = "UPDATE user SET user_name = ? WHERE user_id = ?"
-                parmeters.append(userName)
-                parmeters.append(userId)
-                //2.2.userName을 수정한다.
-                try self.fmdb.executeUpdate(updateQuery, values: parmeters)
-            } catch let error as NSError {
-                self.fmdb.rollback()
-                print("===== fetchPassportData() failure. =====")
-                print("failed: \(error.localizedDescription)")
-                print("========================================")
+        let fmdatabaseQueue = FMDatabaseQueue(path: self.dbPath)
+        
+        fmdatabaseQueue?.inTransaction({ (db, rollback) in
+            do{
+                //2.userName 이 nil 이 아니면, userId 컬럼을 수정한다.
+                if userName != nil {
+                    guard let userName = userName else {return}
+                    //2.1.userName 을 수정할 쿼리를 작성한다.
+                    updateQuery = "UPDATE user SET user_name = ? WHERE user_id = ?"
+                    parmeters.append(userName)
+                    parmeters.append(userId)
+                    //2.2.userName을 수정한다.
+                    try db.executeUpdate(updateQuery, values: parmeters)
+                    parmeters.removeAll()
+                    
+                //3.userPassword 이 nil 이 아니면, userPassword 컬럼을 수정한다.
+                } else if userPassword != nil {
+                    guard let userPassword = userPassword else {return}
+                    //3.1.userPassword 을 수정할 쿼리를 작성한다.
+                    updateQuery = "UPDATE user SET user_password = ? WHERE user_id = ?"
+                    parmeters.append(userPassword)
+                    parmeters.append(userId)
+                    //2.2.userPassword을 수정한다.
+                    try db.executeUpdate(updateQuery, values: parmeters)
+                    parmeters.removeAll()
+                    
+                //4.userProfilePictureUrl 이 nil 이 아니면, userProfilePictureUrl 컬럼을 수정한다.
+                } else if userProfilePictureUrl != nil {
+                    guard let userProfilePicture = userProfilePictureUrl else {return}
+                    //4.1.userProfilePicture 을 수정할 쿼리를 작성한다.
+                    updateQuery = "UPDATE user SET user_profilepicture = ? WHERE user_id = ?"
+                    parmeters.append(userProfilePicture)
+                    parmeters.append(userId)
+                    //4.2.userPassword을 수정한다.
+                    try db.executeUpdate(updateQuery, values: parmeters)
+                    parmeters.removeAll()
+                }
+            } catch {
+                rollback.pointee = true
+                print(error)
             }
-        //3.userProfilePicture 이 nil 이 아니면, userProfilePicture 컬럼을 수정한다.
-        } else if userProfilePicture != nil{
-            guard let userProfilePicture = userProfilePicture else {return}
-            do {
-                //3.1.userProfilePicture 을 수정할 쿼리를 작성한다.
-                updateQuery = "UPDATE user SET user_profilepicture = ? WHERE user_id = ?"
-                parmeters.append(userProfilePicture)
-                parmeters.append(userId)
-                //2.2.userProfilePicture을 수정한다.
-                try self.fmdb.executeUpdate(updateQuery, values: parmeters)
-            } catch let error as NSError {
-                self.fmdb.rollback()
-                print("===== fetchPassportData() failure. =====")
-                print("failed: \(error.localizedDescription)")
-                print("========================================")
-            }
-        }
+            
+        })
     }
     
+    /*
+     함수명: deleteData
+     기능: 특정 user table 을 지우고, 그에 따른 모든 데이터를 지운다(회원탈퇴).
+     작성일자: 2019.07.02
+     */
+    func deleteData(userId: String) {
+        let paragmaQuery = "PRAGMA foreign_keys=on"
+        let deleteQuery = "DELETE FROM user WHERE user_id = \(userId)"
+        do{
+            try self.fmdb.executeQuery(paragmaQuery, values: nil)
+            try self.fmdb.executeUpdate(deleteQuery, values: nil)
+        } catch {
+            self.fmdb.rollback()
+            print("===== fetchPassportData() failure. =====")
+            print("failed: \(error.localizedDescription)")
+            print("========================================")
+        }
+        
+    }
+    
+    
+/*
     /*
      함수명: deleteData
      기능: 특정 user table 을 지우고, 그에 따른 모든 데이터를 지운다(회원탈퇴).
@@ -251,5 +287,6 @@ class UserDAO: FMDBHelper {
         })
     
     }
+*/
     
 }

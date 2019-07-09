@@ -65,7 +65,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //3.가입한 user 객체를 가져온다.
         let user = User(userName: "Jae", userPassword: "zpzp900", profilePicture: "String")
         //4.가입한 user 정보를 가져온다.
-        let signedUserName = user.getUserName()
+        let signedUserName = user.getName()
         let signedUserPassword = user.getUserPassword()
         //5.입력한 user 정보과 가입된 user 정보가 같다면
         if userName == signedUserName && userPassword == signedUserPassword {
