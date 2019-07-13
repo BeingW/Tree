@@ -11,35 +11,30 @@ import UIKit
 class MainTabBarController: UITabBarController {
 
     var isAppFirstOpen = true
-    var diaryTableViewController = DiaryTableViewController()
-    var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
         if isAppFirstOpen == true {
             DispatchQueue.main.async {
                 let loginController = LoginController()
                 let loginNavContrroller = UINavigationController(rootViewController: loginController)
-                loginController.mainTabBarController = self
                 self.present(loginNavContrroller, animated: false, completion: nil)
             }
+        } else {
+            setTabViewControllers()
         }
         
     }
     
     func setTabViewControllers() {
         
-        self.diaryTableViewController.user = self.user!
-        
-        let diaryNavController = UINavigationController(rootViewController: self.diaryTableViewController)
-        
-        //print("\(user?.getUserName())")
+        let diaryNavController = UINavigationController(rootViewController: DiaryTableViewController())
         
         viewControllers = [diaryNavController]
     }

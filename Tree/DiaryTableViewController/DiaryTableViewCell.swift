@@ -12,15 +12,32 @@ class DiaryTableViewCell: UITableViewCell {
     
     var diarypage: DiaryPage? {
         didSet {
-            dateLabel.text = diarypage?.getDate()
-            titleLable.text = diarypage?.getTitle()
-            diaryTextView.text = diarypage?.getText()
+            guard let date = self.diarypage?.getDate() else {return}
+            guard let title = self.diarypage?.getTitle() else {return}
+            guard let text = self.diarypage?.getTitle() else {return}
+            
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
+            let dateString = dateFormatter.string(from:date)
+            
+            dateLabel.text = dateString
+            titleLable.text = title
+            diaryTextView.text = text
             
             let covertingData = ConvertingDataAndImage()
-            guard let imageUrl = diarypage?.getImage() else {return}
-            guard let unwrappedImage = covertingData.convertingFromUrlToImage(uniqueId: imageUrl) else {return}
             
-            diaryImageView.image = unwrappedImage
+            //diary 에 이미지가 있다면, 이미지를 가져와 붙인다.
+            if self.diarypage?.getImages().count != 0 {
+                guard let images = self.diarypage?.getImages() else {return}
+                
+                for image in images {
+                    guard let image = image else {return}
+                    guard let imageUrl = image.getUrl() else {return}
+                    guard let unwrappedImage = covertingData.convertingFromUrlToImage(uniqueId: imageUrl) else {return}
+                    diaryImageView.image = unwrappedImage
+                }
+            }
+            
         }
     }
     

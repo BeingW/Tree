@@ -10,13 +10,10 @@ import UIKit
 
 class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    var user: User?
-    
-    var diaryTableViewcontroller: DiaryTableViewController?
-    
     let imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true
+        
         return imagePickerController
     }()
     
@@ -32,38 +29,52 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     //MARK: - NavigationBar
     func navigationBar() {
         
+        let thisNavigaionBar = self.navigationController?.navigationBar
+        //guard let userName = self.diaryTableViewcontroller?.user?.getName() else {return}
+        
         let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
         rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        //self.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        guard let userName = self.user?.getName() else {return}
         
-        self.navigationItem.setRightBarButton(rightBarButtonItem, animated: true)
-       // self.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        self.navigationItem.title = "\(userName)"
+        let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
+        leftBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         
+        //thisNavigaionBar?.topItem?.title = "\(userName)"
+        thisNavigaionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
+        thisNavigaionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
+        thisNavigaionBar?.topItem?.leftBarButtonItem = leftBarButtonItem
+        
+    }
+    
+    @objc func cancelButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
     }
     
     @objc func postButtonTapped() {
         
         let title = self.diaryTitleTextField.text
-        let textContents = self.diaryContentTextView.text
-        let imageUrl: String?
+        let text = self.diaryContentTextView.text
+        var image: Image?
+        var images = [Image]()
         
         if let imageContents = self.diaryImageView.image {
-            imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: imageContents)
-        } else {
-            imageUrl = ""
+            
+            guard let imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: imageContents) else {return}
+            let imageWidth = imageContents.size.width
+            let imageHeight = imageContents.size.height
+            let imageCreatedDate = Date()
+            
+            image = Image(url: imageUrl, width: Int(imageWidth), height: Int(imageHeight), createdDate: imageCreatedDate)
+            images.append(image!)
+            
         }
         
-        let imageStrings = [imageUrl]
+        let diaryPage = DiaryPage(title: title, text: text, images: images)
         
-        //let diaryPage = DiaryPage(title: title, contents: textContents, images: imageStrings)
+        User.shared.addNewPage(diaryPage: diaryPage)
         
-        self.user?.addNewPage(diaryPage: diaryPage)
+        NotificationCenter.default.post(name: NSNotification.Name("UpdateFeed"), object: nil)
         
-        self.diaryTableViewcontroller?.user = self.user
-        self.navigationController?.popViewController(animated: true)
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     
@@ -170,11 +181,12 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationBar()
+        
         self.view.backgroundColor = .white
         
         setViews()
         
-        navigationBar()
         
     }
     

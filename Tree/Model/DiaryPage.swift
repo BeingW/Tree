@@ -10,11 +10,10 @@ import Foundation
 
 class DiaryPage {
     private var title: String?
-    private var date: String
+    private var date: Date?
     private var text: String?
     private var images: [Image?]
     
-
     init(title: String?, text: String?, images: [Image?]) {
         self.title = title ?? ""
         self.text = text ?? ""
@@ -22,16 +21,18 @@ class DiaryPage {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
-        let today = NSDate()
-        let dateString = dateFormatter.string(from: today as Date)
-        self.date = dateString
+        let today = Date()
+        let dateString = dateFormatter.string(from:today)
+        guard let dateWithFormatter = dateFormatter.date(from: dateString) else {return}
+        
+        self.date = dateWithFormatter
     }
     
     func getTitle() -> String? {
         return title
     }
     
-    func getDate() -> String? {
+    func getDate() -> Date? {
         return self.date
     }
     
@@ -81,6 +82,16 @@ class DiaryPage {
         self.images.insert(image, at: index)
         
         return images[index]
+    }
+    
+    /*
+     함수명: addImage
+     기능: 다이어리에 이미지를 넣는다.
+     작성일자: 2019.07.09
+     수정일자:
+     */
+    func addImage(image: Image) {
+        self.images.append(image)
     }
     
     /*

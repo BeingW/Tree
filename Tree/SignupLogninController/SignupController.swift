@@ -10,8 +10,6 @@ import UIKit
 
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
-    var mainTabBarController = MainTabBarController()
-    var user = User(userName: "", userPassword: "", profilePicture: "")
     let imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true;
@@ -112,7 +110,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             guard let userProfilePicture = userProfileImage else {return}
             guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
             //1.1. user 객체를 만든다.
-            self.user = User(userName: userName, userPassword: userPassword, profilePicture: profileImageUrl)
+            User.shared = User(name: userName, password: userPassword, profilePictureUrl: profileImageUrl)
             //1.2. loginSucced 를 true 로 한다.
             loginIsSucceed = true
         //2.입력이 하나라도 안됐다면.
@@ -124,14 +122,11 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
         //3.loginIsSucceed 가 true 라면
         if loginIsSucceed == true {
-            self.mainTabBarController.isAppFirstOpen = false
-            self.mainTabBarController.user = user
-            
-            //UIApplication.shared.keyWindow?.rootViewController = self.mainTabBarController
-            //3.1.mainTabBarController 의 기본페이지로 이동한다.
-            mainTabBarController.setTabViewControllers()
+            //3.1.MainTabBarController 의 isAppFirstOpen 를 false로 바꾼다.
+            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
+            mainTabBarController.isAppFirstOpen = false
+            //3.2.mainTabBarController 의 기본페이지로 이동한다.
             self.dismiss(animated: true, completion: nil)
-            
         }
         
     }
@@ -155,23 +150,22 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     //MARK: - setViews
     func setViews() {
-        self.view.addSubview(signupBackgroundImageView);
-        self.view.addSubview(profileButton);
-        self.view.addSubview(userNameTextField);
-        self.view.addSubview(signupButton);
-        self.view.addSubview(goToLoginButton);
+        self.view.addSubview(signupBackgroundImageView)
+        self.view.addSubview(profileButton)
+        self.view.addSubview(goToLoginButton)
+        let signupStakView = UIStackView(arrangedSubviews: [userNameTextField, userPasswordTextField, signupButton])
+        signupStakView.axis = .vertical
+        signupStakView.spacing = view.frame.height/30
+        self.view.addSubview(signupStakView)
        
         signupBackgroundImageView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         profileButton.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 1).isActive = true;
         profileButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: self.view.frame.height * (1/3), paddingLeft: 0, paddingBottom: self.view.frame.height * (2/3), paddingRight: 0, width: self.view.frame.width/3, height: self.view.frame.width/3)
-
-      userNameTextField.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true
-          userNameTextField.anchor(top: self.profileButton.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: view.frame.width/10)
         
-        signupButton.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true;
-        signupButton.anchor(top: self.userNameTextField.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: view.frame.width/10)
-        
+        signupStakView.anchor(top: self.profileButton.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: 0)
+        signupStakView.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true
+    
         goToLoginButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
         goToLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }

@@ -12,13 +12,29 @@ class Image {
     private var url: String?
     private var width: Int?
     private var height: Int?
-    private var createdDate: String?
+    private var createdDate: Date?
     
-    init(url: String, width: Int, height: Int, createdDate: String) {
+    init(url: String, width: Int, height: Int, createdDate: Date) {
         self.url = url
         self.width = width
         self.height = height
         self.createdDate = createdDate
+    }
+    
+    func getUrl() -> String? {
+        return self.url
+    }
+    
+    func getWidth() -> Int? {
+        return self.width
+    }
+    
+    func getHeight() -> Int? {
+        return self.height
+    }
+    
+    func getCreatedDate() -> Date? {
+        return self.createdDate
     }
     
     func editImageUrl(url: String) -> String? {
@@ -36,7 +52,7 @@ class Image {
         return height
     }
     
-    func editCreateDate(date: String) -> String? {
+    func editCreateDate(date: Date) -> Date? {
         self.createdDate = date
         return createdDate
     }

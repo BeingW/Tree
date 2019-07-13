@@ -11,18 +11,26 @@ import UIKit
 
 class User {
 
+    static var shared = User()
+    
     private var name: String?
     private var password: String?
     private var profilePictureUrl: String?
 
     var diary: [DiaryPage?]
     
+    init() {
+        self.name = ""
+        self.password = ""
+        self.profilePictureUrl = ""
+        self.diary = []
+    }
+    
     init(name: String?, password: String?, profilePictureUrl: String?) {
         self.name = name
         self.password = password
         self.profilePictureUrl = profilePictureUrl
-
-        self.diary = [nil]
+        self.diary = []
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,6 +81,26 @@ class User {
         self.profilePictureUrl = url
         return self.profilePictureUrl
     }
+    /*
+     함수명: addNewPage
+     기능: 다이어리에 새 페이지를 꽂는다.
+     작성일자: 2019.07.09
+     수정일자:
+     */
+    func addNewPage(diaryPage: DiaryPage) -> Int {
+        
+        self.diary.append(diaryPage)
+        
+        let count = self.diary.count
+        
+        var i = 0
+        
+        while i < count && diaryPage == self.diary[i]! {
+            i += 1
+        }
+        
+        return i
+    }
     
     /*
      함수명: deleteDiaryPageAt
@@ -94,21 +122,8 @@ class User {
         self.diary.removeAll()
     }
     
-    /*
-    func addNewPage(diaryPage: DiaryPage) -> Int {
-        
-        self.diary.append(diaryPage)
-        
-        let count = self.diary.count
-        
-        var i = 0
-        
-        while i < count && diaryPage == self.diary[i]! {
-            i += 1
-        }
-        
-        return i
-    }
- */
+    
+    
+ 
     
 }

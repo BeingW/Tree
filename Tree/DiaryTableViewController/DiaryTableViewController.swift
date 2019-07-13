@@ -10,13 +10,13 @@ import UIKit
 
 class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    var user: User? {
+    /*
+    var user: User = User.shared {
         didSet {
             self.diaryTableView.reloadData()
         }
     }
-    
-    let diaryPostController = DiaryPostController()
+     */
     
     let diaryTableView = UITableView()
     
@@ -27,7 +27,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let thisUINavigtionBar = self.navigationController?.navigationBar
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationProfileIcon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
-        guard let userName = self.user?.getName() else {return}
+        guard let userName = User.shared.getName() else {return}
         
         thisUINavigtionBar?.topItem?.title = "\(userName)"
         thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
@@ -89,12 +89,11 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }()
 
     @objc func recordButtonTapped() {
-        self.diaryPostController.user = self.user
-        self.diaryPostController.diaryTableViewcontroller = self
-        self.navigationController?.pushViewController(diaryPostController, animated: true)
-        //let diaryPostNavController = UINavigationController(rootViewController: diaryPostController)
-        //self.navigationController?.present(diaryPostNavController, animated: true, completion: nil)
+        let diaryPostController = DiaryPostController()
         
+        let diaryPostControlNavigation = UINavigationController(rootViewController: diaryPostController)
+        
+        self.present(diaryPostControlNavigation, animated: true, completion: nil)
     }
     
     func setViews() {
@@ -143,34 +142,30 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
         
-        print("\(user?.getName())")
-        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
+    }
+    
+    @objc func handleUpdateFeed() {
+        self.diaryTableView.reloadData()
+    }
     
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        /*
-        var numberOfRows: Int
+        let diarypageCount = User.shared.diary.count
         
-        if self.user?.diary[0] == nil {
-            numberOfRows = 0
-        } else {
-            numberOfRows = self.user?.diary.count ?? 0
-        }
-         */
-        
-        return self.user?.diary.count ?? 0
+        return diarypageCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
-        if let user = self.user {
-            cell.diarypage = user.diary[indexPath.item]
-        }
+        cell.diarypage = User.shared.diary[indexPath.item]
         
         return cell
     }
