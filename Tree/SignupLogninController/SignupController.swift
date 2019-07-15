@@ -94,6 +94,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
      함수명: signUpButtonTapped
      기능: 회원가입한다.
      작성일자: 2019.07.05
+     수정일자: 2019.07.15
      */
     @objc func signUpButtonTapped() {
         guard let userName = userNameTextField.text else {return}
@@ -104,6 +105,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alertController.addAction(alertAction)
         let converting = ConvertingDataAndImage()
+        let userDAO = UserDAO()
         
         //1.모든 유저정보가 입력됐을 때.
         if userName != "" && userPassword != "" && userProfileImage != nil {
@@ -111,6 +113,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
             //1.1. user 객체를 만든다.
             User.shared = User(name: userName, password: userPassword, profilePictureUrl: profileImageUrl)
+            userDAO.insertData(userName: userName, userPassword: userPassword, userProfilePicture: profileImageUrl)
             //1.2. loginSucced 를 true 로 한다.
             loginIsSucceed = true
         //2.입력이 하나라도 안됐다면.
@@ -127,6 +130,8 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             mainTabBarController.isAppFirstOpen = false
             //3.2.mainTabBarController 의 기본페이지로 이동한다.
             self.dismiss(animated: true, completion: nil)
+            //데이터가 성공적으로 db 에 입력되었는지 확인한다.
+            userDAO.selectQuery(tableName: "user", primaryKey: "user_id")
         }
         
     }

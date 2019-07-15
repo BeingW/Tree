@@ -10,16 +10,7 @@ import UIKit
 
 class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    /*
-    var user: User = User.shared {
-        didSet {
-            self.diaryTableView.reloadData()
-        }
-    }
-     */
-    
     let diaryTableView = UITableView()
-    
     let diaryTableCellId = "diaryCellId"
     
     //MARK: - NavigationBar
@@ -149,6 +140,12 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
     }
     
+    /*
+     함수명: handleUpdateFeed
+     기능: diaryTableView 의 데이터를 재로드 한다.
+     작성일자: 2019.07.15
+     수정일자:
+     */
     @objc func handleUpdateFeed() {
         self.diaryTableView.reloadData()
     }

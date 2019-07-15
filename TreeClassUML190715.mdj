@@ -741,7 +741,7 @@
 											"top": 1645,
 											"width": 324.7841796875,
 											"height": 13,
-											"text": "+addDiary()",
+											"text": "+addNewPage()",
 											"horizontalAlignment": 0
 										},
 										{
@@ -4890,23 +4890,6 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAFrtuItvzlvqMg=",
-											"_parent": {
-												"$ref": "AAAAAAFrtuD7KS96YN4="
-											},
-											"model": {
-												"$ref": "AAAAAAFrtuItnjlRL8g="
-											},
-											"font": "Arial;13;0",
-											"left": 645,
-											"top": 2732,
-											"width": 471,
-											"height": 13,
-											"text": "+fetchData(): diarypage Array",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
 											"_id": "AAAAAAFrtuI7+TqegRU=",
 											"_parent": {
 												"$ref": "AAAAAAFrtuD7KS96YN4="
@@ -4916,7 +4899,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 645,
-											"top": 2747,
+											"top": 2732,
 											"width": 471,
 											"height": 13,
 											"text": "+InsertData(diarypageId: String, imageId: String, diaryPage: DiaryPage)",
@@ -4933,7 +4916,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 645,
-											"top": 2762,
+											"top": 2747,
 											"width": 471,
 											"height": 13,
 											"text": "+updatetData(diarypageId: String, imageId: String, diaryPage: DiaryPage)",
@@ -4950,7 +4933,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 645,
-											"top": 2777,
+											"top": 2762,
 											"width": 471,
 											"height": 13,
 											"text": "+deleteData(diarypageId: String, imageId: String): void",
@@ -4961,7 +4944,7 @@
 									"left": 640,
 									"top": 2667,
 									"width": 481,
-									"height": 128
+									"height": 113
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -6672,7 +6655,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFq90RCXlX4AIg="
 							},
-							"name": "addDiary"
+							"name": "addNewPage"
 						},
 						{
 							"_type": "UMLOperation",
@@ -8653,25 +8636,6 @@
 								"$ref": "AAAAAAFrtuD7Ji9xO9U="
 							},
 							"name": "makeImageId"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAFrtuItnjlRL8g=",
-							"_parent": {
-								"$ref": "AAAAAAFrtuD7Ji9xO9U="
-							},
-							"name": "fetchData",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFrtuNhVEJlO0g=",
-									"_parent": {
-										"$ref": "AAAAAAFrtuItnjlRL8g="
-									},
-									"type": "diarypage Array",
-									"direction": "return"
-								}
-							]
 						},
 						{
 							"_type": "UMLOperation",

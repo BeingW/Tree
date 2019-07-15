@@ -15,6 +15,31 @@ class UserDAO: FMDBHelper {
     }
     
     /*
+     함수명: selectUser
+     기능: 데이터가 성공적으로 입력되었는지 확인한다.
+     작성일자: 2019.07.15
+     수정일자:
+     */
+    func selectQuery(tableName: String, primaryKey: String) {
+        //0.확인할 table 이름을 입력받는다.
+        //1.select query 를 만든다.
+        do{
+            let selectQuery = "SELECT \(primaryKey) FROM \(tableName)"
+            //2.select query 를 실행한다.
+            let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
+            //3.while문을 돌며 결과들을 출력한다.
+            while resultSet.next() {
+                print("\(resultSet.string(forColumn: primaryKey))")
+            }
+        }catch let error as NSError{
+            self.fmdb.rollback()
+            print("===== fetchPassportData() failure. =====")
+            print("failed: \(error.localizedDescription)")
+            print("========================================")
+        }
+    }
+    
+    /*
      함수명: makeUserId
      기능: 중복되지 않는 user_id 를 만들어 반환한다.
      작성일자: 2019.07.02
@@ -131,7 +156,7 @@ class UserDAO: FMDBHelper {
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
                 //4.입력받을 데이터를 넣을 쿼리를 작성한다.
-                insertQuery = "INSERT INTO user (user_id, user_name, user_password, user_profilepicture) VALUES (?, ?, ?, ?)"
+                insertQuery = "INSERT INTO user (user_id, user_name, user_password, user_profilePicture_url) VALUES (?, ?, ?, ?)"
                 parmeters.append(userId)
                 parmeters.append(userName)
                 parmeters.append(userPassword)

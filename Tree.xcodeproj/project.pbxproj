@@ -59,6 +59,7 @@
 		19C66EA122A4E04A00467E00 /* ToolBoxView.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9B22A4E04A00467E00 /* ToolBoxView.png */; };
 		19C66EA222A4E04A00467E00 /* toolBoxButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66E9C22A4E04A00467E00 /* toolBoxButton.png */; };
 		19C66EA422A4E0F000467E00 /* ProfileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66EA322A4E0F000467E00 /* ProfileIcon.png */; };
+		19EA2B4D22DC5A8100DD8ECB /* DiaryPageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EA2B4C22DC5A8100DD8ECB /* DiaryPageDAO.swift */; };
 		19F79A9922A220AF00EAF51F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9822A220AF00EAF51F /* MainTabBarController.swift */; };
 		19F79A9B22A24E1A00EAF51F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9A22A24E1A00EAF51F /* TestViewController.swift */; };
 /* End PBXBuildFile section */
@@ -119,6 +120,7 @@
 		19C66E9B22A4E04A00467E00 /* ToolBoxView.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ToolBoxView.png; sourceTree = "<group>"; };
 		19C66E9C22A4E04A00467E00 /* toolBoxButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolBoxButton.png; sourceTree = "<group>"; };
 		19C66EA322A4E0F000467E00 /* ProfileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileIcon.png; sourceTree = "<group>"; };
+		19EA2B4C22DC5A8100DD8ECB /* DiaryPageDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPageDAO.swift; sourceTree = "<group>"; };
 		19F79A9822A220AF00EAF51F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		19F79A9A22A24E1A00EAF51F /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +169,7 @@
 			children = (
 				194ED36222B7C5B7000E5716 /* FMDBHelper.swift */,
 				193C79EC22CB022D00A50A73 /* UserDAO.swift */,
+				19EA2B4C22DC5A8100DD8ECB /* DiaryPageDAO.swift */,
 			);
 			path = FMDBHelper;
 			sourceTree = "<group>";
@@ -432,6 +435,7 @@
 				196240CF229EE415009472C9 /* DiaryTableViewController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
 				196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */,
+				19EA2B4D22DC5A8100DD8ECB /* DiaryPageDAO.swift in Sources */,
 				191C253122CB324A00500F80 /* FMDatabaseQueue.m in Sources */,
 				195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */,
 				197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */,

@@ -12,7 +12,7 @@ class FMDBHelper {
     
     private var fileName: String
     private var fileIdentifier: String
-    var dbPath: String
+    var dbPath: String = ""
     
     //파일 경로를 이용해 fmdb객체를 만든다.
     lazy var fmdb: FMDatabase! = {
@@ -47,10 +47,9 @@ class FMDBHelper {
     init(fileName: String, identifier: String) {
         self.fileName = fileName
         self.fileIdentifier = identifier
-        self.dbPath = ""
-        if self.fmdb.goodConnection {
+        
             self.fmdb.open()
-        }
+        
     }
     
     //db 가 열려있다면 db를 닫는다.

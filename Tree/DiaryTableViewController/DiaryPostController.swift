@@ -17,6 +17,12 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         return imagePickerController
     }()
     
+    /*
+     함수명: imagePickerController(UIImagePickerControllerDelegate)
+     기능: 사진첩에 접근해 사진을 선택된 사진을 가져옵니다.
+     작성일자: 2019.07.15
+     수정일자:
+     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
@@ -49,6 +55,12 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         self.dismiss(animated: true, completion: nil)
     }
     
+    /*
+     함수명: postButtonTapped
+     기능: 유저가 입력한 다이어리를 작성하고 포스트합니다.
+     작성일자: 2019.07.15
+     수정일자:
+     */
     @objc func postButtonTapped() {
         
         let title = self.diaryTitleTextField.text
@@ -186,8 +198,6 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         self.view.backgroundColor = .white
         
         setViews()
-        
-        
     }
     
     func setViews() {

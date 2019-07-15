@@ -10,6 +10,12 @@ import UIKit
 
 class DiaryTableViewCell: UITableViewCell {
     
+    /*
+     함수명: diarypage
+     기능: 들어오는 diarypage 마다 Observe 해 cell 을 로드한다.
+     작성일자: 2019.07.15
+     수정일자:
+     */
     var diarypage: DiaryPage? {
         didSet {
             guard let date = self.diarypage?.getDate() else {return}
