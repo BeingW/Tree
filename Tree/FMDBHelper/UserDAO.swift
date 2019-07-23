@@ -111,30 +111,80 @@ class UserDAO: FMDBHelper {
      수정일자: 2019.07.09
      */
     func fetchData() -> User {
-        var userName: String = ""
-        var userProfilePicture: String = ""
-        var userPassword: String = ""
-        var user: User
+        var user = User()
+        var diaryPage = DiaryPage()
+        var images = [Image]()
+        var image: Image
+        var selectQuery: String = ""
+        var resultSet = FMResultSet()
         
-        do {
-            //1.user table 을 읽는다.
-            let selectQuery = "SELECT * FROM user"
-            let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
-            //2.userName 과 userProfilePictrue 을 저장해 놓는다.
-            
-            userName = resultSet.string(forColumn: "user_name") ?? ""
-            userPassword = resultSet.string(forColumn: "user_password") ?? ""
-            userProfilePicture = resultSet.string(forColumn: "user_profilePicture_url") ?? ""
-            
-        } catch let error as NSError {
-            self.fmdb.rollback()
-            print("===== fetchPassportData() failure. =====")
-            print("failed: \(error.localizedDescription)")
-            print("========================================")
-        }
-        //3.저장해 놓은 data로 user class 를 만든다.
-        user = User(name: userName, password: userPassword, profilePictureUrl: userProfilePicture)
-        //4.user class 를 반환한다.
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        fmdbQueue?.inTransaction({ (db, rollBack) in
+            do {
+                //1.user Table 을 이용해 user 객체를 만든다.
+                selectQuery = "SELECT * FROM user"
+                try resultSet = db.executeQuery(selectQuery, values: nil)
+                let userName = resultSet.string(forColumn: "user_name")
+                let userPassword = resultSet.string(forColumn: "user_password")
+                let userProfilePicture = resultSet.string(forColumn: "user_profilePicture_url")
+                user = User(name: userName, password: userPassword, profilePictureUrl: userProfilePicture)
+                //2.user_diarypage_relation 의 수만큼 반복한다.(diarypage_id 가 'D0000'일 경우 pass)
+                selectQuery = "SELECT * FROM user_diarypage_relation"
+                try resultSet = db.executeQuery(selectQuery, values: nil)
+                while resultSet.next() {
+                    //2.1.해당번째의 diarypage_id를 뽑아낸다.
+                    if let diarypageId = resultSet.string(forColumn: "diarypage_id"), diarypageId != "D0000" {
+                        //2.2.diarypage에서 diarypage_id 의 diary_date를 뽑아낸다.
+                        selectQuery = "SELECT diary_date FROM diarypage WHERE diarypage_id = \(diarypageId)"
+                        let diaryResultSet = try db.executeQuery(selectQuery, values: nil)
+                        let diaryDate = diaryResultSet.string(forColumn: "diary_date")
+                        //2.3.diarypage_title에서 diarypage_id 의 diary_title를 뽑아낸다.
+                        selectQuery = "SELECT diary_title FROM diarypage_title WHERE diarypage_id = \(diarypageId)"
+                        let diaryTitleResultSet = try db.executeQuery(selectQuery, values: nil)
+                        let diaryTitle = diaryTitleResultSet.string(forColumn: "diary_title")
+                        //2.4.diarypage_text에서 diarypage_id 의 diary_text를 뽑아낸다.
+                        selectQuery = "SELECT diary_text FROM diarypage_text WHERE diarypage_id = \(diarypageId)"
+                        let diaryTextResultSet = try db.executeQuery(selectQuery, values: nil)
+                        let diaryText = diaryTextResultSet.string(forColumn: "diary_text")
+                        //2.5.diarypage_images_relation에서 diarypage_id 의 image_id가 있다면, 데이터베이스 끝까지 반복한다.
+                        selectQuery = "SELECT image_id FROM diarypage_images_relation WHERE diarypage_id = \(diarypageId)"
+                        let diarypageImageRelationRS = try db.executeQuery(selectQuery, values: nil)
+                        while diarypageImageRelationRS.next() {
+                            //2.5.1.해당번째 image_id 를 뽑아낸다.
+                            let imageId = diarypageImageRelationRS.string(forColumn: "image_id")
+                            selectQuery = "SELECT * FROM images WHERE image_id = \(imageId)"
+                            let imagesResultSet = try db.executeQuery(selectQuery, values: nil)
+                            //2.5.2.image_id 의 image_url 를 뽑아낸다.
+                            let imageUrl = imagesResultSet.string(forColumn: "image_url")
+                            //2.5.3.image_id 의 image_width 를 뽑아낸다.
+                            guard let imageWidth = imagesResultSet.string(forColumn: "image_width") else {return}
+                            let imageWidthInt = Int(imageWidth)
+                            //2.5.4.image_id 의 image_height 를 뽑아낸다.
+                            guard let imageHeight = imagesResultSet.string(forColumn: "image_height") else {return}
+                            let imageHeightInt = Int(imageHeight)
+                            //2.5.5.image_id 의 image_createdDate 를 뽑아낸다.
+                            guard let imageCreatedDateString = imagesResultSet.string(forColumn: "image_createdDate") else {return}
+                            let dateFormatter = DateFormatter()
+                            let imageCreateDate = dateFormatter.date(from: imageCreatedDateString)
+                            //2.5.6.image 객체를 만든다.
+                            let image = Image(url: imageUrl, width: imageWidthInt, height: imageHeightInt, createdDate: imageCreateDate)
+                            //2.5.7.images 에 추가한다.
+                            images.append(image)
+                        }
+                        //2.6.diarypage 객체를 만든다.
+                        diaryPage = DiaryPage(title: diaryTitle, date: diaryDate, text: diaryText, images: images)
+                    }
+                    //2.7.user 객체에 diary에 diarypage를 넣는다.
+                    user.addNewPage(diaryPage: diaryPage)
+                }
+            } catch {
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
+            }
+        })
+        //3.user 객체를 반환한다.
         return user
     }
     
@@ -142,7 +192,7 @@ class UserDAO: FMDBHelper {
      함수명: insertData
      기능: 입력한 user Data 를 user, user_diarypage_relation Table 에 넣는다.
      작성일자: 2019.07.02
-     수정일자: 2019.07.09
+     수정일자: 2019.07.17
      */
     func insertData(userName: String, userPassword: String, userProfilePicture: String) {
         //1. userName, userPassword, userProfilePicture 을 입력받는다.
@@ -237,6 +287,13 @@ class UserDAO: FMDBHelper {
     }
     
     /*
+     함수명: backupData
+     기능: 지금 현재 상태의 user 객체를 Tree.db 에 넣는다.
+     작성일자: 2019.07.17
+     수정일자:
+     */
+    
+    /*
      함수명: deleteData
      기능: 특정 user table 을 지우고, 그에 따른 모든 데이터를 지운다(회원탈퇴).
      작성일자: 2019.07.02
@@ -245,78 +302,23 @@ class UserDAO: FMDBHelper {
     func deleteData(userId: String) {
         let paragmaQuery = "PRAGMA foreign_keys=on"
         let deleteQuery = "DELETE FROM user WHERE user_id = \(userId)"
-        do{
-            try self.fmdb.executeQuery(paragmaQuery, values: nil)
-            try self.fmdb.executeUpdate(deleteQuery, values: nil)
-        } catch {
-            self.fmdb.rollback()
-            print("===== fetchPassportData() failure. =====")
-            print("failed: \(error.localizedDescription)")
-            print("========================================")
-        }
         
-    }
-    
-    
-/*
-    /*
-     함수명: deleteData
-     기능: 특정 user table 을 지우고, 그에 따른 모든 데이터를 지운다(회원탈퇴).
-     작성일자: 2019.07.02
-     */
-    func deleteData(userId: String) {
-        //1.지울 user_id 를 입력 받는다.
-        var selectQuery: String = ""
-        var deleteQuery: String = ""
-        //2.dbPath로 FMDatabaseQueue 객체를 생성한다.
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
         
         fmdbQueue?.inTransaction({ (db, rollback) in
-            do {
-                selectQuery = "SELECT diarypage_id FROM user_diarypage_relation"
-                let userDiaryPGRS = try db.executeQuery(selectQuery, values: nil)
-            //3.user_diarypage_relation row 갯수만큼 반복한다.
-                while userDiaryPGRS.next() {
-                    guard let diarypageId = userDiaryPGRS.string(forColumn: "diarypage_id") else {return}
-                    //3.1.diarypage_id 에 따른 diarypage_title table row 를 지운다.
-                    deleteQuery = "DELETE FROM diarypage_title WHERE diarypage_id = ?"
-                    try db.executeUpdate(deleteQuery, values: [diarypageId])
-                    //3.2.diarypage_id 에 따른 diarypage_text table row 를 지운다.
-                    deleteQuery = "DELETE FROM diarypage_text WHERE diarypage_id = ?"
-                    try db.executeUpdate(deleteQuery, values: [diarypageId])
-                    
-                    
-                    selectQuery = "SELECT image_id FROM diarypage_images_relation WHERE diarypage_id = ?"
-                    let diaryImageRelationRS = try db.executeQuery(selectQuery, values: [diarypageId])
-                    //3.3.diarypage_images_relation 갯수만큼 반복한다.
-                    while diaryImageRelationRS.next() {
-                        //3.3.1.image_id 에 따른 images table row 를 지운다.
-                        guard let imageId = diaryImageRelationRS.string(forColumn: "image_id") else {return}
-                        deleteQuery = "DELETE FROM images WHERE image_id = ?"
-                        try db.executeUpdate(deleteQuery, values: [imageId])
-                    }
-                    
-                    //3.4.diarypage_id 에 따른 user_diarypage_relation table row 를 지운다.
-                    deleteQuery = "DELETE FROM diarypage_images_relation WHERE diarypage_id = ?"
-                    try db.executeUpdate(deleteQuery, values: [diarypageId])
-                    //3.5.diarypage_id 에 따른 diarypage table row 를 지운다.
-                    deleteQuery = "DELETE FROM diarypage WHERE diarypage_id = ?"
-                    try db.executeUpdate(deleteQuery, values: [diarypageId])
-                }
-                //4.user_id 에 따른 user_diarypage_relation table row 를 지운다.
-                deleteQuery = "DELETE FROM user_diarypage_relation WHERE user_id = ?"
-                try db.executeUpdate(deleteQuery, values: [userId])
-                //5.user_id 에 따른 user table row 를 지운다.
-                deleteQuery = "DELETE FROM user WHERE user_id = ?"
-                try db.executeUpdate(deleteQuery, values: [userId])
-                
+            do{
+                try self.fmdb.executeQuery(paragmaQuery, values: nil)
+                try self.fmdb.executeUpdate(deleteQuery, values: nil)
             } catch {
-                rollback.pointee = true
-                print(error)
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
             }
         })
-    
     }
-*/
+    
+    
+
     
 }

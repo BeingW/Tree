@@ -14,6 +14,13 @@ class DiaryPage {
     private var text: String?
     private var images: [Image?]
     
+    init() {
+        self.title = ""
+        self.date = Date()
+        self.text = ""
+        self.images = []
+    }
+    
     init(title: String?, text: String?, images: [Image?]) {
         self.title = title ?? ""
         self.text = text ?? ""
@@ -26,6 +33,20 @@ class DiaryPage {
         guard let dateWithFormatter = dateFormatter.date(from: dateString) else {return}
         
         self.date = dateWithFormatter
+    }
+    
+    init(title: String?, date: String?, text: String?, images: [Image?]) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
+        let today = Date()
+        let dateString = dateFormatter.string(from:today)
+        
+        let date = dateFormatter.date(from: date ?? dateString)
+        
+        self.title = title ?? ""
+        self.date = date
+        self.text = text ?? ""
+        self.images = images
     }
     
     func getTitle() -> String? {

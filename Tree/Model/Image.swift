@@ -14,7 +14,7 @@ class Image {
     private var height: Int?
     private var createdDate: Date?
     
-    init(url: String, width: Int, height: Int, createdDate: Date) {
+    init(url: String?, width: Int?, height: Int?, createdDate: Date?) {
         self.url = url
         self.width = width
         self.height = height

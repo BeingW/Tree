@@ -10,6 +10,7 @@ import UIKit
 
 class DiaryPageDAO: FMDBHelper {
     
+    
     init() {
         super.init(fileName: "Tree", identifier: "db")
     }
