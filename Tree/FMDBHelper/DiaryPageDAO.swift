@@ -173,41 +173,47 @@ class DiaryPageDAO: FMDBHelper {
      함수명: insertData
      기능: 입력한 diaryPage 를 diaryPage와 관련된 Table에 넣는다.
      작성일자: 2019.07.15
-     수정일자:
+     수정일자: 2019.07.24
+     수정내용: 매개변수로 diaryPageId 와 imageId 가 전달된다.
      */
-    func insertData(diaryPage: DiaryPage) {
-        //1.DiaryPage 객체를 입력받는다.
+    func insertData(diaryPage: DiaryPage, diaryPageId: String, imageId: String?) {
+        //1.DiaryPage 객체, diaryPageId, imageId 를 입력받는다.
         var selectQuery: String = ""
         var insertQuery: String = ""
         var parmeters = [Any]()
+        
+        var userId: String = ""
+        
         //dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
                 //user_id를 찾는다.
-                selectQuery = "SELECT user_id FROM user"
+                selectQuery = "SELECT * FROM user"
                 let resultSet = try db.executeQuery(selectQuery, values: nil)
-                guard let userId = resultSet.string(forColumn: "user_id") else {return}
-                //2.diarypage_id 를 만든다.
-                let diarypageId = makeDiaryPageId()
-                //3.user_diarypage_relation 테이블에 데이터를 넣는다.
+                if resultSet.next(){
+                    userId = resultSet.string(forColumn: "user_id") ?? ""
+                }
+                //2.user_diarypage_relation 테이블에 데이터를 넣는다.
                 insertQuery = "INSERT INTO user_diarypage_relation (diarypage_id, user_id) VALUES (?, ?)"
-                parmeters.append(diarypageId)
+                parmeters.append(diaryPageId)
                 parmeters.append(userId)
                 try db.executeUpdate(insertQuery, values: parmeters)
                 parmeters.removeAll()
                 //4.diarypage 테이블에 데이터를 넣는다.
                 guard let diaryDate = diaryPage.getDate() else {return}
-                let diaryDateString = DateFormatter().string(from: diaryDate)
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                let diaryDateString = dateFormatter.string(from: diaryDate)
                 insertQuery = "INSERT INTO diarypage (diarypage_id, diary_date) VALUES (?, ?)"
-                parmeters.append(diarypageId)
+                parmeters.append(diaryPageId)
                 parmeters.append(diaryDateString)
                 try db.executeUpdate(insertQuery, values: parmeters)
                 parmeters.removeAll()
                 //5.title이 있으면, diarypage_title 테이블에 데이터를 넣는다.
                 if let diarypageTitle = diaryPage.getTitle(), diarypageTitle != "" {
                     insertQuery = "INSERT INTO diarypage_title (diarypage_id, diarypage_title) VALUES (?, ?)"
-                    parmeters.append(diarypageId)
+                    parmeters.append(diaryPageId)
                     parmeters.append(diarypageTitle)
                     try db.executeUpdate(insertQuery, values: parmeters)
                     parmeters.removeAll()
@@ -215,21 +221,20 @@ class DiaryPageDAO: FMDBHelper {
                 //6.text이 있으면, diarypage_text 테이블에 데이터를 넣는다.
                 if let diarypageText = diaryPage.getText(), diarypageText != "" {
                     insertQuery = "INSERT INTO diarypage_text (diarypage_id, diarypage_text) VALUES (?, ?)"
-                    parmeters.append(diarypageId)
+                    parmeters.append(diaryPageId)
                     parmeters.append(diarypageText)
                     try db.executeUpdate(insertQuery, values: parmeters)
                     parmeters.removeAll()
                 }
                 //7.image이 있으면.
-                if diaryPage.getImageAt(index: 0) != nil {
+                if diaryPage.getImages() != nil {
+                    guard let imageId = imageId else {return}
                     guard let postImage = diaryPage.getImageAt(index: 0) else {return}
-                    //7.1.image_id를 만든다.
-                    let imageId = makeImageId()
-    
-                    //7.2.diary_images_relation 테이블에 데이터를 넣는다.
+                    
+                    //7.1.diary_images_relation 테이블에 데이터를 넣는다.
                     insertQuery = "INSERT INTO diarypage_images_relation (image_id, diarypage_id) VALUES (?, ?)"
                     parmeters.append(imageId)
-                    parmeters.append(diarypageId)
+                    parmeters.append(diaryPageId)
                     try db.executeUpdate(insertQuery, values: parmeters)
                     parmeters.removeAll()
                     
@@ -272,38 +277,41 @@ class DiaryPageDAO: FMDBHelper {
         var parmeters = [Any]()
         var selectQuery: String = ""
         var updateQuery: String = ""
-        let fmdatabaseQueue = FMDatabaseQueue(path: self.dbPath)
+        var diaryPageId: String = ""
         
+        let fmdatabaseQueue = FMDatabaseQueue(path: self.dbPath)
         fmdatabaseQueue?.inTransaction({ (db, rollback) in
             do{
+                //2.diarypage_id 를 찾는다.
                 guard let diaryPageTitle = diaryPage.getTitle() else {return}
                 guard let diaryPageText = diaryPage.getText() else {return}
-                
-                //2.diarypage_id 를 찾는다.
                 guard let selectedDiarypageDate = diaryPage.getDate() else {return}
                 let dateString = DateFormatter().string(from: selectedDiarypageDate)
-                selectQuery = "SELECT diarypage_id FROM diarypage WHERE diary_date = \(dateString)"
+                selectQuery = "SELECT diarypage_id FROM diarypage WHERE diary_date = '\(dateString)'"
                 let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
-                guard let diarypage_id = diarypageResultSet.string(forColumn: "diarypage_id") else {return}
+                
+                if diarypageResultSet.next() {
+                    diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
+                }
                 
                 //3.diarypage_id 에 따른 diarypage_title 테이블을 수정한다.
                 updateQuery = "UPDATE diarypage_title SET diarypage_title = ? WHERE diarypage_id = ?"
                 parmeters.append(diaryPageTitle)
-                parmeters.append(diarypage_id)
+                parmeters.append(diaryPageId)
                 try db.executeUpdate(updateQuery, values: parmeters)
                 parmeters.removeAll()
                 
                 //4.diarypage_id 에 따른 diarypage_text 테이블을 수정한다.
                 updateQuery = "UPDATE diarypage_text SET diarypage_text = ? WHERE diarypage_id = ?"
                 parmeters.append(diaryPageText)
-                parmeters.append(diarypage_id)
+                parmeters.append(diaryPageId)
                 try db.executeUpdate(updateQuery, values: parmeters)
                 parmeters.removeAll()
                 
                 //5.diarypage 객체에 image가 있다면.
                 if diaryPage.getImageAt(index: 0) != nil {
                     //5.1.diarypage_id 에 따른 image_id를 찾는다.
-                    selectQuery = "SELECT image_id FROM diarypage_images_relation WHERE diarypage_id = \(diarypage_id)"
+                    selectQuery = "SELECT image_id FROM diarypage_images_relation WHERE diarypage_id = '\(diaryPageId)'"
                     let imageResultSet = try db.executeQuery(selectQuery, values: nil)
                     guard let imageId = diarypageResultSet.string(forColumn: "image_id") else {return}
                     
@@ -344,6 +352,9 @@ class DiaryPageDAO: FMDBHelper {
      */
     func deleteData(diaryPage: DiaryPage) {
         //1.diaryPage를 입력받는다.
+        
+        var diaryPageId: String = ""
+        
         //dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
         fmdbQueue?.inTransaction({ (db, rollback) in
@@ -351,16 +362,18 @@ class DiaryPageDAO: FMDBHelper {
                 //2.입력받은 diaryPage의 diary_date attribute 를 이용해 diarypage 테이블에서 diarypage_id 를 찾는다.
                 guard let selectedDiarypageDate = diaryPage.getDate() else {return}
                 let dateString = DateFormatter().string(from: selectedDiarypageDate)
-                let selectQuery = "SELECT diarypage_id FROM diarypage WHERE diary_date = \(dateString)"
+                let selectQuery = "SELECT diarypage_id FROM diarypage WHERE diary_date = '\(dateString)'"
                 let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
-                guard let diarypage_id = diarypageResultSet.string(forColumn: "diarypage_id") else {return}
+                if diarypageResultSet.next() {
+                    diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
+                }
                 
                 //3.pragma 쿼리를 실행한다.
                 let paragmaQuery = "PRAGMA foreign_keys=on"
                 try db.executeUpdate(paragmaQuery, values: nil)
                 
                 //4.diarypage_id 에 관한 row를 user_diarypage_relation table에서 지운다.
-                let deleteQuery = "DELETE FROM user_diarypage_relation WHERE diarypage_id = \(diarypage_id)"
+                let deleteQuery = "DELETE FROM user_diarypage_relation WHERE diarypage_id = '\(diaryPageId)'"
                 try db.executeUpdate(deleteQuery, values: nil)
                 
             }catch{

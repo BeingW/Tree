@@ -33,11 +33,10 @@ class DiaryTableViewCell: UITableViewCell {
             let covertingData = ConvertingDataAndImage()
             
             //diary 에 이미지가 있다면, 이미지를 가져와 붙인다.
-            if self.diarypage?.getImages().count != 0 {
+            if self.diarypage?.getImages() != nil {
                 guard let images = self.diarypage?.getImages() else {return}
                 
                 for image in images {
-                    guard let image = image else {return}
                     guard let imageUrl = image.getUrl() else {return}
                     guard let unwrappedImage = covertingData.convertingFromUrlToImage(uniqueId: imageUrl) else {return}
                     diaryImageView.image = unwrappedImage

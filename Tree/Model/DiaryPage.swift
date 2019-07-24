@@ -12,7 +12,7 @@ class DiaryPage {
     private var title: String?
     private var date: Date?
     private var text: String?
-    private var images: [Image?]
+    private var images: [Image]?
     
     init() {
         self.title = ""
@@ -21,13 +21,13 @@ class DiaryPage {
         self.images = []
     }
     
-    init(title: String?, text: String?, images: [Image?]) {
+    init(title: String?, text: String?, images: [Image]?) {
         self.title = title ?? ""
         self.text = text ?? ""
-        self.images = images 
+        self.images = images
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let today = Date()
         let dateString = dateFormatter.string(from:today)
         guard let dateWithFormatter = dateFormatter.date(from: dateString) else {return}
@@ -35,16 +35,15 @@ class DiaryPage {
         self.date = dateWithFormatter
     }
     
-    init(title: String?, date: String?, text: String?, images: [Image?]) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
-        let today = Date()
-        let dateString = dateFormatter.string(from:today)
+    init(title: String?, date: String?, text: String?, images: [Image]?) {
+        guard let date = date else {return}
         
-        let date = dateFormatter.date(from: date ?? dateString)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        guard let diaryDate = dateFormatter.date(from: date) else {return}
         
         self.title = title ?? ""
-        self.date = date
+        self.date = diaryDate
         self.text = text ?? ""
         self.images = images
     }
@@ -62,10 +61,13 @@ class DiaryPage {
     }
     
     func getImageAt(index: Int) -> Image? {
-        return self.images[index]
+        
+        let image = self.images?[index]
+        
+        return image
     }
     
-    func getImages() -> [Image?] {
+    func getImages() -> [Image]? {
         return images
     }
     
@@ -99,10 +101,13 @@ class DiaryPage {
      수정일자:
      */
     func editImageAt(index: Int, image: Image) -> Image? {
-        self.images.remove(at: index)
-        self.images.insert(image, at: index)
         
-        return images[index]
+        if self.images != nil {
+            self.images?.remove(at: index)
+            self.images?.insert(image, at: index)
+        }
+        
+        return images?[index]
     }
     
     /*
@@ -112,7 +117,9 @@ class DiaryPage {
      수정일자:
      */
     func addImage(image: Image) {
-        self.images.append(image)
+        if self.images != nil {
+            self.images?.append(image)
+        }
     }
     
     /*
@@ -122,7 +129,9 @@ class DiaryPage {
      수정일자:
      */
     func deleteImageAt(index: Int) {
-        self.images.remove(at: index)
+        if self.images != nil {
+            self.images?.remove(at: index)
+        }
     }
     
     /*
@@ -132,7 +141,9 @@ class DiaryPage {
      수정일자:
      */
     func deleteAllImages(){
-        self.images.removeAll()
+        if self.images != nil {
+            self.images?.removeAll()
+        }
     }
 }
 

@@ -12,6 +12,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
+    let user = User.shared
     
     //MARK: - NavigationBar
     func navigationBar() {
@@ -153,7 +154,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let diarypageCount = User.shared.diary.count
+        let diarypageCount = self.user.diary.count
         
         return diarypageCount
     }
@@ -162,7 +163,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
-        cell.diarypage = User.shared.diary[indexPath.item]
+        cell.diarypage = user.diary[indexPath.item]
         
         return cell
     }

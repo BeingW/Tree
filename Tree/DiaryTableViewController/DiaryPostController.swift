@@ -69,6 +69,9 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         var images = [Image]()
         let diaryPageDAO = DiaryPageDAO()
         
+        let diaryPageId = diaryPageDAO.makeDiaryPageId()
+        var imageId: String? = ""
+        
         //2.UI 에 Image가 입력되었다면
         if let imageContents = self.diaryImageView.image {
             //2.1.image 객체를 만든다.
@@ -77,6 +80,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
             let imageHeight = imageContents.size.height
             let imageCreatedDate = Date()
             image = Image(url: imageUrl, width: Int(imageWidth), height: Int(imageHeight), createdDate: imageCreatedDate)
+            imageId = diaryPageDAO.makeImageId()
             //2.2.images에 객체를 넣는다.
             images.append(image!)
         }
@@ -85,7 +89,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         //4.User 객체에 추가된 diaryPage를 넣는다.
         User.shared.addNewPage(diaryPage: diaryPage)
         //5.DB에 DiaryPage관련 데이터를 넣는다.
-        diaryPageDAO.insertData(diaryPage: diaryPage)
+        diaryPageDAO.insertData(diaryPage: diaryPage, diaryPageId: diaryPageId, imageId: imageId)
         //6.갱신한다.
         NotificationCenter.default.post(name: NSNotification.Name("UpdateFeed"), object: nil)
         self.dismiss(animated: true, completion: nil)

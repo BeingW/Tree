@@ -48,9 +48,8 @@ class FMDBHelper {
         self.fileName = fileName
         self.fileIdentifier = identifier
         //만약 db가 이미 열려 있다면 새로 열지 않는다.
-        if self.fmdb.open() != false {
-            self.fmdb.open()
-        }
+        self.fmdb.open()
+        
     }
     
     //db 가 열려있다면 db를 닫는다.
