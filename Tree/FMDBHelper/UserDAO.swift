@@ -14,6 +14,29 @@ class UserDAO: FMDBHelper {
         super.init(fileName: "Tree", identifier: "db")
     }
     
+    func checkOutUserTableExeist() -> Bool {
+        var isExist: Bool = false
+        
+        do {
+            let selectQuery = "SELECT user_id FROM user"
+            let selectResultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
+            
+            if let userId = selectResultSet.string(forColumn: "user_id") {
+                isExist = true
+            } else {
+                isExist = false
+            }
+        } catch let error as NSError{
+            self.fmdb.rollback()
+            print("===== fetchPassportData() failure. =====")
+            print("failed: \(error.localizedDescription)")
+            print("========================================")
+        }
+    
+        return isExist
+        
+    }
+    
     /*
      함수명: selectUser
      기능: 데이터가 성공적으로 입력되었는지 확인한다.

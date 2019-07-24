@@ -4549,13 +4549,30 @@
 											"height": 13,
 											"text": "+deleteData(iserId: String): void",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAFsHSZbe91YY+w=",
+											"_parent": {
+												"$ref": "AAAAAAFrrPuPEKkR5CU="
+											},
+											"model": {
+												"$ref": "AAAAAAFsHSZbTN1PWy4="
+											},
+											"font": "Arial;13;0",
+											"left": 61,
+											"top": 2777,
+											"width": 557.43212890625,
+											"height": 13,
+											"text": "+checkOutUserTableExeist(): Bool",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 56,
 									"top": 2667,
 									"width": 567.43212890625,
-									"height": 113
+									"height": 128
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -4595,7 +4612,7 @@
 							"left": 56,
 							"top": 2632,
 							"width": 567.43212890625,
-							"height": 148,
+							"height": 163,
 							"nameCompartment": {
 								"$ref": "AAAAAAFrrPuPEKkL0Gw="
 							},
@@ -4633,7 +4650,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 427,
+									"left": 430,
 									"top": 2583,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -4654,7 +4671,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 416,
+									"left": 419,
 									"top": 2573,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -4675,7 +4692,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 448,
+									"left": 453,
 									"top": 2604,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -4694,7 +4711,7 @@
 								"$ref": "AAAAAAFrrPuPEKkKnUk="
 							},
 							"lineStyle": 1,
-							"points": "409:2631;467:2569",
+							"points": "414:2631;470:2569",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFrsJQn0yv1Q2c="
@@ -8549,6 +8566,25 @@
 										"$ref": "AAAAAAFrrPyCrLGROKI="
 									},
 									"type": "void",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFsHSZbTN1PWy4=",
+							"_parent": {
+								"$ref": "AAAAAAFrrPuPD6kI3dw="
+							},
+							"name": "checkOutUserTableExeist",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFsHSbjkd2nQhI=",
+									"_parent": {
+										"$ref": "AAAAAAFsHSZbTN1PWy4="
+									},
+									"type": "Bool",
 									"direction": "return"
 								}
 							]

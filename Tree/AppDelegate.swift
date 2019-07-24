@@ -15,6 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        //1.프로그램을 실행한다.
+        //2.DB에 User Table이 있는지 확인하고, 있다면 DB의 data로 User 객체를 만든다.
+        let userDAO = UserDAO()
+        
+        if userDAO.checkOutUserTableExeist() {
+            User.shared = userDAO.fetchData()
+        }
+        
         window = UIWindow()
         
         window?.rootViewController = MainTabBarController()
