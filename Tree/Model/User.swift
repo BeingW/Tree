@@ -16,8 +16,7 @@ class User {
     private var name: String?
     private var password: String?
     private var profilePictureUrl: String?
-
-    var diary: [DiaryPage?]
+    private var diary: [DiaryPage?]
     
     init() {
         self.name = ""
@@ -103,22 +102,32 @@ class User {
     }
     
     /*
-     함수명: deleteDiaryPageAt
-     기능: 특정한 DiaryPage 를 지운다.
-     작성일자: 2019.07.09
+     함수명: deleteDiaryPages
+     기능: 선택된 diaryPage들을 지웁니다.
+     작성일자: 2019.07.25
      수정일자:
      */
-    func deleteDiaryPageAt(index: Int) {
-        self.diary.remove(at: index)
+    func deleteDiaryPages(indexs: [Int]) {
+        //1.지울 diarypage들에 대한 배열변호를 입력받는다.
+        //2.i=0 으로 초기화 한다.
+        var i = 0
+        //3.i 가 배열의 수보다 작을 동안 반복한다.
+        while indexs.count > i {
+            //3.1.indexes의 i 번째 diaryPage를 지운다.
+            let index = indexs[i]
+            diary.remove(at: index)
+            //3.2.i 를 증가시킨다.
+            i += 1
+        }
     }
     
     /*
-     함수명: deleteDiaryPageAt
-     기능: 특정한 DiaryPage 를 지운다.
-     작성일자: 2019.07.09
+     함수명: deleteAllDiary
+     기능: 모든 diaryPage를 지운다.
+     작성일자: 2019.07.25
      수정일자:
      */
-    func deleteDiary() {
+    func deleteAllDiary() {
         self.diary.removeAll()
     }
     
