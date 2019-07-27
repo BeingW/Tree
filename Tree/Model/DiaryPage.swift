@@ -12,7 +12,7 @@ class DiaryPage {
     private var title: String?
     private var date: Date?
     private var text: String?
-    private var images: [Image]?
+    var images: [Image]?
     
     init() {
         self.title = ""

@@ -33,8 +33,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
     let userPasswordTextField: UITextField = {
         let userNameTexField = UITextField()
         let userNameBackgroundImage = UIImage(named: "UserNameTextField@2x")
-        
-        
         userNameTexField.background = userNameBackgroundImage
         
         return userNameTexField
@@ -42,8 +40,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     let loginButton: UIButton = {
         let loginButton = UIButton()
-        let doTreeButtoBackgroundImage = UIImage(named: "LoginButton@2x")
+        let doTreeButtoBackgroundImage = UIImage(named: "LoginButton")
         loginButton.setBackgroundImage(doTreeButtoBackgroundImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        let attirbutedString = NSAttributedString(string: "Login", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
+        loginButton.setAttributedTitle(attirbutedString, for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
         return loginButton
     }()

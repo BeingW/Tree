@@ -17,21 +17,42 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - NavigationBar
     func navigationBar() {
         
-        let thisUINavigtionBar = self.navigationController?.navigationBar
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "NavigationProfileIcon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(rightNavigationBarItemTapped))
+        let navigationBar = self.navigationController?.navigationBar
+        let userNavigationItem = UIBarButtonItem(image: UIImage(named: "NavigationProfileIcon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(userNavigationItemTapped))
         guard let userName = User.shared.getName() else {return}
         
-        thisUINavigtionBar?.topItem?.title = "\(userName)"
-        thisUINavigtionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
-        thisUINavigtionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
-        thisUINavigtionBar?.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white]
-        //self.navigationController?.navigationItem.backBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        self.navigationController?.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        navigationBar?.topItem?.title = "\(userName)"
+        navigationBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
+        navigationBar?.topItem?.leftBarButtonItem = userNavigationItem
+        navigationBar?.titleTextAttributes = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 20, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white]
+    self.navigationController?.navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         
     }
     
-    @objc func rightNavigationBarItemTapped() {
-        print("right NavigationBar")
+    @objc func userNavigationItemTapped() {
+        //1.UIAlertController 객체의 ActionSheet style 로 생성합니다.
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        //2.cancel, logout, User Information Edit 에 대한 객체들을 생성한다.
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            
+        }
+        
+        let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { (action) in
+            let loginNavController = UINavigationController(rootViewController: LoginController())
+            self.present(loginNavController, animated: true, completion: nil)
+        }
+        
+        let userEditAction = UIAlertAction(title: "Edit User Information", style: .default) { (action) in
+            let signUpController = SignupController()
+            signUpController.editMode = true
+            self.present(signUpController, animated: true, completion: nil)
+        }
+        //3.UIAlertController 에 생성한 UIAction 객체를 넣는다.
+        alertController.addAction(userEditAction)
+        alertController.addAction(logoutAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     //MARK: - RecordView

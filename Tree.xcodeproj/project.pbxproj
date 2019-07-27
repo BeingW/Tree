@@ -25,7 +25,6 @@
 		194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBHelper.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
 		196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196240B7229E4AFE009472C9 /* DiaryPage.swift */; };
-		196240C5229EB052009472C9 /* SignupButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240BE229EB052009472C9 /* SignupButton@2x.png */; };
 		196240C6229EB052009472C9 /* ProfileImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240BF229EB052009472C9 /* ProfileImage@2x.png */; };
 		196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240C0229EB052009472C9 /* AlreadyHaveAccount.png */; };
 		196240C8229EB052009472C9 /* UserNameTextField@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 196240C1229EB052009472C9 /* UserNameTextField@2x.png */; };
@@ -41,9 +40,10 @@
 		197A0D33229B99D400647E9B /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D32229B99D400647E9B /* LoginController.swift */; };
 		197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5A229BB38900647E9B /* LoginBackground@2x.png */; };
 		197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5B229BB38900647E9B /* HaveAccount.png */; };
-		197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5C229BB38900647E9B /* LoginButton@2x.png */; };
 		197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D63229BED3800647E9B /* CustomNavigationController.swift */; };
 		1988567422CDC75300AD0778 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988567322CDC75300AD0778 /* Image.swift */; };
+		19A0C67C22EC63040095B4B4 /* SignupButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A0C67B22EC63040095B4B4 /* SignupButton.png */; };
+		19A0C67E22EC630B0095B4B4 /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A0C67D22EC630B0095B4B4 /* LoginButton.png */; };
 		19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B752295291C007011F7 /* AppDelegate.swift */; };
 		19AC1B782295291C007011F7 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B772295291C007011F7 /* SignupController.swift */; };
 		19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B792295291C007011F7 /* Main.storyboard */; };
@@ -84,7 +84,6 @@
 		194ED36222B7C5B7000E5716 /* FMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBHelper.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
 		196240B7229E4AFE009472C9 /* DiaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
-		196240BE229EB052009472C9 /* SignupButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SignupButton@2x.png"; sourceTree = "<group>"; };
 		196240BF229EB052009472C9 /* ProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileImage@2x.png"; sourceTree = "<group>"; };
 		196240C0229EB052009472C9 /* AlreadyHaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlreadyHaveAccount.png; sourceTree = "<group>"; };
 		196240C1229EB052009472C9 /* UserNameTextField@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UserNameTextField@2x.png"; sourceTree = "<group>"; };
@@ -100,9 +99,10 @@
 		197A0D32229B99D400647E9B /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		197A0D5A229BB38900647E9B /* LoginBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBackground@2x.png"; sourceTree = "<group>"; };
 		197A0D5B229BB38900647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
-		197A0D5C229BB38900647E9B /* LoginButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginButton@2x.png"; sourceTree = "<group>"; };
 		197A0D63229BED3800647E9B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		1988567322CDC75300AD0778 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		19A0C67B22EC63040095B4B4 /* SignupButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignupButton.png; sourceTree = "<group>"; };
+		19A0C67D22EC630B0095B4B4 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
 		19AC1B722295291C007011F7 /* Tree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AC1B752295291C007011F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19AC1B772295291C007011F7 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		196240BD229EB052009472C9 /* SignupControllerImages */ = {
 			isa = PBXGroup;
 			children = (
-				196240BE229EB052009472C9 /* SignupButton@2x.png */,
+				19A0C67B22EC63040095B4B4 /* SignupButton.png */,
 				196240BF229EB052009472C9 /* ProfileImage@2x.png */,
 				196240C0229EB052009472C9 /* AlreadyHaveAccount.png */,
 				196240C1229EB052009472C9 /* UserNameTextField@2x.png */,
@@ -222,9 +222,9 @@
 		197A0D59229BB35A00647E9B /* LoginControllerImages */ = {
 			isa = PBXGroup;
 			children = (
+				19A0C67D22EC630B0095B4B4 /* LoginButton.png */,
 				197A0D5B229BB38900647E9B /* HaveAccount.png */,
 				197A0D5A229BB38900647E9B /* LoginBackground@2x.png */,
-				197A0D5C229BB38900647E9B /* LoginButton@2x.png */,
 			);
 			path = LoginControllerImages;
 			sourceTree = "<group>";
@@ -381,8 +381,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
-				197A0D5F229BB38900647E9B /* LoginButton@2x.png in Resources */,
-				196240C5229EB052009472C9 /* SignupButton@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
 				19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */,
 				193C79EB22CAFE8700A50A73 /* Tree.db in Resources */,
@@ -390,10 +388,12 @@
 				19C66E9E22A4E04A00467E00 /* Camera.png in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
 				19756E3722A6658C0019ACB9 /* ShareIcon.png in Resources */,
+				19A0C67C22EC63040095B4B4 /* SignupButton.png in Resources */,
 				19756E3222A6658C0019ACB9 /* FavoriteIcon.png in Resources */,
 				19C66EA122A4E04A00467E00 /* ToolBoxView.png in Resources */,
 				19C66EA222A4E04A00467E00 /* toolBoxButton.png in Resources */,
 				19756E2E22A6658C0019ACB9 /* CommentIcon.png in Resources */,
+				19A0C67E22EC630B0095B4B4 /* LoginButton.png in Resources */,
 				19AC1B7D2295291D007011F7 /* Assets.xcassets in Resources */,
 				19C66EA022A4E04A00467E00 /* Voice.png in Resources */,
 				19C66EA422A4E0F000467E00 /* ProfileIcon.png in Resources */,

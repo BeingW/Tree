@@ -16,7 +16,7 @@ class User {
     private var name: String?
     private var password: String?
     private var profilePictureUrl: String?
-    private var diary: [DiaryPage?]
+    var diary: [DiaryPage?]
     
     init() {
         self.name = ""

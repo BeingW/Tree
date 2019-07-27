@@ -10,6 +10,8 @@ import UIKit
 
 class SignupController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
+    var editMode: Bool = false
+    
     let imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true;
@@ -84,8 +86,10 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     let signupButton: UIButton = {
         let doTreeButton = UIButton(type: .system)
-        let doTreeButtonImage = UIImage(named: "SignupButton@2x")
+        let doTreeButtonImage = UIImage(named: "SignupButton")
         doTreeButton.setBackgroundImage(doTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        let attirbutedString = NSAttributedString(string: "Sign up", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
+        doTreeButton.setAttributedTitle(attirbutedString, for: .normal)
         doTreeButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
         return doTreeButton
     }()
@@ -153,7 +157,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         self.navigationController?.popViewController(animated: true)
     }
     
-    //MARK: - setViews
+    //MARK: - setViews and setEditModeView
     func setViews() {
         self.view.addSubview(signupBackgroundImageView)
         self.view.addSubview(profileButton)
@@ -175,6 +179,8 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         goToLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
+    
+    
     //MARK: - keyboardDismiss
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
@@ -190,6 +196,24 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         super.viewDidLoad()
         
         setViews()
+        
+        //1.editMode 가 true 일 때.
+        if editMode == true {
+            //1.1.User 객체의 data 를 UI 에 넣는다.
+            guard let userName = User.shared.getName() else {return}
+            guard let userPassword = User.shared.getPassword() else {return}
+            guard let userImageString = User.shared.getProfilePictureUrl() else {return}
+            let convetingImage = ConvertingDataAndImage()
+            guard let userProfileImage = convetingImage.convertingFromUrlToImage(uniqueId: userImageString) else {return}
+            
+            self.userNameTextField.text = userName
+            self.userPasswordTextField.text = userPassword
+            self.profileButton.imageView?.image = userProfileImage
+            //1.2.SignupButton 의 text를 Save 바꾼다.
+            let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
+            self.signupButton.setAttributedTitle(attirbutedString, for: .normal)
+            
+        }
         
         print("userName \(userNameTextField.text)", " profileImage \(profileButton.imageView?.image)")
     }
