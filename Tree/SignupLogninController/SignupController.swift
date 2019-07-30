@@ -179,7 +179,23 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         goToLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    
+    func editModeView() {
+        //1.1.User 객체의 data 를 UI 에 넣는다.
+        guard let userName = User.shared.getName() else {return}
+        guard let userPassword = User.shared.getPassword() else {return}
+        guard let userImageString = User.shared.getProfilePictureUrl() else {return}
+        let convetingImage = ConvertingDataAndImage()
+        guard let userProfileImage = convetingImage.convertingFromUrlToImage(uniqueId: userImageString) else {return}
+        
+        self.userNameTextField.text = userName
+        self.userPasswordTextField.text = userPassword
+        self.profileButton.imageView?.image = userProfileImage
+        //1.2.SignupButton 의 text를 Save 바꾼다.
+        let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
+        self.signupButton.setAttributedTitle(attirbutedString, for: .normal)
+        //1.3.goToLoginButton 을 숨긴다.
+        self.goToLoginButton.isHidden = true
+    }
     
     //MARK: - keyboardDismiss
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -199,23 +215,9 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         //1.editMode 가 true 일 때.
         if editMode == true {
-            //1.1.User 객체의 data 를 UI 에 넣는다.
-            guard let userName = User.shared.getName() else {return}
-            guard let userPassword = User.shared.getPassword() else {return}
-            guard let userImageString = User.shared.getProfilePictureUrl() else {return}
-            let convetingImage = ConvertingDataAndImage()
-            guard let userProfileImage = convetingImage.convertingFromUrlToImage(uniqueId: userImageString) else {return}
-            
-            self.userNameTextField.text = userName
-            self.userPasswordTextField.text = userPassword
-            self.profileButton.imageView?.image = userProfileImage
-            //1.2.SignupButton 의 text를 Save 바꾼다.
-            let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
-            self.signupButton.setAttributedTitle(attirbutedString, for: .normal)
-            
+            editModeView()
         }
         
-        print("userName \(userNameTextField.text)", " profileImage \(profileButton.imageView?.image)")
     }
     
 
