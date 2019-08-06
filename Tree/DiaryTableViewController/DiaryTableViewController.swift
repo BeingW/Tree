@@ -8,7 +8,11 @@
 
 import UIKit
 
-class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DiaryTableViewCellDelegate {
+    
+    func didTapEditButton() {
+        print("didTapEditButton Clicked")
+    }
     
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
@@ -184,6 +188,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
+        cell.diaryTableViewCellDelegate = self
         cell.diarypage = user.diary[indexPath.item]
         
         return cell

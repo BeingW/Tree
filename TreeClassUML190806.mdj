@@ -3918,13 +3918,47 @@
 											"height": 13,
 											"text": "+editDiaryIndex: Integer",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsZxyyTDCWmFY=",
+											"_parent": {
+												"$ref": "AAAAAAFrHKqqyUbmkfU="
+											},
+											"model": {
+												"$ref": "AAAAAAFsZxyyKDCN0Vw="
+											},
+											"font": "Arial;13;0",
+											"left": 1261,
+											"top": 2533,
+											"width": 279,
+											"height": 13,
+											"text": "+editDiaryMode: Boolean",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsZx0H9THtQSo=",
+											"_parent": {
+												"$ref": "AAAAAAFrHKqqyUbmkfU="
+											},
+											"model": {
+												"$ref": "AAAAAAFsZx0H1zHkVCU="
+											},
+											"font": "Arial;13;0",
+											"left": 1261,
+											"top": 2548,
+											"width": 279,
+											"height": 13,
+											"text": "+editDiaryIndex: Integer",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1256,
 									"top": 2273,
 									"width": 289,
-									"height": 263
+									"height": 293
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3947,7 +3981,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1261,
-											"top": 2541,
+											"top": 2571,
 											"width": 279,
 											"height": 13,
 											"text": "+viewDidLoad()",
@@ -3964,7 +3998,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1261,
-											"top": 2556,
+											"top": 2586,
 											"width": 279,
 											"height": 13,
 											"text": "+setViews()",
@@ -3981,7 +4015,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1261,
-											"top": 2571,
+											"top": 2601,
 											"width": 279,
 											"height": 13,
 											"text": "+postButtonTapped()",
@@ -3998,7 +4032,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1261,
-											"top": 2586,
+											"top": 2616,
 											"width": 279,
 											"height": 13,
 											"text": "+cancelButtonTapped()",
@@ -4015,7 +4049,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1261,
-											"top": 2601,
+											"top": 2631,
 											"width": 279,
 											"height": 13,
 											"text": "+plusButtonTapped()",
@@ -4032,7 +4066,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 1261,
-											"top": 2616,
+											"top": 2646,
 											"width": 279,
 											"height": 13,
 											"text": "+imageLibraryButtonTapped()",
@@ -4041,7 +4075,7 @@
 									],
 									"font": "Arial;13;0",
 									"left": 1256,
-									"top": 2536,
+									"top": 2566,
 									"width": 289,
 									"height": 98
 								},
@@ -4083,7 +4117,7 @@
 							"left": 1256,
 							"top": 2248,
 							"width": 289,
-							"height": 386,
+							"height": 416,
 							"nameCompartment": {
 								"$ref": "AAAAAAFrHKqqyEbhZ3o="
 							},
@@ -6108,8 +6142,8 @@
 										"$ref": "AAAAAAFsQyjZFaKw3fQ="
 									},
 									"font": "Arial;13;0",
-									"left": 1191,
-									"top": 2295,
+									"left": 1189,
+									"top": 2307,
 									"width": 66.1298828125,
 									"height": 13,
 									"alpha": 3.218676981416941,
@@ -6131,8 +6165,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 936,
-									"top": 2180,
+									"left": 935,
+									"top": 2188,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -6152,8 +6186,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 959,
-									"top": 2142,
+									"left": 960,
+									"top": 2150,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -6174,7 +6208,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1225,
-									"top": 2343,
+									"top": 2354,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -6194,8 +6228,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1216,
-									"top": 2353,
+									"left": 1215,
+									"top": 2364,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -6216,7 +6250,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 1243,
-									"top": 2321,
+									"top": 2333,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -6236,8 +6270,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 663,
-									"top": 1993,
+									"left": 662,
+									"top": 1996,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -6256,8 +6290,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 658,
-									"top": 2005,
+									"left": 657,
+									"top": 2009,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -6277,7 +6311,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 673,
-									"top": 1967,
+									"top": 1971,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -6322,7 +6356,7 @@
 								"$ref": "AAAAAAFrHKqqyEbgAx4="
 							},
 							"lineStyle": 1,
-							"points": "1255:2350;649:1973",
+							"points": "1255:2362;649:1976",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFsQyjZFqK1I9Y="
@@ -8635,6 +8669,24 @@
 						{
 							"_type": "UMLAttribute",
 							"_id": "AAAAAAFsQyN+AZaOQGg=",
+							"_parent": {
+								"$ref": "AAAAAAFrHKqqx0be/UA="
+							},
+							"name": "editDiaryIndex",
+							"type": "Integer"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsZxyyKDCN0Vw=",
+							"_parent": {
+								"$ref": "AAAAAAFrHKqqx0be/UA="
+							},
+							"name": "editDiaryMode",
+							"type": "Boolean"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsZx0H1zHkVCU=",
 							"_parent": {
 								"$ref": "AAAAAAFrHKqqx0be/UA="
 							},

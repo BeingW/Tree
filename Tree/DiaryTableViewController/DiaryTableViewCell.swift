@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol DiaryTableViewCellDelegate {
+    func didTapEditButton()
+}
+
 class DiaryTableViewCell: UITableViewCell {
     
+    var diaryTableViewCellDelegate: DiaryTableViewCellDelegate?
     /*
      함수명: diarypage
      기능: 들어오는 diarypage 마다 Observe 해 cell 을 로드한다.
@@ -71,11 +76,17 @@ class DiaryTableViewCell: UITableViewCell {
         return dateLabel
     }()
     
-    let editButton: UIButton = {
+    lazy var editButton: UIButton = {
         let editButton = UIButton()
         editButton.setImage(UIImage(named: "SetButton")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        editButton.addTarget(self, action: #selector(handleEditButton), for: .touchUpInside)
         return editButton
     }()
+    
+    @objc func handleEditButton() {
+        print("handle EditButton hit")
+        self.diaryTableViewCellDelegate?.didTapEditButton()
+    }
     
     //MARK: - diaryImageView
     let diaryImageView: UIImageView = {

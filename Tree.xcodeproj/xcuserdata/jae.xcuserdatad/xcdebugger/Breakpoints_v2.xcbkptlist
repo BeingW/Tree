@@ -121,13 +121,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tree/DiaryTableViewController/DiaryPostController.swift"
-            timestampString = "585650935.814767"
+            filePath = "Tree/FMDBHelper/DiaryPageDAO.swift"
+            timestampString = "585924416.6029"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "postButtonTapped()"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "insertData(diaryPage:diaryPageId:imageId:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tree/FMDBHelper/DiaryPageDAO.swift"
-            timestampString = "585924416.6029"
+            filePath = "Tree/DiaryTableViewController/DiaryTableViewCell.swift"
+            timestampString = "586795756.7026"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "insertData(diaryPage:diaryPageId:imageId:)"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "handleEditButton()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
