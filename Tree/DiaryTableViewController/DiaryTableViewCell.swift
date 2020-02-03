@@ -86,6 +86,7 @@ class DiaryTableViewCell: UITableViewCell {
     @objc func handleEditButton() {
         print("handle EditButton hit")
         self.diaryTableViewCellDelegate?.didTapEditButton()
+        print("Something New")
     }
     
     //MARK: - diaryImageView
