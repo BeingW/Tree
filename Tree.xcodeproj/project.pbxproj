@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1903060B23EAE1A700D667F6 /* TreeUnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903060A23EAE1A700D667F6 /* TreeUnitTests.swift */; };
+		1903061323EAE1BE00D667F6 /* LoginAndSignUpTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1903061223EAE1BE00D667F6 /* LoginAndSignUpTests.swift */; };
 		190BFB2222A3BF1700341872 /* DiaryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */; };
 		191C250B22CB2E5600500F80 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 191C250A22CB2E5600500F80 /* libsqlite3.tbd */; };
 		191C253122CB324A00500F80 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 191C252722CB324A00500F80 /* FMDatabaseQueue.m */; };
@@ -20,7 +22,6 @@
 		191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252D22CB324A00500F80 /* FMDatabaseQueue.h */; };
 		191C253C22CB345700500F80 /* FMDB.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252F22CB324A00500F80 /* FMDB.h */; };
 		191C253D22CB345700500F80 /* FMResultSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252522CB324A00500F80 /* FMResultSet.h */; };
-		193C79EB22CAFE8700A50A73 /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 193C79EA22CAFE8700A50A73 /* Tree.db */; };
 		193C79ED22CB022D00A50A73 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193C79EC22CB022D00A50A73 /* UserDAO.swift */; };
 		194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBHelper.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
@@ -44,6 +45,7 @@
 		1988567422CDC75300AD0778 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988567322CDC75300AD0778 /* Image.swift */; };
 		19A0C67C22EC63040095B4B4 /* SignupButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A0C67B22EC63040095B4B4 /* SignupButton.png */; };
 		19A0C67E22EC630B0095B4B4 /* LoginButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A0C67D22EC630B0095B4B4 /* LoginButton.png */; };
+		19A4860123EAACA200186C6B /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 19A4860023EAACA200186C6B /* Tree.db */; };
 		19AC1B762295291C007011F7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B752295291C007011F7 /* AppDelegate.swift */; };
 		19AC1B782295291C007011F7 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19AC1B772295291C007011F7 /* SignupController.swift */; };
 		19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19AC1B792295291C007011F7 /* Main.storyboard */; };
@@ -64,7 +66,21 @@
 		19F79A9B22A24E1A00EAF51F /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9A22A24E1A00EAF51F /* TestViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		1903060D23EAE1A700D667F6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 19AC1B6A2295291C007011F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 19AC1B712295291C007011F7;
+			remoteInfo = Tree;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		1903060823EAE1A700D667F6 /* TreeUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TreeUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1903060A23EAE1A700D667F6 /* TreeUnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TreeUnitTests.swift; sourceTree = "<group>"; };
+		1903060C23EAE1A700D667F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1903061223EAE1BE00D667F6 /* LoginAndSignUpTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginAndSignUpTests.swift; sourceTree = "<group>"; };
 		190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		191C250A22CB2E5600500F80 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		191C252522CB324A00500F80 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
@@ -79,7 +95,6 @@
 		191C252F22CB324A00500F80 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		191C253022CB324A00500F80 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		191C253722CB326200500F80 /* Bridgining-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridgining-Header.h"; sourceTree = "<group>"; };
-		193C79EA22CAFE8700A50A73 /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		193C79EC22CB022D00A50A73 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
 		194ED36222B7C5B7000E5716 /* FMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBHelper.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
@@ -103,6 +118,7 @@
 		1988567322CDC75300AD0778 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		19A0C67B22EC63040095B4B4 /* SignupButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignupButton.png; sourceTree = "<group>"; };
 		19A0C67D22EC630B0095B4B4 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
+		19A4860023EAACA200186C6B /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		19AC1B722295291C007011F7 /* Tree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19AC1B752295291C007011F7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19AC1B772295291C007011F7 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
@@ -126,6 +142,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		1903060523EAE1A700D667F6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19AC1B6F2295291C007011F7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +160,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1903060923EAE1A700D667F6 /* TreeUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				1903060A23EAE1A700D667F6 /* TreeUnitTests.swift */,
+				1903060C23EAE1A700D667F6 /* Info.plist */,
+				1903061223EAE1BE00D667F6 /* LoginAndSignUpTests.swift */,
+			);
+			path = TreeUnitTests;
+			sourceTree = "<group>";
+		};
 		191C250922CB2E5600500F80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +275,7 @@
 			isa = PBXGroup;
 			children = (
 				19AC1B742295291C007011F7 /* Tree */,
+				1903060923EAE1A700D667F6 /* TreeUnitTests */,
 				19AC1B732295291C007011F7 /* Products */,
 				191C250922CB2E5600500F80 /* Frameworks */,
 			);
@@ -251,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				19AC1B722295291C007011F7 /* Tree.app */,
+				1903060823EAE1A700D667F6 /* TreeUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,7 +308,7 @@
 				19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */,
 				19AC1B812295291D007011F7 /* Info.plist */,
 				19F79A9A22A24E1A00EAF51F /* TestViewController.swift */,
-				193C79EA22CAFE8700A50A73 /* Tree.db */,
+				19A4860023EAACA200186C6B /* Tree.db */,
 			);
 			path = Tree;
 			sourceTree = "<group>";
@@ -324,6 +359,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		1903060723EAE1A700D667F6 /* TreeUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1903060F23EAE1A700D667F6 /* Build configuration list for PBXNativeTarget "TreeUnitTests" */;
+			buildPhases = (
+				1903060423EAE1A700D667F6 /* Sources */,
+				1903060523EAE1A700D667F6 /* Frameworks */,
+				1903060623EAE1A700D667F6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1903060E23EAE1A700D667F6 /* PBXTargetDependency */,
+			);
+			name = TreeUnitTests;
+			productName = TreeUnitTests;
+			productReference = 1903060823EAE1A700D667F6 /* TreeUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		19AC1B712295291C007011F7 /* Tree */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19AC1B842295291D007011F7 /* Build configuration list for PBXNativeTarget "Tree" */;
@@ -347,10 +400,14 @@
 		19AC1B6A2295291C007011F7 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 1020;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Jae Ki Lee";
 				TargetAttributes = {
+					1903060723EAE1A700D667F6 = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 19AC1B712295291C007011F7;
+					};
 					19AC1B712295291C007011F7 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = 1020;
@@ -371,11 +428,19 @@
 			projectRoot = "";
 			targets = (
 				19AC1B712295291C007011F7 /* Tree */,
+				1903060723EAE1A700D667F6 /* TreeUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		1903060623EAE1A700D667F6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19AC1B702295291C007011F7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,9 +448,9 @@
 				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
 				19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */,
-				193C79EB22CAFE8700A50A73 /* Tree.db in Resources */,
 				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
 				19C66E9E22A4E04A00467E00 /* Camera.png in Resources */,
+				19A4860123EAACA200186C6B /* Tree.db in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
 				19756E3722A6658C0019ACB9 /* ShareIcon.png in Resources */,
 				19A0C67C22EC63040095B4B4 /* SignupButton.png in Resources */,
@@ -412,6 +477,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		1903060423EAE1A700D667F6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1903060B23EAE1A700D667F6 /* TreeUnitTests.swift in Sources */,
+				1903061323EAE1BE00D667F6 /* LoginAndSignUpTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		19AC1B6E2295291C007011F7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -449,6 +523,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		1903060E23EAE1A700D667F6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 19AC1B712295291C007011F7 /* Tree */;
+			targetProxy = 1903060D23EAE1A700D667F6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		19AC1B792295291C007011F7 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -469,6 +551,48 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		1903061023EAE1A700D667F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XS77XABE92;
+				INFOPLIST_FILE = TreeUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jae.TreeUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tree.app/Tree";
+			};
+			name = Debug;
+		};
+		1903061123EAE1A700D667F6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = XS77XABE92;
+				INFOPLIST_FILE = TreeUnitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = jae.TreeUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tree.app/Tree";
+			};
+			name = Release;
+		};
 		19AC1B822295291D007011F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -504,6 +628,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -524,6 +649,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = Tree;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -565,6 +691,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -578,6 +705,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = Tree;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -629,6 +757,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		1903060F23EAE1A700D667F6 /* Build configuration list for PBXNativeTarget "TreeUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1903061023EAE1A700D667F6 /* Debug */,
+				1903061123EAE1A700D667F6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		19AC1B6D2295291C007011F7 /* Build configuration list for PBXProject "Tree" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

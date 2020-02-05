@@ -8,6 +8,11 @@
 
 import UIKit
 
+struct UserTableData {
+    let userName: String
+    let userProfileImage: String
+}
+
 class UserDAO: FMDBHelper {
     
     init() {
@@ -128,6 +133,34 @@ class UserDAO: FMDBHelper {
         return userId
     }
     
+    func getUserTableData() -> UserTableData {
+    
+        var selectQuery = ""
+        var resultSet = FMResultSet()
+        var userTableData: UserTableData = UserTableData(userName: "", userProfileImage: "")
+    
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        fmdbQueue?.inTransaction({ (db, rollBack) in
+            do {
+                selectQuery = "SELECT * FROM user"
+                try resultSet = db.executeQuery(selectQuery, values: nil)
+                if resultSet.next() {
+                    let userName = resultSet.string(forColumn: "user_name")
+                    let userProfileImage = resultSet.string(forColumn: "user_profileImage")
+                    
+                    userTableData = UserTableData(userName: userName ?? "", userProfileImage: userProfileImage ?? "")
+                }
+            } catch {
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
+            }
+        })
+        
+        return userTableData
+    }
+    
     /*
      함수명: fetchData
      기능: DB 에서 user data 를 가져와 user class 에 넣어 생성한 후 반환한다.
@@ -231,45 +264,32 @@ class UserDAO: FMDBHelper {
     
     /*
      함수명: insertData
-     기능: 입력한 user Data 를 user, user_diarypage_relation Table 에 넣는다.
+     기능: 입력한 user Data 를 user Table 에 넣는다.
      작성일자: 2019.07.02
-     수정일자: 2019.07.17
+     수정일자: 2020.02.05
      */
-    func insertData(userName: String, userPassword: String, userProfilePicture: String) {
-        //1. userName, userPassword, userProfilePicture 을 입력받는다.
-        //2. makeUserId 함수를 실행시켜 userId를 만든다.
-        let userId = makeUserId()
+    func insertData(userName: String, userProfileImage: String) {
+        //1. userName, userProfileImage 을 입력받는다.
         var insertQuery: String = ""
         var parmeters = [Any]()
-        //3.dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
+        //2.dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
         
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
-                //4.입력받을 데이터를 넣을 쿼리를 작성한다.
-                insertQuery = "INSERT INTO user (user_id, user_name, user_password, user_profilePicture_url) VALUES (?, ?, ?, ?)"
-                parmeters.append(userId)
+                //3.입력받을 데이터를 넣을 쿼리를 작성한다.
+                insertQuery = "INSERT INTO user (user_name, user_profileImage) VALUES (?, ?)"
                 parmeters.append(userName)
-                parmeters.append(userPassword)
-                parmeters.append(userProfilePicture)
-                //5.쿼리를 작동한다.
+                parmeters.append(userProfileImage)
+                //4.쿼리를 작동한다.
                 try db.executeUpdate(insertQuery, values: parmeters)
                 parmeters.removeAll()
-                
-                //4.입력받을 데이터를 넣을 쿼리를 작성한다.
-                insertQuery = "INSERT INTO user_diarypage_relation (diarypage_id, user_id) VALUES (?, ?)"
-                parmeters.append("D0000")
-                parmeters.append(userId)
-                //5.쿼리를 작동한다.
-                try db.executeUpdate(insertQuery, values: parmeters)
-                parmeters.removeAll()
-                
+
             }catch{
                 rollback.pointee = true
                 print(error)
             }
         })
-        
     }
     
     /*

@@ -46,6 +46,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     //2.imagePickerController 함수를 실행한다.
         self.present(imagePickerController, animated: true, completion: nil)
     }
+    
     //3.사진앱으로 이동한다.
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var selectedPhoto: UIImage?
@@ -117,7 +118,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
             //1.1. user 객체를 만든다.
             User.shared = User(name: userName, password: userPassword, profilePictureUrl: profileImageUrl)
-            userDAO.insertData(userName: userName, userPassword: userPassword, userProfilePicture: profileImageUrl)
+//            userDAO.insertData(userName: userName, userPassword: userPassword, userProfilePicture: profileImageUrl)
             //1.2. loginSucced 를 true 로 한다.
             loginIsSucceed = true
         //2.입력이 하나라도 안됐다면.
