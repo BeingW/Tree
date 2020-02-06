@@ -73,18 +73,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         return textField;
     }()
     
-    let userPasswordTextField: UITextField = {
-        let textField = UITextField();
-        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 20))
-        textField.leftView = paddingView
-        textField.leftViewMode = .always
-        
-        let image = UIImage(named: "UserNameTextField@2x")
-        textField.background = image
-        
-        return textField;
-    }()
-    
     let signupButton: UIButton = {
         let doTreeButton = UIButton(type: .system)
         let doTreeButtonImage = UIImage(named: "SignupButton")
@@ -103,7 +91,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
      */
     @objc func signUpButtonTapped() {
         guard let userName = userNameTextField.text else {return}
-        guard let userPassword = userPasswordTextField.text else {return}
+//        guard let userPassword = userPasswordTextField.text else {return}
         let userProfileImage = profileButton.imageView?.image
         var loginIsSucceed: Bool = false;
         let alertController = UIAlertController(title: "Please check signup information", message: "", preferredStyle: .alert)
@@ -112,13 +100,13 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         let converting = ConvertingDataAndImage()
         let userDAO = UserDAO()
         
-        //1.모든 유저정보가 입력됐을 때.
-        if userName != "" && userPassword != "" && userProfileImage != nil {
+        //모든 유저정보가 입력됐을 때.
+        if userName != "" && userProfileImage != nil {
             guard let userProfilePicture = userProfileImage else {return}
             guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
-            //1.1. user 객체를 만든다.
-            User.shared = User(name: userName, password: userPassword, profilePictureUrl: profileImageUrl)
-//            userDAO.insertData(userName: userName, userPassword: userPassword, userProfilePicture: profileImageUrl)
+            
+            userDAO.insertIntoUserTable(userName: userName, userProfileImage: profileImageUrl)
+        
             //1.2. loginSucced 를 true 로 한다.
             loginIsSucceed = true
         //2.입력이 하나라도 안됐다면.
@@ -163,17 +151,17 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         self.view.addSubview(signupBackgroundImageView)
         self.view.addSubview(profileButton)
         self.view.addSubview(goToLoginButton)
-        let signupStakView = UIStackView(arrangedSubviews: [userNameTextField, userPasswordTextField, signupButton])
+        let signupStakView = UIStackView(arrangedSubviews: [userNameTextField, signupButton])
         signupStakView.axis = .vertical
-        signupStakView.spacing = view.frame.height/30
+        signupStakView.spacing = 30
         self.view.addSubview(signupStakView)
        
         signupBackgroundImageView.anchor(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
-        profileButton.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 1).isActive = true;
+        profileButton.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 1).isActive = true
         profileButton.anchor(top: view.topAnchor, left: nil, bottom: nil, right: nil, paddingTop: self.view.frame.height * (1/3), paddingLeft: 0, paddingBottom: self.view.frame.height * (2/3), paddingRight: 0, width: self.view.frame.width/3, height: self.view.frame.width/3)
         
-        signupStakView.anchor(top: self.profileButton.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: 0)
+        signupStakView.anchor(top: self.profileButton.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: view.frame.height/30, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width/2, height: 110)
         signupStakView.centerXAnchor.constraint(equalToSystemSpacingAfter: view.centerXAnchor, multiplier: 0).isActive = true
     
         goToLoginButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
@@ -189,7 +177,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         guard let userProfileImage = convetingImage.convertingFromUrlToImage(uniqueId: userImageString) else {return}
         
         self.userNameTextField.text = userName
-        self.userPasswordTextField.text = userPassword
+//        self.userPasswordTextField.text = userPassword
         self.profileButton.imageView?.image = userProfileImage
         //1.2.SignupButton 의 text를 Save 바꾼다.
         let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])

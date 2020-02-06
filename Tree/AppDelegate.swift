@@ -18,14 +18,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //1.프로그램을 실행한다.
         //2.DB에 User Table이 있는지 확인하고, 있다면 DB의 data로 User 객체를 만든다.
         let userDAO = UserDAO()
+        let userTableData = userDAO.getUserTableData()
+        let userName = userTableData.userName
+        let userProfileImageUrl = userTableData.userProfileImage
         
-        if userDAO.checkOutUserTableExeist() {
-            User.shared = userDAO.fetchData()
-        }
+        Diary.shared = Diary(userName: userName, userProfileImage: userProfileImageUrl)
         
         window = UIWindow()
         
         window?.rootViewController = MainTabBarController()
+
+        //        if userDAO.checkOutUserTableExeist() {
+        //            User.shared = userDAO.fetchData()
+        //        }
+        //
+
         
         return true 
     }

@@ -18,6 +18,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         return loginBackgroundView
     }()
     
+    let treeMainImageView: UIImageView = {
+        let treeMainImage = UIImage(named: "TREE.png")!
+        let treeMainImageView = UIImageView(image: treeMainImage)
+        return treeMainImageView
+    }()
+    
     let userNameTextField: UITextField = {
        let userNameTexField = UITextField()
         let userNameBackgroundImage = UIImage(named: "UserNameTextField@2x")
@@ -25,14 +31,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         userNameTexField.leftView = paddingView
         userNameTexField.leftViewMode = .always
         
-        userNameTexField.background = userNameBackgroundImage
-        
-        return userNameTexField
-    }()
-    
-    let userPasswordTextField: UITextField = {
-        let userNameTexField = UITextField()
-        let userNameBackgroundImage = UIImage(named: "UserNameTextField@2x")
         userNameTexField.background = userNameBackgroundImage
         
         return userNameTexField
@@ -57,13 +55,12 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //1.userName 을 가져온다.
         guard let userName = self.userNameTextField.text else {return}
         //2.userPassword 을 가져온다.
-        guard let userPassword = self.userPasswordTextField.text else {return}
+//        guard let userPassword = self.userPasswordTextField.text else {return}
         //3.가입한 user 객체를 가져온다.
         //4.가입한 user 정보를 가져온다.
-        let signedUserName = User.shared.getName()
-        let signedUserPassword = User.shared.getPassword()
+        let signedUserName = Diary.shared.getUserName()
         //5.입력한 user 정보과 가입된 user 정보가 같다면
-        if signedUserName == userName && signedUserPassword == userPassword{
+        if signedUserName == userName && signedUserName != "" {
             //5.1.mainTabBarController 의 isAppFirstOpen 을 false 로 한다.
             let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
             mainTabBarController.isAppFirstOpen = false
@@ -74,6 +71,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
             let alertController = UIAlertController(title: "Please check login information", message: "", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             alertController.addAction(alertAction)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -114,9 +112,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         self.userNameTextField.heightAnchor.constraint(equalToConstant: view.frame.width / 10).isActive = true
         self.loginButton.widthAnchor.constraint(equalToConstant: view.frame.width / 2).isActive = true
         self.loginButton.heightAnchor.constraint(equalToConstant: view.frame.width / 10).isActive = true
-        let loginStackview = UIStackView(arrangedSubviews: [userNameTextField, userPasswordTextField, loginButton])
+        let loginStackview = UIStackView(arrangedSubviews: [treeMainImageView, userNameTextField, loginButton])
         loginStackview.axis = .vertical
         loginStackview.spacing = view.frame.height/30
+        //옆 패딩 54, loginText 거리 30 높이 124
         
         self.view.addSubview(loginBackgroundImageView)
         self.view.addSubview(loginStackview)

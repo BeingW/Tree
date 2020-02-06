@@ -19,6 +19,75 @@ class UserDAO: FMDBHelper {
         super.init(fileName: "Tree", identifier: "db")
     }
     
+    /*
+     함수명: insertIntoUserTable
+     기능: DB user Table 에 userName, userProfileImage 를 넣는다.
+     작성일자: 2020.02.06
+     수정일자:
+     */
+    func insertIntoUserTable(userName: String, userProfileImage: String) {
+        //1. userName, userProfileImage 을 입력받는다.
+        var insertQuery: String = ""
+        var parmeters = [Any]()
+        //2.dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        
+        fmdbQueue?.inTransaction({ (db, rollback) in
+            do {
+                //3.입력받을 데이터를 넣을 쿼리를 작성한다.
+                insertQuery = "INSERT INTO user (user_name, user_profileImage) VALUES (?, ?)"
+                parmeters.append(userName)
+                parmeters.append(userProfileImage)
+                //4.쿼리를 작동한다.
+                try db.executeUpdate(insertQuery, values: parmeters)
+                parmeters.removeAll()
+                
+            }catch{
+                rollback.pointee = true
+                print(error)
+            }
+        })
+    }
+    
+    /*
+     함수명: getUserTableData
+     기능: DB user Table 에서 data 를 가져와 useTable 객체로 바꾸어 반환한다.
+     작성일자: 2020.02.06
+     수정일자:
+     */
+    func getUserTableData() -> UserTableData {
+        var selectQuery = ""
+        var resultSet = FMResultSet()
+        var userTableData: UserTableData = UserTableData(userName: "", userProfileImage: "")
+        //1.fmdb 객체를 가져온다.
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        fmdbQueue?.inTransaction({ (db, rollBack) in
+            do {
+                //2.user Table 이 select query 를 작성한다.
+                selectQuery = "SELECT * FROM user"
+                try resultSet = db.executeQuery(selectQuery, values: nil)
+                if resultSet.next() {
+                    //3.user Table 에 data 를 가져온다.
+                    let userName = resultSet.string(forColumn: "user_name")
+                    let userProfileImage = resultSet.string(forColumn: "user_profileImage")
+                    //4.useTable 객체를 가져온 data를 이용해 만든다.
+                    userTableData = UserTableData(userName: userName ?? "", userProfileImage: userProfileImage ?? "")
+                }
+            } catch {
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
+            }
+        })
+        //5.UserTable 을 반환한다.
+        return userTableData
+    }
+    
+    
+    
+
+    
     func checkOutUserTableExeist() -> Bool {
         var isExist: Bool = false
         
@@ -131,34 +200,6 @@ class UserDAO: FMDBHelper {
         
         //8. 반환한다.
         return userId
-    }
-    
-    func getUserTableData() -> UserTableData {
-    
-        var selectQuery = ""
-        var resultSet = FMResultSet()
-        var userTableData: UserTableData = UserTableData(userName: "", userProfileImage: "")
-    
-        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
-        fmdbQueue?.inTransaction({ (db, rollBack) in
-            do {
-                selectQuery = "SELECT * FROM user"
-                try resultSet = db.executeQuery(selectQuery, values: nil)
-                if resultSet.next() {
-                    let userName = resultSet.string(forColumn: "user_name")
-                    let userProfileImage = resultSet.string(forColumn: "user_profileImage")
-                    
-                    userTableData = UserTableData(userName: userName ?? "", userProfileImage: userProfileImage ?? "")
-                }
-            } catch {
-                self.fmdb.rollback()
-                print("===== fetchPassportData() failure. =====")
-                print("failed: \(error.localizedDescription)")
-                print("========================================")
-            }
-        })
-        
-        return userTableData
     }
     
     /*

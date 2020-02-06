@@ -15,6 +15,8 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTableViewControllers()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -27,12 +29,12 @@ class MainTabBarController: UITabBarController {
                 self.present(loginNavContrroller, animated: false, completion: nil)
             }
         } else {
-            setTabViewControllers()
+            setTableViewControllers()
         }
         
     }
     
-    func setTabViewControllers() {
+    func setTableViewControllers() {
         
         let diaryNavController = UINavigationController(rootViewController: DiaryTableViewController())
         

@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tree/FMDBHelper/UserDAO.swift"
-            timestampString = "602595920.284918"
+            timestampString = "602668635.566401"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "selectQuery(tableName:primaryKey:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tree/FMDBHelper/UserDAO.swift"
-            timestampString = "602595920.285826"
+            timestampString = "602668635.566465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "updateData(userId:userName:userPassword:userProfilePictureUrl:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tree/FMDBHelper/UserDAO.swift"
-            timestampString = "602595920.28651"
+            timestampString = "602668635.566512"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "364"
-            endingLineNumber = "364"
+            startingLineNumber = "405"
+            endingLineNumber = "405"
             landmarkName = "deleteData(userId:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -161,113 +161,22 @@
             endingLineNumber = "61"
             landmarkName = "LoginSignUpTests"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.__allocating_init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; TreeTests.LoginSignUpTests"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.0178961"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.init(invocation: Swift.Optional&lt;__C.NSInvocation&gt;) -&gt; TreeTests.LoginSignUpTests"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.01956"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "38">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.__allocating_init(selector: ObjectiveC.Selector) -&gt; TreeTests.LoginSignUpTests"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.021149"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.init(selector: ObjectiveC.Selector) -&gt; TreeTests.LoginSignUpTests"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.022678"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "38">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.__allocating_init() -&gt; TreeTests.LoginSignUpTests"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.0242389"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "12">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.init() -&gt; TreeTests.LoginSignUpTests"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.02615"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "26">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "TreeTests.LoginSignUpTests.__deallocating_deinit"
-                  moduleName = "TreeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/TreeTests/LoginSignUpTests.swift"
-                  timestampString = "602593078.027658"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "16">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tree/FMDBHelper/UserDAO.swift"
+            timestampString = "602668635.566617"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "insertIntoUserTable(userName:userProfileImage:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
