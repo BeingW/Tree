@@ -66,6 +66,7 @@ class UserDAO: FMDBHelper {
                 //2.user Table 이 select query 를 작성한다.
                 selectQuery = "SELECT * FROM user"
                 try resultSet = db.executeQuery(selectQuery, values: nil)
+                
                 if resultSet.next() {
                     //3.user Table 에 data 를 가져온다.
                     let userName = resultSet.string(forColumn: "user_name")
@@ -201,7 +202,8 @@ class UserDAO: FMDBHelper {
         //8. 반환한다.
         return userId
     }
-    
+
+/*
     /*
      함수명: fetchData
      기능: DB 에서 user data 를 가져와 user class 에 넣어 생성한 후 반환한다.
@@ -302,6 +304,7 @@ class UserDAO: FMDBHelper {
         //3.user 객체를 반환한다.
         return user
     }
+*/
     
     /*
      함수명: insertData

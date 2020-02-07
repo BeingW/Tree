@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userProfileImageUrl = userTableData.userProfileImage
         
         Diary.shared = Diary(userName: userName, userProfileImage: userProfileImageUrl)
+        Diary.shared.setPages(diaryPages: DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]())
         
         window = UIWindow()
-        
         window?.rootViewController = MainTabBarController()
 
         //        if userDAO.checkOutUserTableExeist() {

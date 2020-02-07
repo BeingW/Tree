@@ -21,6 +21,8 @@ class DiaryTableViewCell: UITableViewCell {
      작성일자: 2019.07.15
      수정일자:
      */
+
+/*
     var diarypage: DiaryPage? {
         didSet {
             guard let date = self.diarypage?.getDate() else {return}
@@ -50,6 +52,7 @@ class DiaryTableViewCell: UITableViewCell {
             
         }
     }
+ */
     
     //MARK: - CellHeadViewPart
     let diaryHeadView: UIView = {

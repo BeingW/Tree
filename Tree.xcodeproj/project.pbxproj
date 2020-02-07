@@ -20,6 +20,7 @@
 		191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252D22CB324A00500F80 /* FMDatabaseQueue.h */; };
 		191C253C22CB345700500F80 /* FMDB.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252F22CB324A00500F80 /* FMDB.h */; };
 		191C253D22CB345700500F80 /* FMResultSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252522CB324A00500F80 /* FMResultSet.h */; };
+		193C215123ED548200ACF7EB /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 1958928223ED491C006F2AF0 /* Tree.db */; };
 		193C79ED22CB022D00A50A73 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193C79EC22CB022D00A50A73 /* UserDAO.swift */; };
 		194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBHelper.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
@@ -40,7 +41,7 @@
 		197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5A229BB38900647E9B /* LoginBackground@2x.png */; };
 		197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 197A0D5B229BB38900647E9B /* HaveAccount.png */; };
 		197A0D64229BED3800647E9B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197A0D63229BED3800647E9B /* CustomNavigationController.swift */; };
-		1988567422CDC75300AD0778 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988567322CDC75300AD0778 /* Image.swift */; };
+		1988567422CDC75300AD0778 /* DiaryPageImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1988567322CDC75300AD0778 /* DiaryPageImage.swift */; };
 		199D05A923EBB9D500D6C036 /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199D05A823EBB9D500D6C036 /* Diary.swift */; };
 		199D05D023EBFBFA00D6C036 /* TREE.png in Resources */ = {isa = PBXBuildFile; fileRef = 199D05CF23EBFBFA00D6C036 /* TREE.png */; };
 		19A0C67C22EC63040095B4B4 /* SignupButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19A0C67B22EC63040095B4B4 /* SignupButton.png */; };
@@ -82,6 +83,7 @@
 		193C79EC22CB022D00A50A73 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
 		194ED36222B7C5B7000E5716 /* FMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBHelper.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
+		1958928223ED491C006F2AF0 /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		196240B7229E4AFE009472C9 /* DiaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
 		196240BF229EB052009472C9 /* ProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileImage@2x.png"; sourceTree = "<group>"; };
 		196240C0229EB052009472C9 /* AlreadyHaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlreadyHaveAccount.png; sourceTree = "<group>"; };
@@ -99,9 +101,8 @@
 		197A0D5A229BB38900647E9B /* LoginBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginBackground@2x.png"; sourceTree = "<group>"; };
 		197A0D5B229BB38900647E9B /* HaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HaveAccount.png; sourceTree = "<group>"; };
 		197A0D63229BED3800647E9B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
-		1988567322CDC75300AD0778 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		1988567322CDC75300AD0778 /* DiaryPageImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPageImage.swift; sourceTree = "<group>"; };
 		199D05A823EBB9D500D6C036 /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
-		199D05CE23EBF28F00D6C036 /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		199D05CF23EBFBFA00D6C036 /* TREE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TREE.png; sourceTree = "<group>"; };
 		19A0C67B22EC63040095B4B4 /* SignupButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SignupButton.png; sourceTree = "<group>"; };
 		19A0C67D22EC630B0095B4B4 /* LoginButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginButton.png; sourceTree = "<group>"; };
@@ -273,8 +274,8 @@
 				19AC1B792295291C007011F7 /* Main.storyboard */,
 				19AC1B7C2295291D007011F7 /* Assets.xcassets */,
 				19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */,
+				1958928223ED491C006F2AF0 /* Tree.db */,
 				19AC1B812295291D007011F7 /* Info.plist */,
-				199D05CE23EBF28F00D6C036 /* Tree.db */,
 			);
 			path = Tree;
 			sourceTree = "<group>";
@@ -292,7 +293,7 @@
 			children = (
 				19AC1B8B2295440D007011F7 /* User.swift */,
 				196240B7229E4AFE009472C9 /* DiaryPage.swift */,
-				1988567322CDC75300AD0778 /* Image.swift */,
+				1988567322CDC75300AD0778 /* DiaryPageImage.swift */,
 				199D05A823EBB9D500D6C036 /* Diary.swift */,
 			);
 			path = Model;
@@ -382,6 +383,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193C215123ED548200ACF7EB /* Tree.db in Resources */,
 				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
 				19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */,
@@ -419,7 +421,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				191C253822CB345700500F80 /* FMDatabase.h in Sources */,
-				1988567422CDC75300AD0778 /* Image.swift in Sources */,
+				1988567422CDC75300AD0778 /* DiaryPageImage.swift in Sources */,
 				191C253922CB345700500F80 /* FMDatabaseAdditions.h in Sources */,
 				191C253A22CB345700500F80 /* FMDatabasePool.h in Sources */,
 				191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */,
@@ -601,6 +603,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QENNCHR6YZ;
 				INFOPLIST_FILE = Tree/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -622,6 +625,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QENNCHR6YZ;
 				INFOPLIST_FILE = Tree/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

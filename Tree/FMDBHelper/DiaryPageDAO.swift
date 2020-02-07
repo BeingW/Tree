@@ -169,6 +169,7 @@ class DiaryPageDAO: FMDBHelper {
         return imageId
     }
     
+/*
     /*
      함수명: insertData
      기능: 입력한 diaryPage 를 diaryPage와 관련된 Table에 넣는다.
@@ -265,6 +266,7 @@ class DiaryPageDAO: FMDBHelper {
         
         
     }
+ */
     
     /*
      함수명: updateData
@@ -272,6 +274,7 @@ class DiaryPageDAO: FMDBHelper {
      작성일자: 2019.07.15
      수정일자:
      */
+/*
     func updateData(diaryPage: DiaryPage) {
         //1.Diary 객체를 입력받는다.
         var parmeters = [Any]()
@@ -343,7 +346,9 @@ class DiaryPageDAO: FMDBHelper {
             
         })
     }
+*/
     
+/*
     /*
      함수명: deleteData
      기능: 특정 다이어리 페이지를 지운다.
@@ -383,7 +388,74 @@ class DiaryPageDAO: FMDBHelper {
         })
         
     }
+*/
+    
+    func fetchDiaryPage() -> [DiaryPage]? {
+        var selectQuery: String = ""
+        var diaryPageRS = FMResultSet()
+        var diaryImageRS = FMResultSet()
+        var imageRS = FMResultSet()
+        
+        var diaryPages = [DiaryPage]()
+        var diaryPage = DiaryPage()
+        var diaryPageImage = DiaryPageImage()
+        var diaryPageImages = [DiaryPageImage]()
+        
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        fmdbQueue?.inTransaction({ (db, rollBack) in
+            do {
+                //1.DB에서 diarypage table 끝까지 반복한다.
+                selectQuery = "SELECT * FROM diarypage"
+                try diaryPageRS = db.executeQuery(selectQuery, values: nil)
+                while diaryPageRS.next() {
+                    //1.1.diarypage_id, diarypage_title, diary_date, diarypage_text 를 가져온다.
+                    guard let diarypageId = diaryPageRS.string(forColumn: "diarypage_id") else {return}
+                    let diarypageTitle = diaryPageRS.string(forColumn: "diarypage_title") ?? ""
+                    let diarypageDate = diaryPageRS.string(forColumn: "diarypage_date") ?? ""
+                    let diarypageText = diaryPageRS.string(forColumn: "diarypage_text") ?? ""
+                    
+                    //1.2.diarypage_id 를 이용하여 diarypage_id 와 같은 diarypage_image table 을 가져온다.
+                    selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id = \(diarypageId)"
+                    try diaryImageRS = db.executeQuery(selectQuery, values: nil)
+                    //1.3.diarypage_image table 끝까지 반복한다.
+                    while diaryImageRS.next() {
+                        //1.3.1.image_id 를 가져온다.
+                        guard let imageId = diaryImageRS.string(forColumn: "image_id") else {return}
+                        //1.3.1.1.image_id 에 대한 image table 의 데이터를 가져온다.
+                        selectQuery = "SELECT * FROM image WHERE image_id = \(imageId)"
+                        try imageRS = db.executeQuery(selectQuery, values: nil)
+                        
+                        let imageWidth = imageRS.string(forColumn: "image_width") ?? ""
+                        let imageHeight = imageRS.string(forColumn: "image_height") ?? ""
+                        let imageUrl = imageRS.string(forColumn: "image_url") ?? ""
+                        let imageCreateDate = imageRS.string(forColumn: "image_createDate") ?? ""
+                        
+                        diaryPageImage = DiaryPageImage(url: imageUrl, width: imageWidth, height: imageHeight, createdDate: imageCreateDate)
+                        
+                        diaryPageImages.append(diaryPageImage)
+                    }
+                    //1.4.DiaryPage 객체를 만든다.
+                    diaryPage.setTitle(title: diarypageTitle)
+                    diaryPage.setDate(date: diarypageDate)
+                    diaryPage.setText(text: diarypageText)
+                    diaryPage.setDiaryPageImages(diaryPageImages: diaryPageImages)
+                    
+                    diaryPages.append(diaryPage)
+                    
+                }
+            } catch {
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
+            }
+        })
+        
+        return diaryPages
+        
     }
+
+}
 
     
 

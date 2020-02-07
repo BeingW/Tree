@@ -35,19 +35,19 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     //MARK: - NavigationBar
     func navigationBar() {
         
-        let thisNavigaionBar = self.navigationController?.navigationBar
-        //guard let userName = self.diaryTableViewcontroller?.user?.getName() else {return}
-        
-        let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
-        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        
-        let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
-        leftBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
-        
-        //thisNavigaionBar?.topItem?.title = "\(userName)"
-        thisNavigaionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
-        thisNavigaionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
-        thisNavigaionBar?.topItem?.leftBarButtonItem = leftBarButtonItem
+//        let thisNavigaionBar = self.navigationController?.navigationBar
+//        //guard let userName = self.diaryTableViewcontroller?.user?.getName() else {return}
+//
+//        let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
+//        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+//
+//        let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
+//        leftBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+//
+//        //thisNavigaionBar?.topItem?.title = "\(userName)"
+//        thisNavigaionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
+//        thisNavigaionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
+//        thisNavigaionBar?.topItem?.leftBarButtonItem = leftBarButtonItem
         
     }
     
@@ -61,6 +61,8 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
      작성일자: 2019.07.15
      수정일자:
      */
+    
+/*
     @objc func postButtonTapped() {
         //1.UI에서 text, title 을 입력받아 객체를 만든다.
         let title = self.diaryTitleTextField.text
@@ -94,7 +96,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         NotificationCenter.default.post(name: NSNotification.Name("UpdateFeed"), object: nil)
         self.dismiss(animated: true, completion: nil)
     }
-    
+*/
     
     //MARK: - PostContainerView
     let navigationSeperatorView: UIView = {

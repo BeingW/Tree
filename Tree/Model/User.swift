@@ -86,20 +86,20 @@ class User {
      작성일자: 2019.07.09
      수정일자:
      */
-    func addNewPage(diaryPage: DiaryPage) -> Int {
-        
-        self.diary.append(diaryPage)
-        
-        let count = self.diary.count
-        
-        var i = 0
-        
-        while i < count && diaryPage == self.diary[i]! {
-            i += 1
-        }
-        
-        return i
-    }
+//    func addNewPage(diaryPage: DiaryPage) -> Int {
+//
+//        self.diary.append(diaryPage)
+//
+//        let count = self.diary.count
+//
+//        var i = 0
+//
+//        while i < count && diaryPage == self.diary[i]! {
+//            i += 1
+//        }
+//
+//        return i
+//    }
     
     /*
      함수명: deleteDiaryPages

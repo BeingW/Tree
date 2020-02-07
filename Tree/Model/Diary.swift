@@ -12,6 +12,7 @@ class Diary {
     private var userName: String = ""
     private var userProfileImageUrl: String = ""
     var isOpenedDiary: Bool = false
+    var pages = [DiaryPage]()
     
     static var shared = Diary()
     
@@ -22,6 +23,12 @@ class Diary {
     init(userName: String, userProfileImage: String) {
         self.userName = userName
         self.userProfileImageUrl = userProfileImage
+    }
+    
+    init(userName: String, userProfileImage: String, diaryPages: [DiaryPage]?) {
+        self.userName = userName
+        self.userProfileImageUrl = userProfileImage
+        self.pages = diaryPages ?? [DiaryPage]()
     }
     
     func getUserName() -> String {
@@ -40,6 +47,14 @@ class Diary {
     func setUserProfilImageUrl(userProfileImageUrl: String) -> String {
         self.userProfileImageUrl = userProfileImageUrl
         return self.userProfileImageUrl
+    }
+    
+    func getPages() -> [DiaryPage] {
+        return self.pages
+    }
+    
+    func setPages(diaryPages: [DiaryPage]) {
+        self.pages = diaryPages
     }
     
     func login(userName: String) -> Bool {

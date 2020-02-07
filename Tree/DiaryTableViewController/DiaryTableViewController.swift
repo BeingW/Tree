@@ -17,6 +17,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
     let user = User.shared
+    let diary = Diary.shared
     
     //MARK: - NavigationBar
     func navigationBar() {
@@ -146,6 +147,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         
         let safeArea = self.view.safeAreaLayoutGuide
@@ -159,6 +161,22 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        loadData()
+        
+    }
+    
+    func loadData() {
+        self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
+        test()
+    }
+    
+    func test() {
+        print("3")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -189,7 +207,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
         cell.diaryTableViewCellDelegate = self
-        cell.diarypage = user.diary[indexPath.item]
+//        cell.diarypage = user.diary[indexPath.item]
         
         return cell
     }
