@@ -27,12 +27,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.rootViewController = MainTabBarController()
-
+//        window?.rootViewController = UINavigationController(rootViewController: DiaryTableViewController())
+        
         //        if userDAO.checkOutUserTableExeist() {
         //            User.shared = userDAO.fetchData()
         //        }
         //
-
         
         return true 
     }

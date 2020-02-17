@@ -109,12 +109,13 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @objc func recordButtonTapped() {
         let diaryPostController = DiaryPostController()
         
-        let diaryPostControlNavigation = UINavigationController(rootViewController: diaryPostController)
-        
-        self.present(diaryPostControlNavigation, animated: true, completion: nil)
+//        let diaryPostControlNavigation = UINavigationController(rootViewController: diaryPostController)
+//
+//        self.present(diaryPostControlNavigation, animated: true, completion: nil)
+        self.navigationController?.pushViewController(DiaryPostController(), animated: true)
     }
     
-    func setViews() {
+    private func setBodyViews() {
         self.view.addSubview(recordTopSeperateView)
         self.view.addSubview(recordView)
             self.recordView.addSubview(recordLabel)
@@ -148,36 +149,37 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setView()
+        setTableView()
+        
+        self.tabBarController?.tabBar.isHidden = true
+        
+    }
+    
+    private func setView() {
         view.backgroundColor = .white
-        
-        let safeArea = self.view.safeAreaLayoutGuide
-        
         navigationBar()
-        setViews()
-        
+        setBodyViews()
+    }
+    
+    private func setTableView() {
         self.diaryTableView.delegate = self
         self.diaryTableView.dataSource = self
-        self.diaryTableView.estimatedRowHeight = safeArea.layoutFrame.height * 1.7/3
+        self.diaryTableView.estimatedRowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height * 1.7/3
         
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         loadData()
-        
     }
     
     func loadData() {
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
-        test()
     }
     
-    func test() {
-        print("3")
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)

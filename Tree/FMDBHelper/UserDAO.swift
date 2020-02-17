@@ -34,8 +34,10 @@ class UserDAO: FMDBHelper {
         
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
+                let userId = self.makeUserId()
                 //3.입력받을 데이터를 넣을 쿼리를 작성한다.
-                insertQuery = "INSERT INTO user (user_name, user_profileImage) VALUES (?, ?)"
+                insertQuery = "INSERT INTO user (user_id, user_name, user_profileImage) VALUES (?, ?, ?)"
+                parmeters.append(userId)
                 parmeters.append(userName)
                 parmeters.append(userProfileImage)
                 //4.쿼리를 작동한다.
@@ -155,42 +157,47 @@ class UserDAO: FMDBHelper {
         do{
             let selectQuery = "SELECT user_id FROM user"
             let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
-            //2.user_id 가 있다면 끝까지 반복한다.
-            while resultSet.next() {
-                //2.1.user_id 를 뽑아낸다.
-                var selectedUserId = resultSet.string(forColumn: "user_id")!
-                //2.2.user_id 에서 "U"를 지운다.
-                selectedUserId.removeFirst()
-                //2.3."U"를 지운 user_id 를 정수화 하여, presnetNumber 에 넣는다.
-                presentNumber = Int(selectedUserId)!
-                //2.4.presentNumber 와 previousNumber를 비교한다.
-                //2.4.1.previousNumber 가 크다면 number에 previousNumber 을 넣는다,
-                if previousNumber > presentNumber {
-                    number = previousNumber
-                //2.4.2.presentNumber 가 크다면 number에 presentNumber 을 넣는다,
-                } else if previousNumber < presentNumber {
-                    number = presentNumber
-                }
-                //2.5.previousNumber 에 presentNumber 를 넣는다.
-                previousNumber = presentNumber
-            }
-            //3. number에 1을 더한다.
-            number += 1
-            //4. number가 1 자리이면 앞에 000 을 더한다
-            if number >= 0 || number <= 9 {
-                idNumber = "000" + "\(number)"
-            //5. number가 2 자리이면 앞에 00 을 더한다
-            } else if number >= 10 || number <= 99{
-                idNumber = "00" + "\(number)"
-            //6. number가 3 의 자리이면 앞에 0 을 더한다
-            } else if number >= 100 || number <= 999 {
-                idNumber = "0" + "\(number)"
-            } else {
-                idNumber = "\(number)"
-            }
             
-            //7.number 앞에 'U'를 붙여 userId 를 만든다.
-            userId = "U" + idNumber
+            if resultSet.string(forColumn: "user_id") == "" {
+                userId = "U0001"
+            } else {
+                //2.user_id 가 있다면 끝까지 반복한다.
+                while resultSet.next() {
+                    //2.1.user_id 를 뽑아낸다.
+                    var selectedUserId = resultSet.string(forColumn: "user_id")!
+                    //2.2.user_id 에서 "U"를 지운다.
+                    selectedUserId.removeFirst()
+                    //2.3."U"를 지운 user_id 를 정수화 하여, presnetNumber 에 넣는다.
+                    presentNumber = Int(selectedUserId)!
+                    //2.4.presentNumber 와 previousNumber를 비교한다.
+                    //2.4.1.previousNumber 가 크다면 number에 previousNumber 을 넣는다,
+                    if previousNumber > presentNumber {
+                        number = previousNumber
+                        //2.4.2.presentNumber 가 크다면 number에 presentNumber 을 넣는다,
+                    } else if previousNumber < presentNumber {
+                        number = presentNumber
+                    }
+                    //2.5.previousNumber 에 presentNumber 를 넣는다.
+                    previousNumber = presentNumber
+                }
+                //3. number에 1을 더한다.
+                number += 1
+                //4. number가 1 자리이면 앞에 000 을 더한다
+                if number >= 0 || number <= 9 {
+                    idNumber = "000" + "\(number)"
+                    //5. number가 2 자리이면 앞에 00 을 더한다
+                } else if number >= 10 || number <= 99{
+                    idNumber = "00" + "\(number)"
+                    //6. number가 3 의 자리이면 앞에 0 을 더한다
+                } else if number >= 100 || number <= 999 {
+                    idNumber = "0" + "\(number)"
+                } else {
+                    idNumber = "\(number)"
+                }
+                
+                //7.number 앞에 'U'를 붙여 userId 를 만든다.
+                userId = "U" + idNumber
+            }
             
         } catch let error as NSError {
             self.fmdb.rollback()
