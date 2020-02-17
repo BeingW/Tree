@@ -246,11 +246,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Tree.UserDAO.insertIntoUserTable(userName: Swift.String, userProfileImage: Swift.String) -&gt; ()"
+                  symbolName = "Tree.UserDAO.insertUser(userName: Swift.String, userProfileImage: Swift.String) -&gt; ()"
                   moduleName = "Tree"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/Tree/FMDBHelper/UserDAO.swift"
-                  timestampString = "602758173.704815"
+                  timestampString = "603628561.117228"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -261,16 +261,16 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.FMDatabase, Swift.UnsafeMutablePointer&lt;ObjectiveC.ObjCBool&gt;) -&gt; () in Tree.UserDAO.insertIntoUserTable(userName: Swift.String, userProfileImage: Swift.String) -&gt; ()"
+                  symbolName = "closure #1 (__C.FMDatabase, Swift.UnsafeMutablePointer&lt;ObjectiveC.ObjCBool&gt;) -&gt; () in Tree.UserDAO.insertUser(userName: Swift.String, userProfileImage: Swift.String) -&gt; ()"
                   moduleName = "Tree"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/Tree/FMDBHelper/UserDAO.swift"
-                  timestampString = "602758173.70599"
+                  timestampString = "603628561.119904"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "38"
-                  endingLineNumber = "38"
-                  offsetFromSymbolStart = "373">
+                  startingLineNumber = "37"
+                  endingLineNumber = "37"
+                  offsetFromSymbolStart = "426">
                </Location>
             </Locations>
          </BreakpointContent>
