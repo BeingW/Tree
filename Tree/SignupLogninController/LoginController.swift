@@ -62,10 +62,11 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //5.입력한 user 정보과 가입된 user 정보가 같다면
         if signedUserName == userName && signedUserName != "" {
             //5.1.mainTabBarController 의 isAppFirstOpen 을 false 로 한다.
-            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
-            mainTabBarController.isAppFirstOpen = false
+//            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
+//            mainTabBarController.isAppFirstOpen = false
             //5.2.mainTabBarController 의 기본페이지로 이동한다.
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
+            self.present(MainTabBarController.shared, animated: true, completion: nil)
         //6.다르다면, 입력정보를 확인해 달라는 메시지를 띄운다.
         } else {
             let alertController = UIAlertController(title: "Please check login information", message: "", preferredStyle: .alert)

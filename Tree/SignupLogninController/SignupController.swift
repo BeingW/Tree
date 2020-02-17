@@ -119,12 +119,14 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         //3.loginIsSucceed 가 true 라면
         if loginIsSucceed == true {
             //3.1.MainTabBarController 의 isAppFirstOpen 를 false로 바꾼다.
-            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
-            mainTabBarController.isAppFirstOpen = false
+//            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
+//            mainTabBarController.isAppFirstOpen = false
             //3.2.mainTabBarController 의 기본페이지로 이동한다.
-            self.dismiss(animated: true, completion: nil)
+//            self.dismiss(animated: true, completion: nil)
+            self.present(MainTabBarController.shared, animated: true, completion: nil)
             //데이터가 성공적으로 db 에 입력되었는지 확인한다.
             userDAO.selectQuery(tableName: "user", primaryKey: "user_id")
+            
         }
         
     }

@@ -9,6 +9,8 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
+    
+    static var shared = MainTabBarController()
 
     var isAppFirstOpen = true
     var aaa = true
