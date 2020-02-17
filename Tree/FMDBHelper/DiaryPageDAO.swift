@@ -531,10 +531,6 @@ class DiaryPageDAO: FMDBHelper {
             }
         })
         
-        if let diaryPageImages = diaryPage.images, diaryPageImages.count != 0 {
-            self.insertDiaryImage(dateString: dateString)
-        }
-        
     }
     
 
