@@ -10,19 +10,15 @@ import UIKit
 
 class DiaryPageImage {
     private var url: String = ""
-    private var width: Int = 0
-    private var height: Int = 0
     private var createdDate: Date = Date()
     private var image: UIImage?
     
     init() {
         self.url = ""
-        self.width = 0
-        self.height = 0
         self.createdDate = Date()
     }
     
-    init(url: String, width: String, height: String, createdDate: String) {
+    init(url: String, createdDate: String) {
         //1.imageWidth, imageHeight, imageCreateDate, imageUrl 을 입력받는다.
         //2.imageUrl 을 Url type 으로 변경한다.
         //3.imageUrl 을 UIImage type 으로 변경한다.
@@ -32,14 +28,12 @@ class DiaryPageImage {
         guard let diaryDate = dateFormatter.date(from: createdDate) else {return}
         
         self.url = url
-        self.width = Int(width) ?? 0
-        self.height = Int(height) ?? 0
         self.createdDate = diaryDate
         self.image = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: url)
         
     }
     
-    func getUrl() -> String? {
+    func getUrl() -> String {
         return self.url
     }
     
@@ -48,23 +42,7 @@ class DiaryPageImage {
         self.image = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: url)
     }
     
-    func getWidth() -> Int? {
-        return self.width
-    }
-    
-    func setWidth(width: String) {
-        self.width = Int(width) ?? 0
-    }
-    
-    func getHeight() -> Int? {
-        return self.height
-    }
-    
-    func setHeight(height: String) {
-        self.height = Int(height) ?? 0
-    }
-    
-    func getCreatedDate() -> Date? {
+    func getCreatedDate() -> Date {
         return self.createdDate
     }
     
@@ -89,28 +67,6 @@ class DiaryPageImage {
     func editImageUrl(url: String) -> String? {
         self.url = url
         return url
-    }
-    
-    /*
-     함수명: editWidth
-     기능: ImageWidth 을 변경한다.
-     작성일자: 2019.07.15
-     수정일자:
-     */
-    func editWidth(width: Int) -> Int? {
-        self.width = width
-        return width
-    }
-    
-    /*
-     함수명: editHeight
-     기능: ImageHeight 을 변경한다.
-     작성일자: 2019.07.15
-     수정일자:
-     */
-    func editHeight(height: Int) -> Int? {
-        self.height = height
-        return height
     }
     
     /*

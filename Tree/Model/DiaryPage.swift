@@ -21,6 +21,13 @@ class DiaryPage {
         self.images = []
     }
     
+    init(title: String, date: Date, text: String, images: [DiaryPageImage]?) {
+        self.title = title
+        self.date = date
+        self.text = text
+        self.images = images
+    }
+    
     init(title: String?, date: String, text: String?, images: [DiaryPageImage]?) {
         //1.tile, date, text, image Array 를 optional type 으로 입력받는다.
         

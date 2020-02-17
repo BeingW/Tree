@@ -16,7 +16,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
-    let user = User.shared
+
     let diary = Diary.shared
     
     //MARK: - NavigationBar
@@ -109,12 +109,13 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     @objc func recordButtonTapped() {
         let diaryPostController = DiaryPostController()
         
-        let diaryPostControlNavigation = UINavigationController(rootViewController: diaryPostController)
-        
-        self.present(diaryPostControlNavigation, animated: true, completion: nil)
+//        let diaryPostControlNavigation = UINavigationController(rootViewController: diaryPostController)
+//
+//        self.present(diaryPostControlNavigation, animated: true, completion: nil)
+        self.navigationController?.pushViewController(DiaryPostController(), animated: true)
     }
     
-    func setViews() {
+    private func setBodyViews() {
         self.view.addSubview(recordTopSeperateView)
         self.view.addSubview(recordView)
             self.recordView.addSubview(recordLabel)
@@ -144,44 +145,46 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    //MARK: - viewDidLoad
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        setView()
+        setTableView()
         
-        let safeArea = self.view.safeAreaLayoutGuide
+        self.tabBarController?.tabBar.isHidden = true
         
-        navigationBar()
-        setViews()
-        
-        self.diaryTableView.delegate = self
-        self.diaryTableView.dataSource = self
-        self.diaryTableView.estimatedRowHeight = safeArea.layoutFrame.height * 1.7/3
-        
-        diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        loadData()
-        
-    }
-    
-    func loadData() {
-        self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
-        test()
-    }
-    
-    func test() {
-        print("3")
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        loadDiaryPage()
+    }
+    
+    //MARK: - Set View
+    private func setView() {
+        view.backgroundColor = .white
+        navigationBar()
+        setBodyViews()
+    }
+    
+    private func setTableView() {
+        self.diaryTableView.delegate = self
+        self.diaryTableView.dataSource = self
+        self.diaryTableView.estimatedRowHeight = self.view.safeAreaLayoutGuide.layoutFrame.height * 1.7/3
+        
+        diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
+    }
+    
+    //MARK: - Set Data
+   private func loadDiaryPage() {
+        self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
     }
     
     /*
@@ -197,9 +200,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let diarypageCount = self.user.diary.count
-        
-        return diarypageCount
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

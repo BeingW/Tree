@@ -91,7 +91,6 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
      */
     @objc func signUpButtonTapped() {
         guard let userName = userNameTextField.text else {return}
-//        guard let userPassword = userPasswordTextField.text else {return}
         let userProfileImage = profileButton.imageView?.image
         var loginIsSucceed: Bool = false;
         let alertController = UIAlertController(title: "Please check signup information", message: "", preferredStyle: .alert)
@@ -105,7 +104,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             guard let userProfilePicture = userProfileImage else {return}
             guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
             
-            userDAO.insertIntoUserTable(userName: userName, userProfileImage: profileImageUrl)
+            userDAO.insertUser(userName: userName, userProfileImage: profileImageUrl)
         
             //1.2. loginSucced 를 true 로 한다.
             loginIsSucceed = true
@@ -118,11 +117,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         }
         //3.loginIsSucceed 가 true 라면
         if loginIsSucceed == true {
-            //3.1.MainTabBarController 의 isAppFirstOpen 를 false로 바꾼다.
-            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
-            mainTabBarController.isAppFirstOpen = false
-            //3.2.mainTabBarController 의 기본페이지로 이동한다.
-            self.dismiss(animated: true, completion: nil)
+            self.present(MainTabBarController(), animated: true, completion: nil)
             //데이터가 성공적으로 db 에 입력되었는지 확인한다.
             userDAO.selectQuery(tableName: "user", primaryKey: "user_id")
         }

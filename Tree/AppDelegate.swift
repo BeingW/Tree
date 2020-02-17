@@ -26,13 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Diary.shared.setPages(diaryPages: DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]())
         
         window = UIWindow()
-        window?.rootViewController = MainTabBarController()
-
-        //        if userDAO.checkOutUserTableExeist() {
-        //            User.shared = userDAO.fetchData()
-        //        }
-        //
-
+        window?.rootViewController = UINavigationController(rootViewController: LoginController())
         
         return true 
     }

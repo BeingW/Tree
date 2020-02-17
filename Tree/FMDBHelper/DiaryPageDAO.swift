@@ -54,7 +54,7 @@ class DiaryPageDAO: FMDBHelper {
         var diarypageId: String = ""
         
         do{
-            let selectQuery = "SELECT diarypage_id FROM user_diarypage_relation"
+            let selectQuery = "SELECT diarypage_id FROM diarypage"
             let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
             //2.diarypage_id 가 있다면 끝까지 반복한다.
             while resultSet.next() {
@@ -119,7 +119,7 @@ class DiaryPageDAO: FMDBHelper {
         var imageId: String = ""
         
         do{
-            let selectQuery = "SELECT image_id FROM diarypage_images_relation"
+            let selectQuery = "SELECT image_id FROM diarypage_image"
             let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
             //2.image_id 가 있다면 끝까지 반복한다.
             while resultSet.next() {
@@ -389,6 +389,12 @@ class DiaryPageDAO: FMDBHelper {
         
     }
 */
+    /*
+     함수명: fetchDiaryPage
+     기능: DB 에서 diarypage table 과 관계된 모든 데이터를 가져와 DiaryPage 로 맵핑한 후 DiaryPage 배열로 반환한다.
+     작성일자: 2020.02.07
+     수정일자:
+     */
     
     func fetchDiaryPage() -> [DiaryPage]? {
         var selectQuery: String = ""
@@ -425,12 +431,10 @@ class DiaryPageDAO: FMDBHelper {
                         selectQuery = "SELECT * FROM image WHERE image_id = \(imageId)"
                         try imageRS = db.executeQuery(selectQuery, values: nil)
                         
-                        let imageWidth = imageRS.string(forColumn: "image_width") ?? ""
-                        let imageHeight = imageRS.string(forColumn: "image_height") ?? ""
                         let imageUrl = imageRS.string(forColumn: "image_url") ?? ""
                         let imageCreateDate = imageRS.string(forColumn: "image_createDate") ?? ""
                         
-                        diaryPageImage = DiaryPageImage(url: imageUrl, width: imageWidth, height: imageHeight, createdDate: imageCreateDate)
+                        diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: imageCreateDate)
                         
                         diaryPageImages.append(diaryPageImage)
                     }
@@ -454,6 +458,86 @@ class DiaryPageDAO: FMDBHelper {
         return diaryPages
         
     }
+    
+    /*
+     함수명: insertDiaryPage
+     기능: DiaryPage 객체를 매개변수로 받아 DB 의 diarypage table 과 관계된 table 들을 채운다.
+     작성일자: 2020.02.10
+     수정일자:
+     */
+    func insertDiaryPage(diaryPage: DiaryPage) {
+        //1.DiaryPage 를 읽어온다.
+        var insertQuery: String = ""
+        var selectQuery: String = ""
+        var parameters = [Any]()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let dateString = dateFormatter.string(from: diaryPage.getDate())
+        
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        
+        fmdbQueue?.inTransaction({ (db, rollback) in
+            //2.DiaryPage title, date, text 데이터를 DB 의 diarypage table 에 넣는다.
+            do {
+                insertQuery = "INSERT INTO diarypage (diarypage_title, diarypage_date, diarypage_text) VALUES (?, ?, ?)"
+                parameters.append(diaryPage.getTitle())
+                parameters.append(dateString)
+                parameters.append(diaryPage.getText())
+                try db.executeUpdate(insertQuery, values: parameters)
+                parameters.removeAll()
+                
+                //3.DiaryPage 의 images 가 있다면.
+                var diaryPageId: String = ""
+                if let diayPageImages = diaryPage.images, diayPageImages.count != 0  {
+                    //3.1.DB 의 diarypage table 에서 diarypage_id 데이터를 가져온다.
+                    selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date=?"
+                    parameters.append(dateString)
+                    let diaryPageRS = try db.executeQuery(selectQuery, values: parameters)
+                    parameters.removeAll()
+                    
+                    if diaryPageRS.next() {
+                        diaryPageId = diaryPageRS.string(forColumn: "diarypage_id") ?? "0"
+                    }
+                    
+                    //3.2.DiaryPage 의 images 의 갯수만큼 반복한다.
+                    diayPageImages.forEach({ (diaryPageImage) in
+                        //3.2.1.DB 의 diarypage_image table 에 diarypage_id 에 대한 image_id row 를 만든다.
+                        do {
+                            insertQuery = "INSERT INTO diarypage_image (diarypage_id) VALUES (?)"
+                            parameters.append(diaryPageId)
+                            try db.executeUpdate(insertQuery, values: parameters)
+                            parameters.removeAll()
+                            //3.2.2.DB 의 image table 에 image_id 에 해당 diarpageImage 의 데이터를 맵핑한다.
+                            insertQuery = "INSERT INTO image(image_createDate, image_url) VALUES (?, ?)"
+                            let imageCreateDateString = dateFormatter.string(from: diaryPageImage.getCreatedDate())
+                            parameters.append(imageCreateDateString)
+                            parameters.append(diaryPageImage.getUrl())
+                            try db.executeUpdate(insertQuery, values: parameters)
+                            parameters.removeAll()
+                        } catch {
+                            self.fmdb.rollback()
+                            print("===== fetchPassportData() failure. =====")
+                            print("failed: \(error.localizedDescription)")
+                            print("========================================")
+                        }
+                    })
+                }
+            } catch {
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
+            }
+        })
+        
+        if let diaryPageImages = diaryPage.images, diaryPageImages.count != 0 {
+            self.insertDiaryImage(dateString: dateString)
+        }
+        
+    }
+    
+
 
 }
 

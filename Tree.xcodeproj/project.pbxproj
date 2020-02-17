@@ -20,7 +20,7 @@
 		191C253B22CB345700500F80 /* FMDatabaseQueue.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252D22CB324A00500F80 /* FMDatabaseQueue.h */; };
 		191C253C22CB345700500F80 /* FMDB.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252F22CB324A00500F80 /* FMDB.h */; };
 		191C253D22CB345700500F80 /* FMResultSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252522CB324A00500F80 /* FMResultSet.h */; };
-		193C215123ED548200ACF7EB /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 1958928223ED491C006F2AF0 /* Tree.db */; };
+		1934907923FA5539008CFEBC /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 1934907823FA5538008CFEBC /* Tree.db */; };
 		193C79ED22CB022D00A50A73 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193C79EC22CB022D00A50A73 /* UserDAO.swift */; };
 		194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBHelper.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
@@ -80,10 +80,10 @@
 		191C252F22CB324A00500F80 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		191C253022CB324A00500F80 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
 		191C253722CB326200500F80 /* Bridgining-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridgining-Header.h"; sourceTree = "<group>"; };
+		1934907823FA5538008CFEBC /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		193C79EC22CB022D00A50A73 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
 		194ED36222B7C5B7000E5716 /* FMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBHelper.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
-		1958928223ED491C006F2AF0 /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		196240B7229E4AFE009472C9 /* DiaryPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
 		196240BF229EB052009472C9 /* ProfileImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ProfileImage@2x.png"; sourceTree = "<group>"; };
 		196240C0229EB052009472C9 /* AlreadyHaveAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AlreadyHaveAccount.png; sourceTree = "<group>"; };
@@ -261,6 +261,7 @@
 		19AC1B742295291C007011F7 /* Tree */ = {
 			isa = PBXGroup;
 			children = (
+				1934907823FA5538008CFEBC /* Tree.db */,
 				193C79F022CB176700A50A73 /* FMDB */,
 				19F79A9822A220AF00EAF51F /* MainTabBarController.swift */,
 				194ED36122B7C592000E5716 /* FMDBHelper */,
@@ -274,7 +275,6 @@
 				19AC1B792295291C007011F7 /* Main.storyboard */,
 				19AC1B7C2295291D007011F7 /* Assets.xcassets */,
 				19AC1B7E2295291D007011F7 /* LaunchScreen.storyboard */,
-				1958928223ED491C006F2AF0 /* Tree.db */,
 				19AC1B812295291D007011F7 /* Info.plist */,
 			);
 			path = Tree;
@@ -383,7 +383,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				193C215123ED548200ACF7EB /* Tree.db in Resources */,
 				197A0D5D229BB38900647E9B /* LoginBackground@2x.png in Resources */,
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
 				19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */,
@@ -408,6 +407,7 @@
 				19756E3122A6658C0019ACB9 /* NavigationBackGround.png in Resources */,
 				19756E3922A666370019ACB9 /* NavigationProfileIcon.png in Resources */,
 				19756E3622A6658C0019ACB9 /* PostTextField.png in Resources */,
+				1934907923FA5539008CFEBC /* Tree.db in Resources */,
 				196240C6229EB052009472C9 /* ProfileImage@2x.png in Resources */,
 				19AC1B7B2295291C007011F7 /* Main.storyboard in Resources */,
 			);

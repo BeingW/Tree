@@ -10,27 +10,10 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
 
-    var isAppFirstOpen = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTableViewControllers()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if isAppFirstOpen == true {
-            DispatchQueue.main.async {
-                let loginController = LoginController()
-                let loginNavContrroller = UINavigationController(rootViewController: loginController)
-                self.present(loginNavContrroller, animated: false, completion: nil)
-            }
-        } else {
-            setTableViewControllers()
-        }
         
     }
     
