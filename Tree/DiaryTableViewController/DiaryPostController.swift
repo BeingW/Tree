@@ -52,16 +52,8 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
         leftBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
 
-        //thisNavigaionBar?.topItem?.title = "\(userName)"
-//        thisNavigaionBar?.setBackgroundImage(UIImage(named: "NavigationBackGround"), for: .default)
-//        thisNavigaionBar?.topItem?.rightBarButtonItem = rightBarButtonItem
-//        self.navigationController?.navigationItem.leftBarButtonItem = leftBarButtonItem
-//        self.navigationController?.navigationItem.backBarButtonItem = leftBarButtonItem
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
-        
-//        thisNavigaionBar?.topItem?.leftBarButtonItem = leftBarButtonItem
-//        self.navigationController?.navigationItem.rightBarButtonItem = rightBarButtonItem
         
     }
     
@@ -77,38 +69,6 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
      */
     
     @objc func postButtonTapped() {
-//        //1.UI에서 text, title 을 입력받아 객체를 만든다.
-//        let title = self.diaryTitleTextField.text
-//        let text = self.diaryContentTextView.text
-//        var image: Image?
-//        var images = [Image]()
-//        let diaryPageDAO = DiaryPageDAO()
-//
-//        let diaryPageId = diaryPageDAO.makeDiaryPageId()
-//        var imageId: String? = ""
-//
-//        //2.UI 에 Image가 입력되었다면
-//        if let imageContents = self.diaryImageView.image {
-//            //2.1.image 객체를 만든다.
-//            guard let imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: imageContents) else {return}
-//            let imageWidth = imageContents.size.width
-//            let imageHeight = imageContents.size.height
-//            let imageCreatedDate = Date()
-//            image = Image(url: imageUrl, width: Int(imageWidth), height: Int(imageHeight), createdDate: imageCreatedDate)
-//            imageId = diaryPageDAO.makeImageId()
-//            //2.2.images에 객체를 넣는다.
-//            images.append(image!)
-//        }
-//        //3.diaryPage 객체를 만든다.
-//        let diaryPage = DiaryPage(title: title, text: text, images: images)
-//        //4.User 객체에 추가된 diaryPage를 넣는다.
-//        User.shared.addNewPage(diaryPage: diaryPage)
-//        //5.DB에 DiaryPage관련 데이터를 넣는다.
-//        diaryPageDAO.insertData(diaryPage: diaryPage, diaryPageId: diaryPageId, imageId: imageId)
-//        //6.갱신한다.
-//        NotificationCenter.default.post(name: NSNotification.Name("UpdateFeed"), object: nil)
-//        self.dismiss(animated: true, completion: nil)
-        
         self.postDiaryPage()
         self.navigationController?.popViewController(animated: true)
     }
@@ -295,7 +255,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         
     }
 
-    func postDiaryPage() {
+    private func postDiaryPage() {
         //1.diaryTitle, diaryText, 현재 날과 시간, diaryImage 를 읽어온다.
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"

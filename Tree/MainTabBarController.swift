@@ -9,34 +9,11 @@
 import UIKit
 
 class MainTabBarController: UITabBarController {
-    
-    static var shared = MainTabBarController()
-
-    var isAppFirstOpen = true
-    var aaa = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTableViewControllers()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-//        if aaa {
-//            aaa = true
-//            if isAppFirstOpen == true {
-//                DispatchQueue.main.async {
-//                    let loginController = LoginController()
-//                    let loginNavContrroller = UINavigationController(rootViewController: loginController)
-//                    self.present(loginNavContrroller, animated: false, completion: nil)
-//                }
-//            } else {
-//                setTableViewControllers()
-//            }
-//        }
         
     }
     

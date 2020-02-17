@@ -16,7 +16,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
-    let user = User.shared
+
     let diary = Diary.shared
     
     //MARK: - NavigationBar
@@ -145,7 +145,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    //MARK: - viewDidLoad
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -156,6 +156,18 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        loadDiaryPage()
+    }
+    
+    //MARK: - Set View
     private func setView() {
         view.backgroundColor = .white
         navigationBar()
@@ -170,20 +182,9 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        loadData()
-    }
-    
-    func loadData() {
+    //MARK: - Set Data
+   private func loadDiaryPage() {
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
-    }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
     }
     
     /*
@@ -199,9 +200,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let diarypageCount = self.user.diary.count
-        
-        return diarypageCount
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

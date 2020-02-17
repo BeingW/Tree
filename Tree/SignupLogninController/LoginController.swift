@@ -55,18 +55,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //1.userName 을 가져온다.
         guard let userName = self.userNameTextField.text else {return}
         //2.userPassword 을 가져온다.
-//        guard let userPassword = self.userPasswordTextField.text else {return}
         //3.가입한 user 객체를 가져온다.
         //4.가입한 user 정보를 가져온다.
         let signedUserName = Diary.shared.getUserName()
         //5.입력한 user 정보과 가입된 user 정보가 같다면
         if signedUserName == userName && signedUserName != "" {
-            //5.1.mainTabBarController 의 isAppFirstOpen 을 false 로 한다.
-//            let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as! MainTabBarController
-//            mainTabBarController.isAppFirstOpen = false
-            //5.2.mainTabBarController 의 기본페이지로 이동한다.
-//            self.dismiss(animated: true, completion: nil)
-            self.present(MainTabBarController.shared, animated: true, completion: nil)
+            //5.1.MainTabBarController 로 이동한다.
+            self.present(MainTabBarController(), animated: true, completion: nil)
         //6.다르다면, 입력정보를 확인해 달라는 메시지를 띄운다.
         } else {
             let alertController = UIAlertController(title: "Please check login information", message: "", preferredStyle: .alert)

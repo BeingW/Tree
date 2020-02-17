@@ -465,59 +465,64 @@ class DiaryPageDAO: FMDBHelper {
      작성일자: 2020.02.10
      수정일자:
      */
-    
     func insertDiaryPage(diaryPage: DiaryPage) {
         //1.DiaryPage 를 읽어온다.
-        var selectQuery: String = ""
         var insertQuery: String = ""
+        var selectQuery: String = ""
         var parameters = [Any]()
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let dateString = dateFormatter.string(from: diaryPage.getDate())
         
-        let diarypageId = self.makeDiaryPageId()
-        
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        
         fmdbQueue?.inTransaction({ (db, rollback) in
             //2.DiaryPage title, date, text 데이터를 DB 의 diarypage table 에 넣는다.
             do {
-                insertQuery = "INSERT INTO diarypage (diarypage_id, diarypage_title, diarypage_date, diarypage_text) VALUES (?, ?, ?)"
-                parameters.append(diarypageId)
+                insertQuery = "INSERT INTO diarypage (diarypage_title, diarypage_date, diarypage_text) VALUES (?, ?, ?)"
                 parameters.append(diaryPage.getTitle())
                 parameters.append(dateString)
                 parameters.append(diaryPage.getText())
-                try db.executeQuery(insertQuery, values: parameters)
+                try db.executeUpdate(insertQuery, values: parameters)
                 parameters.removeAll()
+                
                 //3.DiaryPage 의 images 가 있다면.
-//                if let diayPageImages = diaryPage.images, diayPageImages.count != 0  {
-//                    //3.1.DB 의 diarypage table 에서 diarypage_id 데이터를 가져온다.
-//                    selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date =\(dateString)"
-//                    let diaryPageRS = try db.executeQuery(selectQuery, values: nil)
-//                    let diaryPageId = diaryPageRS.string(forColumn: "diarypage_id") ?? "0"
-//                    //3.2.DiaryPage 의 images 의 갯수만큼 반복한다.
-//                    diayPageImages.forEach({ (diaryPageImage) in
-//                        //3.2.1.DB 의 diarypage_image table 에 diarypage_id 에 대한 image_id row 를 만든다.
-//                        do {
-//                            insertQuery = "INSERT INTO diarypage_image (diarypage_id) VALUES (?)"
-//                            parameters.append(diaryPageId)
-//                            try db.executeQuery(insertQuery, values: parameters)
-//                            parameters.removeAll()
-//                            //3.2.2.DB 의 image table 에 image_id 에 해당 diarpageImage 의 데이터를 맵핑한다.
-//                            insertQuery = "INSERT INTO image(image_createDate, image_url) VALUES (?, ?)"
-//                            let imageCreateDateString = dateFormatter.string(from: diaryPageImage.getCreatedDate())
-//                            parameters.append(imageCreateDateString)
-//                            parameters.append(diaryPageImage.getUrl())
-//                            try db.executeQuery(insertQuery, values: parameters)
-//                            parameters.removeAll()
-//                        } catch {
-//                            self.fmdb.rollback()
-//                            print("===== fetchPassportData() failure. =====")
-//                            print("failed: \(error.localizedDescription)")
-//                            print("========================================")
-//                        }
-//                    })
-//                }
+                var diaryPageId: String = ""
+                if let diayPageImages = diaryPage.images, diayPageImages.count != 0  {
+                    //3.1.DB 의 diarypage table 에서 diarypage_id 데이터를 가져온다.
+                    selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date=?"
+                    parameters.append(dateString)
+                    let diaryPageRS = try db.executeQuery(selectQuery, values: parameters)
+                    parameters.removeAll()
+                    
+                    if diaryPageRS.next() {
+                        diaryPageId = diaryPageRS.string(forColumn: "diarypage_id") ?? "0"
+                    }
+                    
+                    //3.2.DiaryPage 의 images 의 갯수만큼 반복한다.
+                    diayPageImages.forEach({ (diaryPageImage) in
+                        //3.2.1.DB 의 diarypage_image table 에 diarypage_id 에 대한 image_id row 를 만든다.
+                        do {
+                            insertQuery = "INSERT INTO diarypage_image (diarypage_id) VALUES (?)"
+                            parameters.append(diaryPageId)
+                            try db.executeUpdate(insertQuery, values: parameters)
+                            parameters.removeAll()
+                            //3.2.2.DB 의 image table 에 image_id 에 해당 diarpageImage 의 데이터를 맵핑한다.
+                            insertQuery = "INSERT INTO image(image_createDate, image_url) VALUES (?, ?)"
+                            let imageCreateDateString = dateFormatter.string(from: diaryPageImage.getCreatedDate())
+                            parameters.append(imageCreateDateString)
+                            parameters.append(diaryPageImage.getUrl())
+                            try db.executeUpdate(insertQuery, values: parameters)
+                            parameters.removeAll()
+                        } catch {
+                            self.fmdb.rollback()
+                            print("===== fetchPassportData() failure. =====")
+                            print("failed: \(error.localizedDescription)")
+                            print("========================================")
+                        }
+                    })
+                }
             } catch {
                 self.fmdb.rollback()
                 print("===== fetchPassportData() failure. =====")
@@ -526,6 +531,30 @@ class DiaryPageDAO: FMDBHelper {
             }
         })
         
+        if let diaryPageImages = diaryPage.images, diaryPageImages.count != 0 {
+            self.insertDiaryImage(dateString: dateString)
+        }
+        
+    }
+    
+    private func insertDiaryImage(dateString: String) {
+        
+        //들어온 dateString 을 이용해 diaryPageId 를 찾고
+        //diaryPageId 를 DiaryIage Table 에 insert 한다.
+//        do {
+//            let selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = \(dateString)"
+//            print(selectQuery)
+//            let resultSet = try self.fmdb.executeQuery(selectQuery, values: nil)
+//            print(resultSet)
+//            let diaryId = resultSet.string(forColumn: "diarypage_id")
+//            print(diaryId)
+//        } catch let error as NSError {
+//            self.fmdb.rollback()
+//            print("===== fetchPassportData() failure. =====")
+//            print("failed: \(error.localizedDescription)")
+//            print("========================================")
+//        }
+
     }
 
 }

@@ -25,7 +25,7 @@ class UserDAO: FMDBHelper {
      작성일자: 2020.02.06
      수정일자:
      */
-    func insertIntoUserTable(userName: String, userProfileImage: String) {
+    func insertUser(userName: String, userProfileImage: String) {
         //1. userName, userProfileImage 을 입력받는다.
         var insertQuery: String = ""
         var parmeters = [Any]()
@@ -36,8 +36,8 @@ class UserDAO: FMDBHelper {
             do {
                 let userId = self.makeUserId()
                 //3.입력받을 데이터를 넣을 쿼리를 작성한다.
-                insertQuery = "INSERT INTO user (user_id, user_name, user_profileImage) VALUES (?, ?, ?)"
-                parmeters.append(userId)
+                insertQuery = "INSERT INTO user (user_name, user_profileImage) VALUES (?, ?)"
+//                parmeters.append(userId)
                 parmeters.append(userName)
                 parmeters.append(userProfileImage)
                 //4.쿼리를 작동한다.
