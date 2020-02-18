@@ -401,6 +401,7 @@ class DiaryPageDAO: FMDBHelper {
         var diaryPageRS = FMResultSet()
         var diaryImageRS = FMResultSet()
         var imageRS = FMResultSet()
+        var parameters = [Any]()
         
         var diaryPages = [DiaryPage]()
         var diaryPage = DiaryPage()
@@ -421,29 +422,29 @@ class DiaryPageDAO: FMDBHelper {
                     let diarypageText = diaryPageRS.string(forColumn: "diarypage_text") ?? ""
                     
                     //1.2.diarypage_id 를 이용하여 diarypage_id 와 같은 diarypage_image table 을 가져온다.
-                    selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id = \(diarypageId)"
-                    try diaryImageRS = db.executeQuery(selectQuery, values: nil)
+                    selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id=?"
+                    parameters.append(diarypageId)
+                    try diaryImageRS = db.executeQuery(selectQuery, values: parameters)
+                    parameters.removeAll()
                     //1.3.diarypage_image table 끝까지 반복한다.
                     while diaryImageRS.next() {
                         //1.3.1.image_id 를 가져온다.
                         guard let imageId = diaryImageRS.string(forColumn: "image_id") else {return}
                         //1.3.1.1.image_id 에 대한 image table 의 데이터를 가져온다.
-                        selectQuery = "SELECT * FROM image WHERE image_id = \(imageId)"
-                        try imageRS = db.executeQuery(selectQuery, values: nil)
-                        
-                        let imageUrl = imageRS.string(forColumn: "image_url") ?? ""
-                        let imageCreateDate = imageRS.string(forColumn: "image_createDate") ?? ""
-                        
-                        diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: imageCreateDate)
+                        selectQuery = "SELECT * FROM image WHERE image_id=?"
+                        parameters.append(imageId)
+                        try imageRS = db.executeQuery(selectQuery, values: parameters)
+                        parameters.removeAll()
+                        if imageRS.next() {
+                            let imageUrl = imageRS.string(forColumn: "image_url") ?? ""
+                            let imageCreateDate = imageRS.string(forColumn: "image_createDate") ?? ""
+                            diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: imageCreateDate)
+                        }
                         
                         diaryPageImages.append(diaryPageImage)
                     }
                     //1.4.DiaryPage 객체를 만든다.
-                    diaryPage.setTitle(title: diarypageTitle)
-                    diaryPage.setDate(date: diarypageDate)
-                    diaryPage.setText(text: diarypageText)
-                    diaryPage.setDiaryPageImages(diaryPageImages: diaryPageImages)
-                    
+                    diaryPage = DiaryPage(title: diarypageTitle, date: diarypageDate, text: diarypageText, images: diaryPageImages)
                     diaryPages.append(diaryPage)
                     
                 }
@@ -531,6 +532,11 @@ class DiaryPageDAO: FMDBHelper {
             }
         })
         
+    }
+    
+    func deleteDiaryPage(diaryPageDate: Date) {
+        //1.특정 diaryPage 의 날짜를 입력 받는다.
+        //2.날짜를 이용하여 diarypage table 의 찾고자 하는 데이터를 지운다.
     }
     
 

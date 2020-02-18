@@ -8,11 +8,7 @@
 
 import UIKit
 
-class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, DiaryTableViewCellDelegate {
-    
-    func didTapEditButton() {
-        print("didTapEditButton Clicked")
-    }
+class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
@@ -108,10 +104,6 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @objc func recordButtonTapped() {
         let diaryPostController = DiaryPostController()
-        
-//        let diaryPostControlNavigation = UINavigationController(rootViewController: diaryPostController)
-//
-//        self.present(diaryPostControlNavigation, animated: true, completion: nil)
         self.navigationController?.pushViewController(DiaryPostController(), animated: true)
     }
     
@@ -156,16 +148,17 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         loadDiaryPage()
+        
     }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(true)
+//        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
+//    }
     
     //MARK: - Set View
     private func setView() {
@@ -185,7 +178,12 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - Set Data
    private func loadDiaryPage() {
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
+        self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending
+    })
+    
     }
+    
+    
     
     /*
      함수명: handleUpdateFeed
@@ -200,7 +198,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return self.diary.getPages().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -208,11 +206,42 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
         cell.diaryTableViewCellDelegate = self
-//        cell.diarypage = user.diary[indexPath.item]
+        cell.diarypage = self.diary.getPages()[indexPath.item]
         
         return cell
     }
     
+}
+
+extension DiaryTableViewController: DiaryTableViewCellDelegate {
     
+    func didTapEditButton(diaryPage: DiaryPage) {
+        //1.UIAlertController 객체의 ActionSheet style 로 생성합니다.
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        //2.cancel, logout, User Information Edit 에 대한 객체들을 생성한다.
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in }
+        
+        let deletePostAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            //1.DiaryPageDAO 객체를 가져온다.
+            //2.DiaryPageDAO 객체의 deleteDiaryPage() 함수를 호출하여 원하는 diaryPage 를 지운다.
+            DiaryPageDAO().deleteDiaryPage(diaryPageDate: diaryPage.getDate())
+            //3.TableView 를 갱신한다.
+            self.loadDiaryPage()
+            self.diaryTableView.reloadData()
+        }
+        
+        let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { (action) in
+            let signUpController = SignupController()
+            signUpController.editMode = true
+            self.present(signUpController, animated: true, completion: nil)
+        }
+        
+        //3.UIAlertController 에 생성한 UIAction 객체를 넣는다.
+        alertController.addAction(editPostAction)
+        alertController.addAction(deletePostAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol DiaryTableViewCellDelegate {
-    func didTapEditButton()
+    func didTapEditButton(diaryPage: DiaryPage)
 }
 
 class DiaryTableViewCell: UITableViewCell {
@@ -19,10 +19,8 @@ class DiaryTableViewCell: UITableViewCell {
      함수명: diarypage
      기능: 들어오는 diarypage 마다 Observe 해 cell 을 로드한다.
      작성일자: 2019.07.15
-     수정일자:
+     수정일자: 2020.02.18
      */
-
-/*
     var diarypage: DiaryPage? {
         didSet {
             guard let date = self.diarypage?.getDate() else {return}
@@ -31,28 +29,26 @@ class DiaryTableViewCell: UITableViewCell {
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
-            let dateString = dateFormatter.string(from:date)
+            let dateString = dateFormatter.string(from: date)
             
-            dateLabel.text = dateString
             titleLable.text = title
+            dateLabel.text = dateString
             diaryTextView.text = text
             
-            let covertingData = ConvertingDataAndImage()
-            
             //diary 에 이미지가 있다면, 이미지를 가져와 붙인다.
-            if self.diarypage?.getImages() != nil {
-                guard let images = self.diarypage?.getImages() else {return}
+            if self.diarypage?.images != nil {
+                guard let images = self.diarypage?.images else {return}
                 
-                for image in images {
-                    guard let imageUrl = image.getUrl() else {return}
-                    guard let unwrappedImage = covertingData.convertingFromUrlToImage(uniqueId: imageUrl) else {return}
-                    diaryImageView.image = unwrappedImage
+                images.forEach { (image) in
+                    guard let imageFile = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: image.getUrl()) else {return}
+                    diaryImageView.image = imageFile
                 }
+
             }
             
         }
     }
- */
+ 
     
     //MARK: - CellHeadViewPart
     let diaryHeadView: UIView = {
@@ -87,9 +83,7 @@ class DiaryTableViewCell: UITableViewCell {
     }()
     
     @objc func handleEditButton() {
-        print("handle EditButton hit")
-        self.diaryTableViewCellDelegate?.didTapEditButton()
-        print("Something New")
+        self.diaryTableViewCellDelegate?.didTapEditButton(diaryPage: self.diarypage!)
     }
     
     //MARK: - diaryImageView
