@@ -579,7 +579,85 @@ class DiaryPageDAO: FMDBHelper {
         })
     }
     
-
+    func updateDiaryPage(diaryPage: DiaryPage) {
+        //1.DiaryPage 객체를 입력받는다.
+        var parmeters = [Any]()
+        var selectQuery: String = ""
+        var updateQuery: String = ""
+        var diaryPageId: String = ""
+        
+        let fmdatabaseQueue = FMDatabaseQueue(path: self.dbPath)
+        fmdatabaseQueue?.inTransaction({ (db, rollback) in
+            do{
+                //2.diarypage_id 를 찾는다.
+                let diaryPageTitle = diaryPage.getTitle()
+                let diaryPageText = diaryPage.getText()
+                let diaryPageDate = diaryPage.getDate()
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                let dateString = dateFormatter.string(from: diaryPageDate)
+                
+                selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = '\(dateString)'"
+                let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
+                
+                if diarypageResultSet.next() {
+                    diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
+                }
+                
+                //3.diarypage_id 에 따른 diarypage 테이블을 수정한다.
+                updateQuery = """
+                UPDATE diarypage
+                SET diarypage_title = ?, diarypage_text = ?
+                WHERE diarypage_id = '\(diaryPageId)'
+                """
+                parmeters.append(diaryPageTitle)
+                parmeters.append(diaryPageText)
+                try db.executeUpdate(updateQuery, values: parmeters)
+                parmeters.removeAll()
+                
+//                //4.diarypage_id 에 따른 diarypage_text 테이블을 수정한다.
+//                updateQuery = "UPDATE diarypage_text SET diarypage_text = ? WHERE diarypage_id = ?"
+//                parmeters.append(diaryPageText)
+//                parmeters.append(diaryPageId)
+//                try db.executeUpdate(updateQuery, values: parmeters)
+//                parmeters.removeAll()
+//
+//                //5.diarypage 객체에 image가 있다면.
+//                if diaryPage.getImageAt(index: 0) != nil {
+//                    //5.1.diarypage_id 에 따른 image_id를 찾는다.
+//                    selectQuery = "SELECT image_id FROM diarypage_images_relation WHERE diarypage_id = '\(diaryPageId)'"
+//                    let imageResultSet = try db.executeQuery(selectQuery, values: nil)
+//                    guard let imageId = diarypageResultSet.string(forColumn: "image_id") else {return}
+//
+//                    //5.2.image_id 에 따른 images 테이블을 수정한다.
+//                    guard let image = diaryPage.getImageAt(index: 0) else {return}
+//                    guard let imageUrl = image.getUrl() else {return}
+//                    guard let imageWidth = image.getWidth() else {return}
+//                    let imageWidthString = String(imageWidth)
+//                    guard let imageHeight = image.getHeight() else {return}
+//                    let imageHeightString = String(imageHeight)
+//                    guard let imageCreatedDate = image.getCreatedDate() else {return}
+//                    let imageCreatedDateString = DateFormatter().string(from: imageCreatedDate)
+//
+//                    updateQuery = "UPDATE images SET image_url = ?, image_width = ?, image_height = ?, image_createdDate = ?, WHERE image_id = ?"
+//
+//                    parmeters.append(imageUrl)
+//                    parmeters.append(imageWidthString)
+//                    parmeters.append(imageHeightString)
+//                    parmeters.append(imageCreatedDateString)
+//                    parmeters.append(imageId)
+//                    try db.executeUpdate(updateQuery, values: parmeters)
+//                    parmeters.removeAll()
+//                }
+                
+            } catch {
+                rollback.pointee = true
+                print(error)
+            }
+            
+        })
+    }
 
 }
 

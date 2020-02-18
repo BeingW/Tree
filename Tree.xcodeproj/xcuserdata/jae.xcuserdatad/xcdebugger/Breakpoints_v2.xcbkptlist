@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tree/DiaryTableViewController/DiaryTableViewController.swift"
-            timestampString = "603713233.008306"
+            timestampString = "603718678.754385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "183"
@@ -26,13 +26,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tree/FMDBHelper/DiaryPageDAO.swift"
-            timestampString = "603713233.008893"
+            timestampString = "603718678.7550139"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "568"
             endingLineNumber = "568"
             landmarkName = "deleteDiaryPage(diaryPageDate:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tree/DiaryTableViewController/DiaryPostController.swift"
+            timestampString = "603718678.75572"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Tree/FMDBHelper/DiaryPageDAO.swift"
+            timestampString = "603718678.7559659"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
+            landmarkName = "updateDiaryPage(diaryPage:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FMDatabase, Swift.UnsafeMutablePointer&lt;ObjectiveC.ObjCBool&gt;) -&gt; () in Tree.DiaryPageDAO.updateDiaryPage(diaryPage: Tree.DiaryPage) -&gt; ()"
+                  moduleName = "Tree"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/Tree/FMDBHelper/DiaryPageDAO.swift"
+                  timestampString = "603718678.964453"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "654"
+                  endingLineNumber = "654"
+                  offsetFromSymbolStart = "3012">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FMDatabase, Swift.UnsafeMutablePointer&lt;ObjectiveC.ObjCBool&gt;) -&gt; () in Tree.DiaryPageDAO.updateDiaryPage(diaryPage: Tree.DiaryPage) -&gt; ()"
+                  moduleName = "Tree"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/Tree/FMDBHelper/DiaryPageDAO.swift"
+                  timestampString = "603718678.966324"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "654"
+                  endingLineNumber = "654"
+                  offsetFromSymbolStart = "3125">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
