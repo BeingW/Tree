@@ -10,6 +10,9 @@ import UIKit
 
 class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    var diaryPage: DiaryPage?
+    var isEdit: Bool = false
+    
     let imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true
@@ -28,16 +31,9 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
         
         self.diaryImageView.image = selectedImage
-        
-//        imagePickerController.popViewController(animated: true)
-        
-//        self.imagePickerController.dismiss(animated: true, completion: nil)
 
         picker.dismiss(animated: true, completion: nil)
 
-        
-        //        self.dismiss(animated: true, completion: nil)
-        
     }
     
     //MARK: - NavigationBar
@@ -48,12 +44,20 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
 
         let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
         rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
+        
+        let editRightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        editRightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
 
         let leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelButtonTapped))
         leftBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
 
         self.navigationItem.leftBarButtonItem = leftBarButtonItem
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+        if !isEdit {
+            self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        } else {
+            self.navigationItem.rightBarButtonItem = editRightBarButtonItem
+        }
         
     }
     
@@ -72,8 +76,12 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         self.postDiaryPage()
         self.navigationController?.popViewController(animated: true)
     }
-
     
+    @objc func editButtonTapped() {
+        self.updateDiaryPage()
+        self.navigationController?.popViewController(animated: true)
+    }
+
     //MARK: - PostContainerView
     let navigationSeperatorView: UIView = {
         let uiView = UIView()
@@ -186,6 +194,21 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     
         self.view.backgroundColor = .white
         
+        if isEdit {
+            if let diaryPage = self.diaryPage {
+                self.diaryTitleTextField.text = diaryPage.getTitle()
+                self.diaryContentTextView.text = diaryPage.getText()
+                
+                //일단 image 한장
+                //            if let diaryPageImages = diaryPage.getDiaryPageImages() {
+                //                let diaryPageImage = diaryPageImages[0].getImage()
+                //                self.diaryImageView.image = diaryPageImage
+                //            }
+                
+            }
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -282,6 +305,37 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         //4.DiaryPageDAO 객체의 insertDiayPage(diarypage: DairyPage) 함수를 만든 DiaryPage 객체를 넣어 호출한다.
         DiaryPageDAO().insertDiaryPage(diaryPage: diaryPage)
         
+    }
+    
+    private func updateDiaryPage() {
+        //1.diaryTitle, diaryText, 현재 날과 시간, diaryImage 를 읽어온다.
+        
+        //DiaryPage Data
+        let diaryTitle = self.diaryTitleTextField.text ?? ""
+        let diaryText = self.diaryContentTextView.text ?? ""
+        let diaryDate = self.diaryPage?.getDate()
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+        let dateString = dateFormatter.string(from: diaryDate!)
+        
+        //DiaryPageImage Data
+        var diaryPageImages = [DiaryPageImage]()
+        
+        if let diaryImage = self.diaryImageView.image {
+            guard let imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: diaryImage) else {return}
+            
+            let diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: dateString)
+            
+            diaryPageImages.append(diaryPageImage)
+        }
+        
+        //2.읽어온 데이터로 DiaryPage 를 만든다.
+        let diaryPage = DiaryPage(title: diaryTitle, date: dateString, text: diaryText, images: diaryPageImages)
+        
+        //3.DiaryPageDAO 객체를 가져온다.
+        //4.DiaryPageDAO 객체의 insertDiayPage(diarypage: DairyPage) 함수를 만든 DiaryPage 객체를 넣어 호출한다.
+        DiaryPageDAO().updateDiaryPage(diaryPage: diaryPage)
     }
     
 }

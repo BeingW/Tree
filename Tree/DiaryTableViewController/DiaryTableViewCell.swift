@@ -25,7 +25,7 @@ class DiaryTableViewCell: UITableViewCell {
         didSet {
             guard let date = self.diarypage?.getDate() else {return}
             guard let title = self.diarypage?.getTitle() else {return}
-            guard let text = self.diarypage?.getTitle() else {return}
+            guard let text = self.diarypage?.getText() else {return}
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
@@ -171,7 +171,7 @@ class DiaryTableViewCell: UITableViewCell {
         diaryTextView.anchor(top: nil, left: leftAnchor, bottom: stackButtonSeperatView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
         
         addSubview(diaryImageView)
-        diaryImageView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: diaryTextView.topAnchor, right: rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 0)
+        diaryImageView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: diaryTextView.topAnchor, right: rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 500)
     
     }
     
