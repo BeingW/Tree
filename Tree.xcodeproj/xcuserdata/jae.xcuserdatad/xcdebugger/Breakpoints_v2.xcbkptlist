@@ -30,7 +30,13 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "568"
+<<<<<<< HEAD
             endingLineNumber = "568">
+=======
+            endingLineNumber = "568"
+            landmarkName = "deleteDiaryPage(diaryPageDate:)"
+            landmarkType = "7">
+>>>>>>> feat/UpdateDiaryPage
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -45,7 +51,11 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "211"
             endingLineNumber = "211"
+<<<<<<< HEAD
             landmarkName = "setViews()"
+=======
+            landmarkName = "viewDidLoad()"
+>>>>>>> feat/UpdateDiaryPage
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -60,7 +70,13 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "618"
+<<<<<<< HEAD
             endingLineNumber = "618">
+=======
+            endingLineNumber = "618"
+            landmarkName = "updateDiaryPage(diaryPage:)"
+            landmarkType = "7">
+>>>>>>> feat/UpdateDiaryPage
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"

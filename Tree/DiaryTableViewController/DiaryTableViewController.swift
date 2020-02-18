@@ -180,6 +180,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
         self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending
     })
+        self.diaryTableView.reloadData()
     
     }
     
@@ -227,13 +228,13 @@ extension DiaryTableViewController: DiaryTableViewCellDelegate {
             DiaryPageDAO().deleteDiaryPage(diaryPageDate: diaryPage.getDate())
             //3.TableView 를 갱신한다.
             self.loadDiaryPage()
-            self.diaryTableView.reloadData()
         }
         
         let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { (action) in
-            let signUpController = SignupController()
-            signUpController.editMode = true
-            self.present(signUpController, animated: true, completion: nil)
+            let diaryPostController = DiaryPostController()
+            diaryPostController.diaryPage = diaryPage
+            diaryPostController.isEdit = true
+            self.navigationController?.pushViewController(diaryPostController, animated: true)
         }
         
         //3.UIAlertController 에 생성한 UIAction 객체를 넣는다.
