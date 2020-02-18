@@ -543,7 +543,7 @@ class DiaryPageDAO: FMDBHelper {
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
-                //2.입력받은 diaryPage의 diary_date attribute 를 이용해 diarypage 테이블에서 diarypage_id 를 찾는다.
+                //입력받은 diaryPage의 diary_date attribute 를 이용해 diarypage 테이블에서 diarypage_id 를 찾는다.
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                 let dateString = dateFormatter.string(from: diaryPageDate)
@@ -554,7 +554,19 @@ class DiaryPageDAO: FMDBHelper {
                     diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
                 }
                 
-                //4.diarypage_id 에 관한 row를 user_diarypage_relation table에서 지운다.
+                //pragma 쿼리를 실행한다.
+//                var pragmaQuery = "PRAGMA foreign_keys"
+//                let pragmaRS = try db.executeQuery(pragmaQuery, values: nil)
+//                var enabled: Int
+//
+//                if pragmaRS.next() {
+//                    enabled = Int(pragmaRS.int(forColumnIndex: 0))
+//                }
+//
+//                if !enabled
+                try db.executeQuery("PRAGMA foreign_keys = ON", values: nil)
+                
+                //diarypage_id 에 관한 row를 user_diarypage_relation table에서 지운다.
                 let deleteQuery = "DELETE FROM diarypage WHERE diarypage_id = '\(diaryPageId)'"
                 try db.executeUpdate(deleteQuery, values: nil)
                 
