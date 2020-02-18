@@ -180,6 +180,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
         self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending
     })
+        self.diaryTableView.reloadData()
     
     }
     
@@ -227,7 +228,6 @@ extension DiaryTableViewController: DiaryTableViewCellDelegate {
             DiaryPageDAO().deleteDiaryPage(diaryPageDate: diaryPage.getDate())
             //3.TableView 를 갱신한다.
             self.loadDiaryPage()
-            self.diaryTableView.reloadData()
         }
         
         let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { (action) in

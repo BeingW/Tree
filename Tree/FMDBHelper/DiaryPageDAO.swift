@@ -537,6 +537,34 @@ class DiaryPageDAO: FMDBHelper {
     func deleteDiaryPage(diaryPageDate: Date) {
         //1.특정 diaryPage 의 날짜를 입력 받는다.
         //2.날짜를 이용하여 diarypage table 의 찾고자 하는 데이터를 지운다.
+        var diaryPageId: String = ""
+        
+        //dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
+        let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
+        fmdbQueue?.inTransaction({ (db, rollback) in
+            do {
+                //2.입력받은 diaryPage의 diary_date attribute 를 이용해 diarypage 테이블에서 diarypage_id 를 찾는다.
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                let dateString = dateFormatter.string(from: diaryPageDate)
+                
+                let selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = '\(dateString)'"
+                let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
+                if diarypageResultSet.next() {
+                    diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
+                }
+                
+                //4.diarypage_id 에 관한 row를 user_diarypage_relation table에서 지운다.
+                let deleteQuery = "DELETE FROM diarypage WHERE diarypage_id = '\(diaryPageId)'"
+                try db.executeUpdate(deleteQuery, values: nil)
+                
+            }catch{
+                self.fmdb.rollback()
+                print("===== fetchPassportData() failure. =====")
+                print("failed: \(error.localizedDescription)")
+                print("========================================")
+            }
+        })
     }
     
 
