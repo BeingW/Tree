@@ -142,10 +142,6 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     }()
     
     @objc func imageLibrayButtonTapped() {
-//        self.present(imagePickerController, animated: true, completion: nil)
-        
-//        self.navigationController?.pushViewController(imagePickerController, animated: true)
-        
         self.present(imagePickerController, animated: true, completion: nil)
     }
     
@@ -199,11 +195,12 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
                 self.diaryTitleTextField.text = diaryPage.getTitle()
                 self.diaryContentTextView.text = diaryPage.getText()
                 
-                //일단 image 한장
-                //            if let diaryPageImages = diaryPage.getDiaryPageImages() {
-                //                let diaryPageImage = diaryPageImages[0].getImage()
-                //                self.diaryImageView.image = diaryPageImage
-                //            }
+                if let diaryImages = diaryPage.getDiaryPageImages(), diaryImages.count != 0 {
+                    if let diaryImage = diaryImages[0].getImage() {
+                        self.diaryImageView.image = diaryImage
+                    }
+                }
+                
                 
             }
         }

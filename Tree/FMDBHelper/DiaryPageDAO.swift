@@ -585,6 +585,7 @@ class DiaryPageDAO: FMDBHelper {
         var selectQuery: String = ""
         var updateQuery: String = ""
         var diaryPageId: String = ""
+        var imageId: String = ""
         
         let fmdatabaseQueue = FMDatabaseQueue(path: self.dbPath)
         fmdatabaseQueue?.inTransaction({ (db, rollback) in
@@ -597,6 +598,8 @@ class DiaryPageDAO: FMDBHelper {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                 let dateString = dateFormatter.string(from: diaryPageDate)
+                
+                let diaryPageImages = diaryPage.images
                 
                 selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = '\(dateString)'"
                 let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
@@ -616,40 +619,28 @@ class DiaryPageDAO: FMDBHelper {
                 try db.executeUpdate(updateQuery, values: parmeters)
                 parmeters.removeAll()
                 
-//                //4.diarypage_id 에 따른 diarypage_text 테이블을 수정한다.
-//                updateQuery = "UPDATE diarypage_text SET diarypage_text = ? WHERE diarypage_id = ?"
-//                parmeters.append(diaryPageText)
-//                parmeters.append(diaryPageId)
-//                try db.executeUpdate(updateQuery, values: parmeters)
-//                parmeters.removeAll()
-//
-//                //5.diarypage 객체에 image가 있다면.
-//                if diaryPage.getImageAt(index: 0) != nil {
-//                    //5.1.diarypage_id 에 따른 image_id를 찾는다.
-//                    selectQuery = "SELECT image_id FROM diarypage_images_relation WHERE diarypage_id = '\(diaryPageId)'"
-//                    let imageResultSet = try db.executeQuery(selectQuery, values: nil)
-//                    guard let imageId = diarypageResultSet.string(forColumn: "image_id") else {return}
-//
-//                    //5.2.image_id 에 따른 images 테이블을 수정한다.
-//                    guard let image = diaryPage.getImageAt(index: 0) else {return}
-//                    guard let imageUrl = image.getUrl() else {return}
-//                    guard let imageWidth = image.getWidth() else {return}
-//                    let imageWidthString = String(imageWidth)
-//                    guard let imageHeight = image.getHeight() else {return}
-//                    let imageHeightString = String(imageHeight)
-//                    guard let imageCreatedDate = image.getCreatedDate() else {return}
-//                    let imageCreatedDateString = DateFormatter().string(from: imageCreatedDate)
-//
-//                    updateQuery = "UPDATE images SET image_url = ?, image_width = ?, image_height = ?, image_createdDate = ?, WHERE image_id = ?"
-//
-//                    parmeters.append(imageUrl)
-//                    parmeters.append(imageWidthString)
-//                    parmeters.append(imageHeightString)
-//                    parmeters.append(imageCreatedDateString)
-//                    parmeters.append(imageId)
-//                    try db.executeUpdate(updateQuery, values: parmeters)
-//                    parmeters.removeAll()
-//                }
+                //diaryPage 에 image 가 있다면,
+                if let diaryPageImages = diaryPage.images, diaryPageImages.count != 0 {
+                    //4.diarypage_id 에 따른 image_id 를 가져온다.
+                    selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id = '\(diaryPageId)'"
+                    let diaryPageImageRS = try db.executeQuery(selectQuery, values: nil)
+                    
+                    if diaryPageImageRS.next() {
+                        imageId = diaryPageImageRS.string(forColumn: "image_id") ?? ""
+                    }
+                    
+                    //5.image_id 에 따른 image table 의 데이터를 변경한다.
+                    updateQuery = """
+                    UPDATE image
+                    SET image_url = ?
+                    WHERE image_id = '\(imageId)'
+                    """
+                    
+                    let diaryPageImage = diaryPageImages[0]
+                    parmeters.append(diaryPageImage.getUrl())
+                    try db.executeUpdate(updateQuery, values: parmeters)
+                    parmeters.removeAll()
+                }
                 
             } catch {
                 rollback.pointee = true
