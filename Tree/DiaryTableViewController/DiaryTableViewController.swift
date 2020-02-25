@@ -184,8 +184,6 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     }
     
-    
-    
     /*
      함수명: handleUpdateFeed
      기능: diaryTableView 의 데이터를 재로드 한다.

@@ -74,13 +74,12 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     }()
     
     let signupButton: UIButton = {
-        let doTreeButton = UIButton(type: .system)
+        let uiButton = UIButton(type: .system)
         let doTreeButtonImage = UIImage(named: "SignupButton")
-        doTreeButton.setBackgroundImage(doTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        let attirbutedString = NSAttributedString(string: "Sign up", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
-        doTreeButton.setAttributedTitle(attirbutedString, for: .normal)
-        doTreeButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        return doTreeButton
+        uiButton.setBackgroundImage(doTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
+        uiButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
+        
+        return uiButton
     }()
     
     /*
@@ -92,34 +91,37 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     @objc func signUpButtonTapped() {
         guard let userName = userNameTextField.text else {return}
         let userProfileImage = profileButton.imageView?.image
-        var loginIsSucceed: Bool = false;
-        let alertController = UIAlertController(title: "Please check signup information", message: "", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-        alertController.addAction(alertAction)
-        let converting = ConvertingDataAndImage()
         let userDAO = UserDAO()
         
-        //모든 유저정보가 입력됐을 때.
-        if userName != "" && userProfileImage != nil {
-            guard let userProfilePicture = userProfileImage else {return}
-            guard let profileImageUrl = converting.convertingFromImageToUrl(image: userProfilePicture) else { return }
+        if !editMode {
+            var loginIsSucceed: Bool = false;
+            let alertController = UIAlertController(title: "Please check signup information", message: "", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
             
-            userDAO.insertUser(userName: userName, userProfileImage: profileImageUrl)
-        
-            //1.2. loginSucced 를 true 로 한다.
-            loginIsSucceed = true
-        //2.입력이 하나라도 안됐다면.
+            //모든 유저정보가 입력됐을 때.
+            if userName != "" && userProfileImage != nil {
+                guard let userProfilePicture = userProfileImage else {return}
+                guard let profileImageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: userProfilePicture) else { return }
+                userDAO.insertUser(userName: userName, userProfileImage: profileImageUrl)
+                //1.2. loginSucced 를 true 로 한다.
+                loginIsSucceed = true
+                //2.입력이 하나라도 안됐다면.
+            } else {
+                //2.1.입력정보를 확인해 달라는 메시지를 띄운다.
+                self.present(alertController, animated: true, completion: nil)
+                //2.2.loginIsSucced 를 false 로 한다.
+                loginIsSucceed = false
+            }
+            //3.loginIsSucceed 가 true 라면
+            if loginIsSucceed == true {
+                self.present(MainTabBarController(), animated: true, completion: nil)
+                //데이터가 성공적으로 db 에 입력되었는지 확인한다.
+                userDAO.selectQuery(tableName: "user", primaryKey: "user_id")
+            }
         } else {
-            //2.1.입력정보를 확인해 달라는 메시지를 띄운다.
-            self.present(alertController, animated: true, completion: nil)
-            //2.2.loginIsSucced 를 false 로 한다.
-            loginIsSucceed = false
-        }
-        //3.loginIsSucceed 가 true 라면
-        if loginIsSucceed == true {
-            self.present(MainTabBarController(), animated: true, completion: nil)
-            //데이터가 성공적으로 db 에 입력되었는지 확인한다.
-            userDAO.selectQuery(tableName: "user", primaryKey: "user_id")
+//            userDAO.updateUser(userName: userName, userProfileImage: userProfileImage)
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
@@ -161,18 +163,16 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     
         goToLoginButton.anchor(top: nil, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: 0, height: 44)
         goToLoginButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
     }
     
     func editModeView() {
         //1.1.User 객체의 data 를 UI 에 넣는다.
-        guard let userName = User.shared.getName() else {return}
-        guard let userPassword = User.shared.getPassword() else {return}
-        guard let userImageString = User.shared.getProfilePictureUrl() else {return}
+        let userImageString = Diary.shared.getUserProfileImageUrl()
         let convetingImage = ConvertingDataAndImage()
         guard let userProfileImage = convetingImage.convertingFromUrlToImage(uniqueId: userImageString) else {return}
         
-        self.userNameTextField.text = userName
-//        self.userPasswordTextField.text = userPassword
+        self.userNameTextField.text = Diary.shared.getUserName()
         self.profileButton.imageView?.image = userProfileImage
         //1.2.SignupButton 의 text를 Save 바꾼다.
         let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])

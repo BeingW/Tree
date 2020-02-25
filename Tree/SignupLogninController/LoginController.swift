@@ -40,11 +40,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
         let loginButton = UIButton()
         let doTreeButtoBackgroundImage = UIImage(named: "LoginButton")
         loginButton.setBackgroundImage(doTreeButtoBackgroundImage?.withRenderingMode(.alwaysOriginal), for: .normal)
-        let attirbutedString = NSAttributedString(string: "Login", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
-        loginButton.setAttributedTitle(attirbutedString, for: .normal)
+        let loginAttirbutedString = NSAttributedString(string: "Login", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
+        
+        loginButton.setAttributedTitle(loginAttirbutedString, for: .normal)
         loginButton.addTarget(self, action: #selector(loginButtonTapped), for: .touchUpInside)
+    
         return loginButton
     }()
+    
+    @objc func updateButtonTapped() {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     /*
      함수명: loginButtonTapped
@@ -139,7 +145,6 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         self.navigationController?.isNavigationBarHidden = true
     }
-    
     
     
 }
