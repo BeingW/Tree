@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tree/SignupLogninController/SignupController.swift"
-            timestampString = "604305141.610976"
+            filePath = "Tree/DiaryPostController/DiaryPostController.swift"
+            timestampString = "604378225.709777"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "editModeView()"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "setViews()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

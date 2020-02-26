@@ -13,35 +13,29 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     var diaryPage: DiaryPage?
     var isEdit: Bool = false
     
+    let cellId = "cellId"
+    let headerId = "headerId"
+    
+    let diaryImageCollectionViewHeader = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
+    let diaryCollecionViewCellHeaderlayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    let diaryImageCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
+    let diaryCollecionViewCelllayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+    
+    
     let imagePickerController: UIImagePickerController = {
         let imagePickerController = UIImagePickerController()
         imagePickerController.allowsEditing = true
-        
         return imagePickerController
     }()
     
-    /*
-     함수명: imagePickerController(UIImagePickerControllerDelegate)
-     기능: 사진첩에 접근해 사진을 선택된 사진을 가져옵니다.
-     작성일자: 2019.07.15
-     수정일자:
-     */
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
         let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        
         self.diaryImageView.image = selectedImage
-
         picker.dismiss(animated: true, completion: nil)
-
     }
     
     //MARK: - NavigationBar
     func navigationBar() {
-        
-//        let thisNavigaionBar = self.navigationController?.navigationBar
-        //guard let userName = self.diaryTableViewcontroller?.user?.getName() else {return}
-
         let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
         rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font : UIFont.systemFont(ofSize: 15, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white], for: .normal)
         
@@ -58,19 +52,11 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         } else {
             self.navigationItem.rightBarButtonItem = editRightBarButtonItem
         }
-        
     }
     
     @objc func cancelButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
-    
-    /*
-     함수명: postButtonTapped
-     기능: 유저가 입력한 다이어리를 작성하고 포스트합니다.
-     작성일자: 2019.07.15
-     수정일자:
-     */
     
     @objc func postButtonTapped() {
         self.postDiaryPage()
@@ -177,6 +163,7 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     
     let diaryImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.backgroundColor = .green
         return imageView
     }()
     
@@ -184,11 +171,18 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = .white
+        
         self.imagePickerController.delegate = self
+        
+        self.diaryCollecionViewCelllayout.scrollDirection = .horizontal
+        self.diaryImageCollectionView.setCollectionViewLayout(diaryCollecionViewCelllayout, animated: true)
+        self.diaryImageCollectionView.delegate = self
+        self.diaryImageCollectionView.dataSource = self
+        self.diaryImageCollectionView.register(DiaryPostImageCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        
         setViews()
         navigationBar()
-    
-        self.view.backgroundColor = .white
         
         if isEdit {
             if let diaryPage = self.diaryPage {
@@ -200,11 +194,8 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
                         self.diaryImageView.image = diaryImage
                     }
                 }
-                
-                
             }
         }
-        
         
     }
     
@@ -214,7 +205,6 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     }
     
     func setViews() {
-        
         //PostContainerView
         let safeLayoutArea = self.view.safeAreaLayoutGuide
         let postContainerViewHeight = (safeLayoutArea.layoutFrame.height * 0.7) / 2
@@ -266,12 +256,22 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         
         //ContentContainerView
         self.view.addSubview(contentContainerSeperatorView)
-        self.view.addSubview(contentContainerView)
-        contentContainerView.addSubview(diaryImageView)
+        self.view.addSubview(diaryImageView)
+        self.view.addSubview(diaryImageCollectionView)
         
         contentContainerSeperatorView.anchor(top: postContainerView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: nil, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
-        contentContainerView.anchor(top: contentContainerSeperatorView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: safeLayoutArea.bottomAnchor, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        diaryImageView.anchor(top: contentContainerView.topAnchor, left: contentContainerView.leftAnchor, bottom: contentContainerView.bottomAnchor, right: contentContainerView.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: 0, height: 0)
+        
+        diaryImageView.anchor(top: contentContainerSeperatorView.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 260)
+        diaryImageCollectionView.anchor(top: diaryImageView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+//        self.view.addSubview(contentContainerView)
+//         contentContainerView.addSubview(diaryImageView)
+//         contentContainerView.addSubview(diaryImageCollectionView)
+    
+//        contentContainerSeperatorView.anchor(top: postContainerView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: nil, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
+//        contentContainerView.anchor(top: contentContainerSeperatorView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: safeLayoutArea.bottomAnchor, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+//        diaryImageView.anchor(top: contentContainerView.topAnchor, left: contentContainerView.leftAnchor, bottom: nil, right: contentContainerView.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: (contentContainerView.frame.height * (3/4)))
+//        diaryImageCollectionView.anchor(top: diaryImageView.topAnchor, left: contentContainerView.leftAnchor, bottom: contentContainerView.bottomAnchor, right: contentContainerView.rightAnchor, paddingTop: 1, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
     }
 
@@ -334,5 +334,35 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         //4.DiaryPageDAO 객체의 insertDiayPage(diarypage: DairyPage) 함수를 만든 DiaryPage 객체를 넣어 호출한다.
         DiaryPageDAO().updateDiaryPage(diaryPage: diaryPage)
     }
+    
+}
+
+extension DiaryPostController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = (view.frame.width - 3) / 4
+        
+        return CGSize(width: width, height: width)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 23
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiaryPostImageCollectionViewCell
+        
+        return cell
+    }
+    
     
 }

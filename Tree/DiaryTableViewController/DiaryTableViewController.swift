@@ -151,7 +151,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        loadDiaryPage()
+        loadDiary()
         
     }
     
@@ -176,7 +176,10 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     //MARK: - Set Data
-   private func loadDiaryPage() {
+   private func loadDiary() {
+        let userInfo = UserDAO().getUserTableData()
+        self.diary.setUserName(userName: userInfo.userName)
+        self.diary.setUserProfilImageUrl(userProfileImageUrl: userInfo.userProfileImage)
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
         self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending
     })
@@ -225,7 +228,7 @@ extension DiaryTableViewController: DiaryTableViewCellDelegate {
             //2.DiaryPageDAO 객체의 deleteDiaryPage() 함수를 호출하여 원하는 diaryPage 를 지운다.
             DiaryPageDAO().deleteDiaryPage(diaryPageDate: diaryPage.getDate())
             //3.TableView 를 갱신한다.
-            self.loadDiaryPage()
+            self.loadDiary()
         }
         
         let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { (action) in

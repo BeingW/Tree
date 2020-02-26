@@ -35,18 +35,16 @@ class Diary {
         return self.userName
     }
     
-    func setUserName(userName: String) -> String {
+    func setUserName(userName: String) {
         self.userName = userName
-        return self.userName
     }
     
     func getUserProfileImageUrl() -> String {
         return self.userProfileImageUrl
     }
     
-    func setUserProfilImageUrl(userProfileImageUrl: String) -> String {
+    func setUserProfilImageUrl(userProfileImageUrl: String) {
         self.userProfileImageUrl = userProfileImageUrl
-        return self.userProfileImageUrl
     }
     
     func getPages() -> [DiaryPage] {

@@ -55,8 +55,8 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         //3.2.사진을 동그라미 버튼에 씌운다.
         self.profileButton.setImage(selectedPhoto?.withRenderingMode(.alwaysOriginal), for: .normal)
         //3.3.동그라미의 외각을 조정한다.
-        profileButton.layer.cornerRadius = profileButton.frame.width/2
-        profileButton.layer.masksToBounds = true;
+        self.profileButton.layer.cornerRadius = profileButton.frame.width/2
+        self.profileButton.layer.masksToBounds = true;
         //3.4.화면을 dismiss 한다.
         self.dismiss(animated: true, completion: nil)
     }
@@ -76,9 +76,10 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     let signupButton: UIButton = {
         let uiButton = UIButton(type: .system)
         let doTreeButtonImage = UIImage(named: "SignupButton")
+        let attirbutedString = NSAttributedString(string: "Sign up", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
+        uiButton.setAttributedTitle(attirbutedString, for: .normal)
         uiButton.setBackgroundImage(doTreeButtonImage?.withRenderingMode(.alwaysOriginal), for: .normal)
         uiButton.addTarget(self, action: #selector(signUpButtonTapped), for: .touchUpInside)
-        
         return uiButton
     }()
     
@@ -92,6 +93,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         guard let userName = userNameTextField.text else {return}
         let userProfileImage = profileButton.imageView?.image
         let userDAO = UserDAO()
+        let convertingImageAndUrl = ConvertingDataAndImage()
         
         if !editMode {
             var loginIsSucceed: Bool = false;
@@ -102,7 +104,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             //모든 유저정보가 입력됐을 때.
             if userName != "" && userProfileImage != nil {
                 guard let userProfilePicture = userProfileImage else {return}
-                guard let profileImageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: userProfilePicture) else { return }
+                guard let profileImageUrl = convertingImageAndUrl.convertingFromImageToUrl(image: userProfilePicture) else { return }
                 userDAO.insertUser(userName: userName, userProfileImage: profileImageUrl)
                 //1.2. loginSucced 를 true 로 한다.
                 loginIsSucceed = true
@@ -120,7 +122,8 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
                 userDAO.selectQuery(tableName: "user", primaryKey: "user_id")
             }
         } else {
-//            userDAO.updateUser(userName: userName, userProfileImage: userProfileImage)
+            let profileUrl = convertingImageAndUrl.convertingFromImageToUrl(image: userProfileImage!)
+            userDAO.updateUser(userName: userName, userProfileImage: profileUrl!)
             self.dismiss(animated: true, completion: nil)
         }
         
@@ -171,9 +174,10 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         let userImageString = Diary.shared.getUserProfileImageUrl()
         let convetingImage = ConvertingDataAndImage()
         guard let userProfileImage = convetingImage.convertingFromUrlToImage(uniqueId: userImageString) else {return}
-        
         self.userNameTextField.text = Diary.shared.getUserName()
-        self.profileButton.imageView?.image = userProfileImage
+        self.profileButton.setImage(userProfileImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        self.profileButton.layer.cornerRadius = 125/2
+        self.profileButton.layer.masksToBounds = true;
         //1.2.SignupButton 의 text를 Save 바꾼다.
         let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
         self.signupButton.setAttributedTitle(attirbutedString, for: .normal)
@@ -197,12 +201,15 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         
         setViews()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
         //1.editMode 가 true 일 때.
         if editMode == true {
             editModeView()
         }
-        
     }
+    
     
 
     

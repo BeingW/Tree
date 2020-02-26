@@ -538,6 +538,9 @@ class DiaryPageDAO: FMDBHelper {
         //1.특정 diaryPage 의 날짜를 입력 받는다.
         //2.날짜를 이용하여 diarypage table 의 찾고자 하는 데이터를 지운다.
         var diaryPageId: String = ""
+        var imageIds = [""]
+        var selectQuery: String = ""
+        var deleteQuery: String = ""
         
         //dbPath 를 넣어 FMDatabaseQueue 객체를 생성한다.
         let fmdbQueue = FMDatabaseQueue(path: self.dbPath)
@@ -547,28 +550,31 @@ class DiaryPageDAO: FMDBHelper {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
                 let dateString = dateFormatter.string(from: diaryPageDate)
-                
-                let selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = '\(dateString)'"
+                //1.diarypage table 삭제
+                selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = '\(dateString)'"
                 let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
                 if diarypageResultSet.next() {
                     diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
                 }
-                
-                //pragma 쿼리를 실행한다.
-//                var pragmaQuery = "PRAGMA foreign_keys"
-//                let pragmaRS = try db.executeQuery(pragmaQuery, values: nil)
-//                var enabled: Int
-//
-//                if pragmaRS.next() {
-//                    enabled = Int(pragmaRS.int(forColumnIndex: 0))
-//                }
-//
-//                if !enabled
-                try db.executeQuery("PRAGMA foreign_keys = ON", values: nil)
-                
                 //diarypage_id 에 관한 row를 user_diarypage_relation table에서 지운다.
-                let deleteQuery = "DELETE FROM diarypage WHERE diarypage_id = '\(diaryPageId)'"
+                deleteQuery = "DELETE FROM diarypage WHERE diarypage_id = '\(diaryPageId)'"
                 try db.executeUpdate(deleteQuery, values: nil)
+                
+                //2.diarypage_id 에 대한 diarypage_image table 에 대한 data 삭제
+                selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id = '\(diaryPageId)'"
+                let diaryImageRS = try db.executeQuery(selectQuery, values: nil)
+                while diaryImageRS.next() {
+                    imageIds.append(diaryImageRS.string(forColumn: "image_id") ?? "")
+                }
+                
+                deleteQuery = "DELETE FROM diarypage_image WHERE diarypage_id = '\(diaryPageId)'"
+                try db.executeUpdate(deleteQuery, values: nil)
+    
+                //3.image_id에 대한 image table 삭제
+                for imageId in imageIds {
+                    deleteQuery = "DELETE FROM image WHERE image_id = '\(imageId)'"
+                    try db.executeUpdate(deleteQuery, values: nil)
+                }
                 
             }catch{
                 self.fmdb.rollback()
