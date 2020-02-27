@@ -587,65 +587,90 @@ class DiaryPageDAO: FMDBHelper {
     
     func updateDiaryPage(diaryPage: DiaryPage) {
         //1.DiaryPage 객체를 입력받는다.
-        var parmeters = [Any]()
+        var parameters = [Any]()
         var selectQuery: String = ""
+        var insertQuery: String = ""
+        var deleteQuery: String = ""
         var updateQuery: String = ""
+        
         var diaryPageId: String = ""
+        var imageIds = [""]
         var imageId: String = ""
         
         let fmdatabaseQueue = FMDatabaseQueue(path: self.dbPath)
         fmdatabaseQueue?.inTransaction({ (db, rollback) in
             do{
-                //2.diarypage_id 를 찾는다.
-                let diaryPageTitle = diaryPage.getTitle()
-                let diaryPageText = diaryPage.getText()
-                let diaryPageDate = diaryPage.getDate()
-                
+                //Delete
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
-                let dateString = dateFormatter.string(from: diaryPageDate)
-                
-                let diaryPageImages = diaryPage.images
-                
+                let dateString = dateFormatter.string(from: diaryPage.getDate())
+                //1.diarypage table 삭제
                 selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date = '\(dateString)'"
                 let diarypageResultSet = try db.executeQuery(selectQuery, values: nil)
-                
                 if diarypageResultSet.next() {
                     diaryPageId = diarypageResultSet.string(forColumn: "diarypage_id") ?? ""
                 }
+                //diarypage_id 에 관한 row를 user_diarypage_relation table에서 지운다.
+                deleteQuery = "DELETE FROM diarypage WHERE diarypage_id = '\(diaryPageId)'"
+                try db.executeUpdate(deleteQuery, values: nil)
                 
-                //3.diarypage_id 에 따른 diarypage 테이블을 수정한다.
-                updateQuery = """
-                UPDATE diarypage
-                SET diarypage_title = ?, diarypage_text = ?
-                WHERE diarypage_id = '\(diaryPageId)'
-                """
-                parmeters.append(diaryPageTitle)
-                parmeters.append(diaryPageText)
-                try db.executeUpdate(updateQuery, values: parmeters)
-                parmeters.removeAll()
+                //2.diarypage_id 에 대한 diarypage_image table 에 대한 data 삭제
+                selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id = '\(diaryPageId)'"
+                let diaryImageRS = try db.executeQuery(selectQuery, values: nil)
+                while diaryImageRS.next() {
+                    imageIds.append(diaryImageRS.string(forColumn: "image_id") ?? "")
+                }
                 
-                //diaryPage 에 image 가 있다면,
-                if let diaryPageImages = diaryPage.images, diaryPageImages.count != 0 {
-                    //4.diarypage_id 에 따른 image_id 를 가져온다.
-                    selectQuery = "SELECT image_id FROM diarypage_image WHERE diarypage_id = '\(diaryPageId)'"
-                    let diaryPageImageRS = try db.executeQuery(selectQuery, values: nil)
+                deleteQuery = "DELETE FROM diarypage_image WHERE diarypage_id = '\(diaryPageId)'"
+                try db.executeUpdate(deleteQuery, values: nil)
+                
+                //3.image_id에 대한 image table 삭제
+                for imageId in imageIds {
+                    deleteQuery = "DELETE FROM image WHERE image_id = '\(imageId)'"
+                    try db.executeUpdate(deleteQuery, values: nil)
+                }
+                
+                //Insert
+                insertQuery = "INSERT INTO diarypage (diarypage_title, diarypage_date, diarypage_text) VALUES (?, ?, ?)"
+                parameters.append(diaryPage.getTitle())
+                parameters.append(dateString)
+                parameters.append(diaryPage.getText())
+                try db.executeUpdate(insertQuery, values: parameters)
+                parameters.removeAll()
+                
+                if let diayPageImages = diaryPage.images, diayPageImages.count != 0  {
+                    //3.1.DB 의 diarypage table 에서 diarypage_id 데이터를 가져온다.
+                    selectQuery = "SELECT diarypage_id FROM diarypage WHERE diarypage_date=?"
+                    parameters.append(dateString)
+                    let diaryPageRS = try db.executeQuery(selectQuery, values: parameters)
+                    parameters.removeAll()
                     
-                    if diaryPageImageRS.next() {
-                        imageId = diaryPageImageRS.string(forColumn: "image_id") ?? ""
+                    if diaryPageRS.next() {
+                        diaryPageId = diaryPageRS.string(forColumn: "diarypage_id") ?? "0"
                     }
                     
-                    //5.image_id 에 따른 image table 의 데이터를 변경한다.
-                    updateQuery = """
-                    UPDATE image
-                    SET image_url = ?
-                    WHERE image_id = '\(imageId)'
-                    """
-                    
-                    let diaryPageImage = diaryPageImages[0]
-                    parmeters.append(diaryPageImage.getUrl())
-                    try db.executeUpdate(updateQuery, values: parmeters)
-                    parmeters.removeAll()
+                    //3.2.DiaryPage 의 images 의 갯수만큼 반복한다.
+                    diayPageImages.forEach({ (diaryPageImage) in
+                        //3.2.1.DB 의 diarypage_image table 에 diarypage_id 에 대한 image_id row 를 만든다.
+                        do {
+                            insertQuery = "INSERT INTO diarypage_image (diarypage_id) VALUES (?)"
+                            parameters.append(diaryPageId)
+                            try db.executeUpdate(insertQuery, values: parameters)
+                            parameters.removeAll()
+                            //3.2.2.DB 의 image table 에 image_id 에 해당 diarpageImage 의 데이터를 맵핑한다.
+                            insertQuery = "INSERT INTO image(image_createDate, image_url) VALUES (?, ?)"
+                            let imageCreateDateString = dateFormatter.string(from: diaryPageImage.getCreatedDate())
+                            parameters.append(imageCreateDateString)
+                            parameters.append(diaryPageImage.getUrl())
+                            try db.executeUpdate(insertQuery, values: parameters)
+                            parameters.removeAll()
+                        } catch {
+                            self.fmdb.rollback()
+                            print("===== fetchPassportData() failure. =====")
+                            print("failed: \(error.localizedDescription)")
+                            print("========================================")
+                        }
+                    })
                 }
                 
             } catch {

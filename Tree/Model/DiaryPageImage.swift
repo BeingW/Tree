@@ -11,11 +11,17 @@ import UIKit
 class DiaryPageImage {
     private var url: String = ""
     private var createdDate: Date = Date()
-    private var image: UIImage?
+    private var image = UIImage()
     
     init() {
         self.url = ""
         self.createdDate = Date()
+    }
+    
+    init(image: UIImage, createdDate: Date) {
+        self.url = ConvertingDataAndImage().convertingFromImageToUrl(image: image)!
+        self.image = image
+        self.createdDate = createdDate
     }
     
     init(url: String, createdDate: String) {
@@ -29,7 +35,7 @@ class DiaryPageImage {
         
         self.url = url
         self.createdDate = diaryDate
-        self.image = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: url)
+        self.image = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: url)!
         
     }
     
@@ -39,7 +45,7 @@ class DiaryPageImage {
     
     func setUrl(url: String) {
         self.url = url
-        self.image = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: url)
+        self.image = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: url)!
     }
     
     func getCreatedDate() -> Date {

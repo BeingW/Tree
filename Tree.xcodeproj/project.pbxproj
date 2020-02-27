@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,7 +22,7 @@
 		191C253D22CB345700500F80 /* FMResultSet.h in Sources */ = {isa = PBXBuildFile; fileRef = 191C252522CB324A00500F80 /* FMResultSet.h */; };
 		1934907923FA5539008CFEBC /* Tree.db in Resources */ = {isa = PBXBuildFile; fileRef = 1934907823FA5538008CFEBC /* Tree.db */; };
 		193868422405FC39008A4104 /* DiaryPostImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193868412405FC39008A4104 /* DiaryPostImageCollectionViewCell.swift */; };
-		19386844240606A9008A4104 /* DiaryPostImageCollectionViewHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19386843240606A9008A4104 /* DiaryPostImageCollectionViewHeaderCell.swift */; };
+		1938684824077FA7008A4104 /* NavigationBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 1938684724077FA7008A4104 /* NavigationBackGround.png */; };
 		193C79ED22CB022D00A50A73 /* UserDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193C79EC22CB022D00A50A73 /* UserDAO.swift */; };
 		194ED36322B7C5B7000E5716 /* FMDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194ED36222B7C5B7000E5716 /* FMDBHelper.swift */; };
 		195629EA229D173400103F8C /* ConvertingDataAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 195629E9229D173400103F8C /* ConvertingDataAndImage.swift */; };
@@ -34,7 +34,6 @@
 		196240CF229EE415009472C9 /* DiaryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196240CE229EE415009472C9 /* DiaryTableViewController.swift */; };
 		19756E2E22A6658C0019ACB9 /* CommentIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19756E2422A6658C0019ACB9 /* CommentIcon.png */; };
 		19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 19756E2522A6658C0019ACB9 /* SetButton.png */; };
-		19756E3122A6658C0019ACB9 /* NavigationBackGround.png in Resources */ = {isa = PBXBuildFile; fileRef = 19756E2722A6658C0019ACB9 /* NavigationBackGround.png */; };
 		19756E3222A6658C0019ACB9 /* FavoriteIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19756E2822A6658C0019ACB9 /* FavoriteIcon.png */; };
 		19756E3622A6658C0019ACB9 /* PostTextField.png in Resources */ = {isa = PBXBuildFile; fileRef = 19756E2C22A6658C0019ACB9 /* PostTextField.png */; };
 		19756E3722A6658C0019ACB9 /* ShareIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19756E2D22A6658C0019ACB9 /* ShareIcon.png */; };
@@ -65,9 +64,11 @@
 		19C66EA422A4E0F000467E00 /* ProfileIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 19C66EA322A4E0F000467E00 /* ProfileIcon.png */; };
 		19EA2B4D22DC5A8100DD8ECB /* DiaryPageDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19EA2B4C22DC5A8100DD8ECB /* DiaryPageDAO.swift */; };
 		19F79A9922A220AF00EAF51F /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19F79A9822A220AF00EAF51F /* MainTabBarController.swift */; };
+		65658F06F2F82E866B33C8E8 /* Pods_Tree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181A847E9787403D238EF13D /* Pods_Tree.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		181A847E9787403D238EF13D /* Pods_Tree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		190BFB2122A3BF1700341872 /* DiaryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryTableViewCell.swift; sourceTree = "<group>"; };
 		191C250A22CB2E5600500F80 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		191C252522CB324A00500F80 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
@@ -84,7 +85,7 @@
 		191C253722CB326200500F80 /* Bridgining-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridgining-Header.h"; sourceTree = "<group>"; };
 		1934907823FA5538008CFEBC /* Tree.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = Tree.db; sourceTree = "<group>"; };
 		193868412405FC39008A4104 /* DiaryPostImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPostImageCollectionViewCell.swift; sourceTree = "<group>"; };
-		19386843240606A9008A4104 /* DiaryPostImageCollectionViewHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPostImageCollectionViewHeaderCell.swift; sourceTree = "<group>"; };
+		1938684724077FA7008A4104 /* NavigationBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavigationBackGround.png; sourceTree = "<group>"; };
 		193C79EC22CB022D00A50A73 /* UserDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDAO.swift; sourceTree = "<group>"; };
 		194ED36222B7C5B7000E5716 /* FMDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMDBHelper.swift; sourceTree = "<group>"; };
 		195629E9229D173400103F8C /* ConvertingDataAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertingDataAndImage.swift; sourceTree = "<group>"; };
@@ -96,7 +97,6 @@
 		196240CE229EE415009472C9 /* DiaryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryTableViewController.swift; sourceTree = "<group>"; };
 		19756E2422A6658C0019ACB9 /* CommentIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CommentIcon.png; sourceTree = "<group>"; };
 		19756E2522A6658C0019ACB9 /* SetButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SetButton.png; sourceTree = "<group>"; };
-		19756E2722A6658C0019ACB9 /* NavigationBackGround.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NavigationBackGround.png; sourceTree = "<group>"; };
 		19756E2822A6658C0019ACB9 /* FavoriteIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FavoriteIcon.png; sourceTree = "<group>"; };
 		19756E2C22A6658C0019ACB9 /* PostTextField.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PostTextField.png; sourceTree = "<group>"; };
 		19756E2D22A6658C0019ACB9 /* ShareIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ShareIcon.png; sourceTree = "<group>"; };
@@ -129,6 +129,8 @@
 		19C66EA322A4E0F000467E00 /* ProfileIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ProfileIcon.png; sourceTree = "<group>"; };
 		19EA2B4C22DC5A8100DD8ECB /* DiaryPageDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryPageDAO.swift; sourceTree = "<group>"; };
 		19F79A9822A220AF00EAF51F /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		4D995FD2FF8014B793314769 /* Pods-Tree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tree.debug.xcconfig"; path = "Target Support Files/Pods-Tree/Pods-Tree.debug.xcconfig"; sourceTree = "<group>"; };
+		7B9A7ED72FE720AD1B6F50FA /* Pods-Tree.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tree.release.xcconfig"; path = "Target Support Files/Pods-Tree/Pods-Tree.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				191C250B22CB2E5600500F80 /* libsqlite3.tbd in Frameworks */,
+				65658F06F2F82E866B33C8E8 /* Pods_Tree.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				191C250A22CB2E5600500F80 /* libsqlite3.tbd */,
+				181A847E9787403D238EF13D /* Pods_Tree.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -156,7 +160,6 @@
 			children = (
 				19C66E9422A4CDC000467E00 /* DiaryPostController.swift */,
 				193868412405FC39008A4104 /* DiaryPostImageCollectionViewCell.swift */,
-				19386843240606A9008A4104 /* DiaryPostImageCollectionViewHeaderCell.swift */,
 			);
 			path = DiaryPostController;
 			sourceTree = "<group>";
@@ -202,10 +205,10 @@
 		196240BA229EB052009472C9 /* DiaryTableViewControllerImages */ = {
 			isa = PBXGroup;
 			children = (
+				1938684724077FA7008A4104 /* NavigationBackGround.png */,
 				19756E3822A666370019ACB9 /* NavigationProfileIcon.png */,
 				19756E2422A6658C0019ACB9 /* CommentIcon.png */,
 				19756E2822A6658C0019ACB9 /* FavoriteIcon.png */,
-				19756E2722A6658C0019ACB9 /* NavigationBackGround.png */,
 				19756E2C22A6658C0019ACB9 /* PostTextField.png */,
 				19756E2522A6658C0019ACB9 /* SetButton.png */,
 				19756E2D22A6658C0019ACB9 /* ShareIcon.png */,
@@ -260,6 +263,7 @@
 				19AC1B742295291C007011F7 /* Tree */,
 				19AC1B732295291C007011F7 /* Products */,
 				191C250922CB2E5600500F80 /* Frameworks */,
+				FD63700D8E6F5A73A131E19C /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,6 +342,15 @@
 			path = DiaryPostControllerImages;
 			sourceTree = "<group>";
 		};
+		FD63700D8E6F5A73A131E19C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4D995FD2FF8014B793314769 /* Pods-Tree.debug.xcconfig */,
+				7B9A7ED72FE720AD1B6F50FA /* Pods-Tree.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,9 +358,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 19AC1B842295291D007011F7 /* Build configuration list for PBXNativeTarget "Tree" */;
 			buildPhases = (
+				8888DC84FF21BE01566B79EE /* [CP] Check Pods Manifest.lock */,
 				19AC1B6E2295291C007011F7 /* Sources */,
 				19AC1B6F2295291C007011F7 /* Frameworks */,
 				19AC1B702295291C007011F7 /* Resources */,
+				E2EF10FDDD0562FCDB415A42 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -401,6 +416,7 @@
 				19AC1B802295291D007011F7 /* LaunchScreen.storyboard in Resources */,
 				19756E2F22A6658C0019ACB9 /* SetButton.png in Resources */,
 				197A0D5E229BB38900647E9B /* HaveAccount.png in Resources */,
+				1938684824077FA7008A4104 /* NavigationBackGround.png in Resources */,
 				19C66E9E22A4E04A00467E00 /* Camera.png in Resources */,
 				196240C7229EB052009472C9 /* AlreadyHaveAccount.png in Resources */,
 				19756E3722A6658C0019ACB9 /* ShareIcon.png in Resources */,
@@ -418,7 +434,6 @@
 				19C66E9D22A4E04A00467E00 /* Photo.png in Resources */,
 				196240C9229EB052009472C9 /* SignupBackground@2x.png in Resources */,
 				196240C8229EB052009472C9 /* UserNameTextField@2x.png in Resources */,
-				19756E3122A6658C0019ACB9 /* NavigationBackGround.png in Resources */,
 				19756E3922A666370019ACB9 /* NavigationProfileIcon.png in Resources */,
 				19756E3622A6658C0019ACB9 /* PostTextField.png in Resources */,
 				1934907923FA5539008CFEBC /* Tree.db in Resources */,
@@ -428,6 +443,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8888DC84FF21BE01566B79EE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Tree-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E2EF10FDDD0562FCDB415A42 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tree/Pods-Tree-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Tree/Pods-Tree-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tree/Pods-Tree-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		19AC1B6E2295291C007011F7 /* Sources */ = {
@@ -451,7 +508,6 @@
 				19C66E9522A4CDC000467E00 /* DiaryPostController.swift in Sources */,
 				191C253422CB324A00500F80 /* FMResultSet.m in Sources */,
 				197A0D33229B99D400647E9B /* LoginController.swift in Sources */,
-				19386844240606A9008A4104 /* DiaryPostImageCollectionViewHeaderCell.swift in Sources */,
 				196240CF229EE415009472C9 /* DiaryTableViewController.swift in Sources */,
 				19AC1B8922954265007011F7 /* Extention.swift in Sources */,
 				196240B8229E4AFE009472C9 /* DiaryPage.swift in Sources */,
@@ -613,6 +669,7 @@
 		};
 		19AC1B852295291D007011F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D995FD2FF8014B793314769 /* Pods-Tree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -635,6 +692,7 @@
 		};
 		19AC1B862295291D007011F7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7B9A7ED72FE720AD1B6F50FA /* Pods-Tree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

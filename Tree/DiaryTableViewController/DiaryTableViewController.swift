@@ -34,9 +34,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         //1.UIAlertController 객체의 ActionSheet style 로 생성합니다.
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         //2.cancel, logout, User Information Edit 에 대한 객체들을 생성한다.
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
-            
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in }
         
         let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { (action) in
             let loginNavController = UINavigationController(rootViewController: LoginController())
@@ -86,6 +84,8 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let recordTumbnailImageView: UIImageView = {
         let recordTumbnailImageView = UIImageView()
         recordTumbnailImageView.image = UIImage(named: "ProfileIcon")
+        recordTumbnailImageView.layer.cornerRadius = 35/2
+        recordTumbnailImageView.layer.masksToBounds = true
         return recordTumbnailImageView
     }()
     
@@ -119,14 +119,14 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let safeLayoutArea = self.view.safeAreaLayoutGuide
         let seperateViewHeight = 5
         let recordViewHeight = view.frame.height / 4
-        let labeHeigth = recordView.frame.height / 5
+        let labelHeigth = recordView.frame.height / 5
         let tumbNailImageViewLegnth = recordView.frame.width / 5
     
         recordTopSeperateView.anchor(top: safeLayoutArea.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
         recordView.anchor(top: recordTopSeperateView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: safeLayoutArea.layoutFrame.height / 4)
         recordLabel.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: 0, height: 20)
         recordContentImageView.anchor(top: recordLabel.bottomAnchor, left: recordView.leftAnchor, bottom: recordView.bottomAnchor, right: recordView.rightAnchor, paddingTop: 15, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 0, height: 0)
-        recordTumbnailImageView.anchor(top: recordContentImageView.topAnchor, left: recordContentImageView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: tumbNailImageViewLegnth, height: tumbNailImageViewLegnth)
+        recordTumbnailImageView.anchor(top: recordContentImageView.topAnchor, left: recordContentImageView.leftAnchor, bottom: nil, right: nil, paddingTop: 15, paddingLeft: 15, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
         recordButton.anchor(top: recordView.topAnchor, left: recordView.leftAnchor, bottom: recordView.bottomAnchor, right: recordView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         recordBottomSeperateView.anchor(top: recordView.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: CGFloat(seperateViewHeight))
         
@@ -155,11 +155,6 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(true)
-//        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: NSNotification.Name(rawValue: "UpdateFeed"), object: nil)
-//    }
-    
     //MARK: - Set View
     private func setView() {
         view.backgroundColor = .white
@@ -183,6 +178,8 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
         self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending
     })
+        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
+        self.recordTumbnailImageView.image = userProfileImage
         self.diaryTableView.reloadData()
     
     }
@@ -209,6 +206,11 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         cell.diaryTableViewCellDelegate = self
         cell.diarypage = self.diary.getPages()[indexPath.item]
+        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
+        
+        cell.profileImageView.image = userProfileImage
+//        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width/2
+//        cell.profileImageView.layer.masksToBounds = true
         
         return cell
     }

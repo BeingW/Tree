@@ -7,32 +7,39 @@
 //
 
 import UIKit
+import ImagePicker
 
-class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class DiaryPostController: UIViewController {
     
     var diaryPage: DiaryPage?
+    var diaryImages = [DiaryPageImage]()
     var isEdit: Bool = false
     
     let cellId = "cellId"
-    let headerId = "headerId"
-    
-    let diaryImageCollectionViewHeader = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    let diaryCollecionViewCellHeaderlayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     let diaryImageCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     let diaryCollecionViewCelllayout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
     
-    
-    let imagePickerController: UIImagePickerController = {
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.allowsEditing = true
+    let imagePickerController: ImagePickerController = {
+        let config = Configuration()
+        config.doneButtonTitle = "Finish"
+        config.noImagesTitle = "Sorry there are no images"
+        config.recordLocation = false
+        let imagePickerController = ImagePickerController(configuration: config)
+        imagePickerController.imageLimit = 10
         return imagePickerController
     }()
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-        self.diaryImageView.image = selectedImage
-        picker.dismiss(animated: true, completion: nil)
-    }
+//    let imagePickerController: UIImagePickerController = {
+//        let imagePickerController = UIImagePickerController()
+//        imagePickerController.allowsEditing = true
+//        return imagePickerController
+//    }()
+    
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
+//        self.diaryImageView.image = selectedImage
+//        picker.dismiss(animated: true, completion: nil)
+//    }
     
     //MARK: - NavigationBar
     func navigationBar() {
@@ -175,27 +182,25 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         
         self.imagePickerController.delegate = self
         
-        self.diaryCollecionViewCelllayout.scrollDirection = .horizontal
-        self.diaryImageCollectionView.setCollectionViewLayout(diaryCollecionViewCelllayout, animated: true)
-        self.diaryImageCollectionView.delegate = self
-        self.diaryImageCollectionView.dataSource = self
-        self.diaryImageCollectionView.register(DiaryPostImageCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        
         setViews()
         navigationBar()
+        setCollectionView()
         
         if isEdit {
             if let diaryPage = self.diaryPage {
                 self.diaryTitleTextField.text = diaryPage.getTitle()
                 self.diaryContentTextView.text = diaryPage.getText()
-                
                 if let diaryImages = diaryPage.getDiaryPageImages(), diaryImages.count != 0 {
-                    if let diaryImage = diaryImages[0].getImage() {
-                        self.diaryImageView.image = diaryImage
-                    }
+                    self.diaryImages = diaryImages
+                    self.diaryImageCollectionView.reloadData()
+                    self.diaryImageView.image = self.diaryImages[0].getImage()
                 }
             }
         }
+        
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
+        longPressGesture.minimumPressDuration = 0.5
+        self.diaryImageCollectionView.addGestureRecognizer(longPressGesture)
         
     }
     
@@ -204,7 +209,40 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         print("viewWillAppear")
     }
     
-    func setViews() {
+    @objc func handleLongPress(longPressGesture: UILongPressGestureRecognizer) {
+        let cellLocation = longPressGesture.location(in: self.diaryImageCollectionView)
+        let indexPath = self.diaryImageCollectionView.indexPathForItem(at: cellLocation)
+        if longPressGesture.state == UIGestureRecognizer.State.began {
+            self.handleImageCellPress(indexPath: indexPath)
+        }
+    }
+    
+    private func handleImageCellPress(indexPath: IndexPath?) {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in }
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
+            self.diaryImages.remove(at: indexPath!.row)
+            self.diaryImageCollectionView.reloadData()
+        }
+        
+        alertController.addAction(deleteAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func setCollectionView() {
+        self.diaryCollecionViewCelllayout.scrollDirection = .horizontal
+        self.diaryImageCollectionView.setCollectionViewLayout(diaryCollecionViewCelllayout, animated: true)
+        self.diaryImageCollectionView.backgroundColor = .white
+        self.diaryImageCollectionView.delegate = self
+        self.diaryImageCollectionView.dataSource = self
+        self.diaryImageCollectionView.register(DiaryPostImageCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+    }
+    
+    private func setViews() {
         //PostContainerView
         let safeLayoutArea = self.view.safeAreaLayoutGuide
         let postContainerViewHeight = (safeLayoutArea.layoutFrame.height * 0.7) / 2
@@ -276,38 +314,19 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
     }
 
     private func postDiaryPage() {
-        //1.diaryTitle, diaryText, 현재 날과 시간, diaryImage 를 읽어온다.
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
-        //DiaryPage Data
         let diaryTitle = self.diaryTitleTextField.text ?? ""
         let diaryText = self.diaryContentTextView.text ?? ""
         let todayDateString = dateFormatter.string(from: Date())
         
-        //DiaryPageImage Data
-        var diaryPageImages = [DiaryPageImage]()
+        let diaryPage = DiaryPage(title: diaryTitle, date: todayDateString, text: diaryText, images: self.diaryImages)
         
-        if let diaryImage = self.diaryImageView.image {
-            guard let imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: diaryImage) else {return}
-            
-            let diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: todayDateString)
-            
-            diaryPageImages.append(diaryPageImage)
-        }
-        //2.읽어온 데이터로 DiaryPage 를 만든다.
-        let diaryPage = DiaryPage(title: diaryTitle, date: todayDateString, text: diaryText, images: diaryPageImages)
-        
-        //3.DiaryPageDAO 객체를 가져온다.
-        //4.DiaryPageDAO 객체의 insertDiayPage(diarypage: DairyPage) 함수를 만든 DiaryPage 객체를 넣어 호출한다.
         DiaryPageDAO().insertDiaryPage(diaryPage: diaryPage)
-        
     }
     
     private func updateDiaryPage() {
-        //1.diaryTitle, diaryText, 현재 날과 시간, diaryImage 를 읽어온다.
-        
-        //DiaryPage Data
         let diaryTitle = self.diaryTitleTextField.text ?? ""
         let diaryText = self.diaryContentTextView.text ?? ""
         let diaryDate = self.diaryPage?.getDate()
@@ -316,25 +335,29 @@ class DiaryPostController: UIViewController, UIImagePickerControllerDelegate, UI
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         let dateString = dateFormatter.string(from: diaryDate!)
         
-        //DiaryPageImage Data
-        var diaryPageImages = [DiaryPageImage]()
-        
-        if let diaryImage = self.diaryImageView.image {
-            guard let imageUrl = ConvertingDataAndImage().convertingFromImageToUrl(image: diaryImage) else {return}
-            
-            let diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: dateString)
-            
-            diaryPageImages.append(diaryPageImage)
-        }
-        
-        //2.읽어온 데이터로 DiaryPage 를 만든다.
-        let diaryPage = DiaryPage(title: diaryTitle, date: dateString, text: diaryText, images: diaryPageImages)
-        
-        //3.DiaryPageDAO 객체를 가져온다.
-        //4.DiaryPageDAO 객체의 insertDiayPage(diarypage: DairyPage) 함수를 만든 DiaryPage 객체를 넣어 호출한다.
+        let diaryPage = DiaryPage(title: diaryTitle, date: dateString, text: diaryText, images: self.diaryImages)
         DiaryPageDAO().updateDiaryPage(diaryPage: diaryPage)
     }
     
+}
+
+extension DiaryPostController: ImagePickerDelegate {
+    func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+    }
+    
+    func doneButtonDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
+        images.forEach { (image) in
+            let diaryImage = DiaryPageImage(image: image, createdDate: Date())
+            self.diaryImages.append(diaryImage)
+        }
+        self.diaryImageCollectionView.reloadData()
+        self.diaryImageView.image = self.diaryImages[0].getImage()
+        self.imagePickerController.dismiss(animated: true, completion: nil)
+    }
+    
+    func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        self.imagePickerController.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension DiaryPostController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate {
@@ -355,14 +378,19 @@ extension DiaryPostController: UICollectionViewDelegateFlowLayout, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 23
+        return self.diaryImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! DiaryPostImageCollectionViewCell
+        cell.backgroundColor = .white
+        cell.photoImageView.image = self.diaryImages[indexPath.row].getImage()
         
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let selectedImage = self.diaryImages[indexPath.row]
+        self.diaryImageView.image = selectedImage.getImage()
+    }
 }
