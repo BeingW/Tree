@@ -36,19 +36,20 @@ class DiaryTableViewCell: UITableViewCell {
             diaryTextView.text = text
             
             //diary 에 이미지가 있다면, 이미지를 가져와 붙인다.
-            if self.diarypage?.images != nil {
+            if self.diarypage?.images != nil && self.diarypage?.images?.count != 0 {
                 guard let images = self.diarypage?.images else {return}
-                
                 images.forEach { (image) in
                     guard let imageFile = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: image.getUrl()) else {return}
                     diaryImageView.image = imageFile
                 }
-
+                setviews()
             } else {
-                
+                setviewsWithoutNoImageView()
             }
             
         }
+        
+        
     }
  
     
@@ -69,14 +70,14 @@ class DiaryTableViewCell: UITableViewCell {
     let titleLable: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Diary Title"
-        titleLabel.font = UIFont.systemFont(ofSize: 20)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         return titleLabel
     }()
     
     let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.text = "date"
-        dateLabel.font = UIFont.systemFont(ofSize: 16)
+        dateLabel.font = UIFont.boldSystemFont(ofSize: 15)
         dateLabel.textColor = .darkGray
         return dateLabel
     }()
@@ -103,6 +104,8 @@ class DiaryTableViewCell: UITableViewCell {
     let diaryTextView: UITextView = {
         let diaryTextView = UITextView()
         diaryTextView.allowsEditingTextAttributes = false
+        diaryTextView.isEditable = false
+        diaryTextView.font = UIFont.systemFont(ofSize: 18)
         diaryTextView.text = "test"
         return diaryTextView
     }()
@@ -139,49 +142,47 @@ class DiaryTableViewCell: UITableViewCell {
     //MARK: - diaryTableCellSeperatorView
     let diaryTableCellSeparatorView: UIView = {
        let diaryTableCellSeparatorView = UIView()
+        diaryTableCellSeparatorView.backgroundColor = .lightGray
         return diaryTableCellSeparatorView
     }()
     
     private func setviews() {
+        self.diaryImageView.isHidden = false
         addSubview(diaryHeadView)
         diaryHeadView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height:48)
         
-        diaryHeadView.addSubview(profileImageView)
-        diaryHeadView.addSubview(titleLable)
-        diaryHeadView.addSubview(dateLabel)
-        diaryHeadView.addSubview(editButton)
+            diaryHeadView.addSubview(profileImageView)
+            diaryHeadView.addSubview(titleLable)
+            diaryHeadView.addSubview(dateLabel)
+            diaryHeadView.addSubview(editButton)
         
         profileImageView.anchor(top: nil, left: diaryHeadView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
         profileImageView.centerYAnchor.constraint(equalToSystemSpacingBelow: diaryHeadView.centerYAnchor, multiplier: 0).isActive = true
-        
         titleLable.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
         dateLabel.anchor(top: titleLable.bottomAnchor, left: titleLable.leftAnchor, bottom: nil, right: nil, paddingTop: 2.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
         editButton.anchor(top: diaryHeadView.topAnchor, left: nil, bottom: diaryHeadView.bottomAnchor, right: diaryHeadView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 0)
         
-        addSubview(diaryTableCellSeparatorView)
-        diaryTableCellSeparatorView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
+        addSubview(diaryImageView)
+        addSubview(diaryTextView)
+        addSubview(stackButtonSeperatView)
+        
+        diaryImageView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 350)
+        diaryTextView.anchor(top: diaryImageView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
+        stackButtonSeperatView.anchor(top: diaryTextView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
         
         let diaryOptionStackView = UIStackView(arrangedSubviews: [commentButton,favoriteButton,shareButton])
         diaryOptionStackView.axis = .horizontal
         diaryOptionStackView.distribution = .fillEqually
         
         addSubview(diaryOptionStackView)
-        diaryOptionStackView.anchor(top: nil, left: leftAnchor, bottom: diaryTableCellSeparatorView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 44)
+        addSubview(diaryTableCellSeparatorView)
+        diaryOptionStackView.anchor(top: stackButtonSeperatView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 44)
+        diaryTableCellSeparatorView.anchor(top: diaryOptionStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
         
-        addSubview(stackButtonSeperatView)
-        stackButtonSeperatView.anchor(top: nil, left: leftAnchor, bottom: diaryOptionStackView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
-        
-        addSubview(diaryTextView)
-        diaryTextView.anchor(top: nil, left: leftAnchor, bottom: stackButtonSeperatView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
-        
-        addSubview(diaryImageView)
-        diaryImageView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: diaryTextView.topAnchor, right: rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 500)
-    
     }
     
     private func setviewsWithoutNoImageView() {
+        self.diaryImageView.isHidden = false
         addSubview(diaryHeadView)
         diaryHeadView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height:48)
         
@@ -192,35 +193,29 @@ class DiaryTableViewCell: UITableViewCell {
         
         profileImageView.anchor(top: nil, left: diaryHeadView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
         profileImageView.centerYAnchor.constraint(equalToSystemSpacingBelow: diaryHeadView.centerYAnchor, multiplier: 0).isActive = true
-        
         titleLable.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
         dateLabel.anchor(top: titleLable.bottomAnchor, left: titleLable.leftAnchor, bottom: nil, right: nil, paddingTop: 2.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
         editButton.anchor(top: diaryHeadView.topAnchor, left: nil, bottom: diaryHeadView.bottomAnchor, right: diaryHeadView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 0)
+    
+        addSubview(diaryTextView)
+        addSubview(stackButtonSeperatView)
+        
+        diaryTextView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
+        stackButtonSeperatView.anchor(top: diaryTextView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
         
         let diaryOptionStackView = UIStackView(arrangedSubviews: [commentButton,favoriteButton,shareButton])
         diaryOptionStackView.axis = .horizontal
         diaryOptionStackView.distribution = .fillEqually
         
         addSubview(diaryOptionStackView)
-        diaryOptionStackView.anchor(top: nil, left: leftAnchor, bottom: self.bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 44)
-        
-        addSubview(stackButtonSeperatView)
-        stackButtonSeperatView.anchor(top: nil, left: leftAnchor, bottom: diaryOptionStackView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
-        
-        addSubview(diaryTextView)
-        diaryTextView.anchor(top: nil, left: leftAnchor, bottom: stackButtonSeperatView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
-        
-        addSubview(diaryImageView)
-        diaryImageView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: diaryTextView.topAnchor, right: rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 500)
+        addSubview(diaryTableCellSeparatorView)
+        diaryOptionStackView.anchor(top: stackButtonSeperatView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 44)
+        diaryTableCellSeparatorView.anchor(top: diaryOptionStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
         
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setviews()
         
     }
     

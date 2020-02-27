@@ -29,18 +29,6 @@ class DiaryPostController: UIViewController {
         return imagePickerController
     }()
     
-//    let imagePickerController: UIImagePickerController = {
-//        let imagePickerController = UIImagePickerController()
-//        imagePickerController.allowsEditing = true
-//        return imagePickerController
-//    }()
-    
-//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//        let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage
-//        self.diaryImageView.image = selectedImage
-//        picker.dismiss(animated: true, completion: nil)
-//    }
-    
     //MARK: - NavigationBar
     func navigationBar() {
         let rightBarButtonItem = UIBarButtonItem(title: "Post", style: .plain, target: self, action: #selector(postButtonTapped))
@@ -94,18 +82,27 @@ class DiaryPostController: UIViewController {
     
     let profileImageView: UIImageView = {
         let profileImageview = UIImageView()
-        profileImageview.image = UIImage(named: "ProfileIcon")
+        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: Diary.shared.getUserProfileImageUrl())
+        profileImageview.image = userProfileImage
+        profileImageview.layer.cornerRadius = 35/2
+        profileImageview.layer.masksToBounds = true
+        
         return profileImageview
     }()
     
     let diaryTitleTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Please type title"
+        textField.font = UIFont.systemFont(ofSize: 18)
         return textField
     }()
     
     let diaryContentTextView: UITextView = {
         let textView = UITextView()
+        textView.backgroundColor = .white
+        textView.text = "Please type text here"
+        textView.textColor = UIColor.lightGray
+        textView.font = UIFont.systemFont(ofSize: 18)
         return textView
     }()
     
@@ -168,9 +165,9 @@ class DiaryPostController: UIViewController {
         return uiView
     }()
     
-    let diaryImageView: UIImageView = {
+    let selectedImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .green
+        imageView.backgroundColor = .white
         return imageView
     }()
     
@@ -181,6 +178,7 @@ class DiaryPostController: UIViewController {
         self.view.backgroundColor = .white
         
         self.imagePickerController.delegate = self
+        self.diaryContentTextView.delegate = self
         
         setViews()
         navigationBar()
@@ -193,7 +191,7 @@ class DiaryPostController: UIViewController {
                 if let diaryImages = diaryPage.getDiaryPageImages(), diaryImages.count != 0 {
                     self.diaryImages = diaryImages
                     self.diaryImageCollectionView.reloadData()
-                    self.diaryImageView.image = self.diaryImages[0].getImage()
+                    self.selectedImageView.image = self.diaryImages[0].getImage()
                 }
             }
         }
@@ -242,10 +240,20 @@ class DiaryPostController: UIViewController {
         self.diaryImageCollectionView.register(DiaryPostImageCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        view.endEditing(true)
+        return true
+    }
+    
     private func setViews() {
         //PostContainerView
         let safeLayoutArea = self.view.safeAreaLayoutGuide
-        let postContainerViewHeight = (safeLayoutArea.layoutFrame.height * 0.7) / 2
+        let postContainerViewHeight = safeLayoutArea.layoutFrame.height * 0.4
         let buttonWidth = self.view.frame.width / 10
         let buttonContainerImageViewWidth = safeLayoutArea.layoutFrame.width * 2/3
         let buttonContainerImageViewHight = buttonWidth * 2
@@ -269,7 +277,7 @@ class DiaryPostController: UIViewController {
             self.postView.addSubview(diaryContentTextView)
         
             profileImageView.anchor(top: postView.topAnchor, left: postView.leftAnchor, bottom: nil, right: nil, paddingTop: 12, paddingLeft: 12, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
-            diaryTitleTextField.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            diaryTitleTextField.anchor(top: nil, left: profileImageView.rightAnchor, bottom: nil, right: postView.rightAnchor, paddingTop: 0, paddingLeft: 8, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
             diaryTitleTextField.centerYAnchor.constraint(equalTo: profileImageView.centerYAnchor, constant: 0).isActive = true
             diaryContentTextView.anchor(top: profileImageView.bottomAnchor, left: postView.leftAnchor, bottom: postView.bottomAnchor, right: postView.rightAnchor, paddingTop: 8, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: 0, height: 0)
         
@@ -294,22 +302,13 @@ class DiaryPostController: UIViewController {
         
         //ContentContainerView
         self.view.addSubview(contentContainerSeperatorView)
-        self.view.addSubview(diaryImageView)
+        self.view.addSubview(selectedImageView)
         self.view.addSubview(diaryImageCollectionView)
+        let cellHeight = (view.frame.width - 3) / 4
         
-        contentContainerSeperatorView.anchor(top: postContainerView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: nil, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
-        
-        diaryImageView.anchor(top: contentContainerSeperatorView.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 260)
-        diaryImageCollectionView.anchor(top: diaryImageView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-//        self.view.addSubview(contentContainerView)
-//         contentContainerView.addSubview(diaryImageView)
-//         contentContainerView.addSubview(diaryImageCollectionView)
-    
-//        contentContainerSeperatorView.anchor(top: postContainerView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: nil, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
-//        contentContainerView.anchor(top: contentContainerSeperatorView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: safeLayoutArea.bottomAnchor, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-//        diaryImageView.anchor(top: contentContainerView.topAnchor, left: contentContainerView.leftAnchor, bottom: nil, right: contentContainerView.rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: (contentContainerView.frame.height * (3/4)))
-//        diaryImageCollectionView.anchor(top: diaryImageView.topAnchor, left: contentContainerView.leftAnchor, bottom: contentContainerView.bottomAnchor, right: contentContainerView.rightAnchor, paddingTop: 1, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        contentContainerSeperatorView.anchor(top: postContainerView.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
+        selectedImageView.anchor(top: contentContainerSeperatorView.bottomAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        diaryImageCollectionView.anchor(top: selectedImageView.bottomAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: cellHeight)
         
     }
 
@@ -318,7 +317,11 @@ class DiaryPostController: UIViewController {
         dateFormatter.dateFormat = "yyyy-MM-dd hh:mm:ss"
         
         let diaryTitle = self.diaryTitleTextField.text ?? ""
-        let diaryText = self.diaryContentTextView.text ?? ""
+        var diaryText = ""
+        
+        if self.diaryContentTextView.text != "Please type text here" || self.diaryTitleTextField.text != "" {
+            diaryText = self.diaryContentTextView.text
+        }
         let todayDateString = dateFormatter.string(from: Date())
         
         let diaryPage = DiaryPage(title: diaryTitle, date: todayDateString, text: diaryText, images: self.diaryImages)
@@ -341,7 +344,7 @@ class DiaryPostController: UIViewController {
     
 }
 
-extension DiaryPostController: ImagePickerDelegate {
+extension DiaryPostController: ImagePickerDelegate, UITextViewDelegate {
     func wrapperDidPress(_ imagePicker: ImagePickerController, images: [UIImage]) {
     }
     
@@ -351,12 +354,26 @@ extension DiaryPostController: ImagePickerDelegate {
             self.diaryImages.append(diaryImage)
         }
         self.diaryImageCollectionView.reloadData()
-        self.diaryImageView.image = self.diaryImages[0].getImage()
+        self.selectedImageView.image = self.diaryImages[0].getImage()
         self.imagePickerController.dismiss(animated: true, completion: nil)
     }
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
         self.imagePickerController.dismiss(animated: true, completion: nil)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            textView.text = "Please type text here"
+            textView.textColor = UIColor.lightGray
+        }
     }
 }
 
@@ -391,6 +408,6 @@ extension DiaryPostController: UICollectionViewDelegateFlowLayout, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedImage = self.diaryImages[indexPath.row]
-        self.diaryImageView.image = selectedImage.getImage()
+        self.selectedImageView.image = selectedImage.getImage()
     }
 }

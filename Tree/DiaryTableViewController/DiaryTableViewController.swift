@@ -13,7 +13,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
 
-    let diary = Diary.shared
+    let diary = Diary()
     
     //MARK: - NavigationBar
     func navigationBar() {
@@ -176,8 +176,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         self.diary.setUserName(userName: userInfo.userName)
         self.diary.setUserProfilImageUrl(userProfileImageUrl: userInfo.userProfileImage)
         self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
-        self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending
-    })
+        self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedAscending })
         let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
         self.recordTumbnailImageView.image = userProfileImage
         self.diaryTableView.reloadData()
@@ -209,8 +208,6 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
         
         cell.profileImageView.image = userProfileImage
-//        cell.profileImageView.layer.cornerRadius = cell.profileImageView.frame.width/2
-//        cell.profileImageView.layer.masksToBounds = true
         
         return cell
     }
@@ -218,7 +215,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
 }
 
 extension DiaryTableViewController: DiaryTableViewCellDelegate {
-    
+
     func didTapEditButton(diaryPage: DiaryPage) {
         //1.UIAlertController 객체의 ActionSheet style 로 생성합니다.
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)

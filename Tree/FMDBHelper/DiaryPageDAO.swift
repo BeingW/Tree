@@ -427,6 +427,7 @@ class DiaryPageDAO: FMDBHelper {
                     try diaryImageRS = db.executeQuery(selectQuery, values: parameters)
                     parameters.removeAll()
                     //1.3.diarypage_image table 끝까지 반복한다.
+                    diaryPageImages.removeAll()
                     while diaryImageRS.next() {
                         //1.3.1.image_id 를 가져온다.
                         guard let imageId = diaryImageRS.string(forColumn: "image_id") else {return}
@@ -435,13 +436,14 @@ class DiaryPageDAO: FMDBHelper {
                         parameters.append(imageId)
                         try imageRS = db.executeQuery(selectQuery, values: parameters)
                         parameters.removeAll()
-                        if imageRS.next() {
+                        
+                        while imageRS.next() {
                             let imageUrl = imageRS.string(forColumn: "image_url") ?? ""
                             let imageCreateDate = imageRS.string(forColumn: "image_createDate") ?? ""
                             diaryPageImage = DiaryPageImage(url: imageUrl, createdDate: imageCreateDate)
+                            diaryPageImages.append(diaryPageImage)
                         }
                         
-                        diaryPageImages.append(diaryPageImage)
                     }
                     //1.4.DiaryPage 객체를 만든다.
                     diaryPage = DiaryPage(title: diarypageTitle, date: diarypageDate, text: diarypageText, images: diaryPageImages)
