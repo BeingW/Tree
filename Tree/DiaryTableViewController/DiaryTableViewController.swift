@@ -105,6 +105,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
 
     @objc func recordButtonTapped() {
         let diaryPostController = DiaryPostController()
+        diaryPostController.profileImageView.image = userProfileImage
         self.navigationController?.pushViewController(DiaryPostController(), animated: true)
     }
     
@@ -175,12 +176,14 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         diaryTableView.register(DiaryTableViewCell.self, forCellReuseIdentifier: diaryTableCellId)
     }
     
+    var userProfileImage = UIImage()
+    
     //MARK: - Set Data
     private func loadUserInfo() {
         let userInfo = UserDAO().getUserTableData()
-        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: userInfo.userProfileImage)
+        guard let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: userInfo.userProfileImage) else {return}
+        self.userProfileImage = userProfileImage
         self.recordTumbnailImageView.image = userProfileImage
-//        self.diaryTableView.reloadData()
     }
     
     private func loadDiaryPage() {
@@ -216,8 +219,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-//        return self.diary.getPages().count
+    
         return self.diaryPageViewModelController.viewModelCount
     }
     
@@ -226,26 +228,11 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
         cell.diaryTableViewCellDelegate = self
+        cell.profileImageView.image = self.userProfileImage
         
         if let diarypageViewModel = self.diaryPageViewModelController.getDiaryPageViewModel(at: indexPath.row){
-            
-            if diarypageViewModel.images.count > 0 {
-                cell.diarypageViewModel = diarypageViewModel
-                cell.hasPhotos = true
-//                cell.configureWithImageView(viewModel: diarypageViewModel)
-            } else {
-                cell.diarypageViewModel = diarypageViewModel
-                cell.hasPhotos = false
-//                cell.configureView(viewModel: diarypageViewModel)
-            }
+            cell.diarypageViewModel = diarypageViewModel
         }
-        
-//        cell.diarypageViewModel = self.diaryPageViewModelController.getDiaryPageViewModel(at: indexPath.row)
-        
-//        cell.diarypage = self.diary.getPages()[indexPath.item]
-//        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
-        
-//        cell.profileImageView.image = userProfileImage
         
         return cell
     }
@@ -266,6 +253,8 @@ extension DiaryTableViewController: DiaryTableViewCellDelegate {
             DiaryPageDAO().deleteDiaryPage(diaryPageDate: diaryPage.getDate())
             //3.TableView 를 갱신한다.
             self.loadUserInfo()
+            self.loadDiaryPage()
+            self.diaryTableView.reloadData()
         }
         
         let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { (action) in

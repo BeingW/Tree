@@ -16,19 +16,21 @@ class DiaryPageViewModelController {
     }
     
     func retrieveDiaryPages(_ completionBlock: @escaping (_ success: Bool, _ error: NSError?) -> ()) {
-        self.viewModels.removeAll()
         //DiaryPageDAO 를 선언 하여 DiaryPage 배열 객체를 가져온다.
         guard let diaryPages = DiaryPageDAO().fetchDiaryPage() else {
             completionBlock(false, nil)
             return
         }
+        var diaryPageViewModels = [DiaryPageViewModel]()
         //가져온 객체를 date 기준으로 Decending 한다.
         let decendingDiaryPages = diaryPages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedDescending })
         //가져온 객체를 차례대로 DiaryPageViewModel 에 맵핑한다.
         decendingDiaryPages.forEach { (diaryPage) in
             let diaryPageViewModel = DiaryPageViewModel(diaryPage: diaryPage)
-            viewModels.append(diaryPageViewModel)
+            diaryPageViewModels.append(diaryPageViewModel)
         }
+        
+        self.viewModels = diaryPageViewModels
         
         completionBlock(true, nil)
     }

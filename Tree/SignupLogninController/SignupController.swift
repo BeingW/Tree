@@ -105,10 +105,18 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
             if userName != "" && userProfileImage != nil {
                 guard let userProfilePicture = userProfileImage else {return}
                 guard let profileImageUrl = convertingImageAndUrl.convertingFromImageToUrl(image: userProfilePicture) else { return }
-                userDAO.insertUser(userName: userName, userProfileImage: profileImageUrl)
-                //1.2. loginSucced 를 true 로 한다.
-                loginIsSucceed = true
-                //2.입력이 하나라도 안됐다면.
+                //유저는 하나의 계정만 생성할수 있다.
+                if userDAO.getUserTableData().userName == "" {
+                    userDAO.insertUser(userName: userName, userProfileImage: profileImageUrl)
+                    loginIsSucceed = true
+                } else {
+                    let oneIdAlertController = UIAlertController(title: "Tree has only one ID", message: "", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    oneIdAlertController.addAction(alertAction)
+                    self.present(oneIdAlertController, animated: true, completion: nil)
+                    loginIsSucceed = false
+                }
+                
             } else {
                 //2.1.입력정보를 확인해 달라는 메시지를 띄운다.
                 self.present(alertController, animated: true, completion: nil)
@@ -124,6 +132,9 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         } else {
             let profileUrl = convertingImageAndUrl.convertingFromImageToUrl(image: userProfileImage!)
             userDAO.updateUser(userName: userName, userProfileImage: profileUrl!)
+            let userInfo = userDAO.getUserTableData()
+            Diary.shared.setUserName(userName: userInfo.userName)
+            Diary.shared.setUserProfilImageUrl(userProfileImageUrl: userInfo.userProfileImage)
             self.dismiss(animated: true, completion: nil)
         }
         

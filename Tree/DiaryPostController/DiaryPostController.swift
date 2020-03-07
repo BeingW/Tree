@@ -107,68 +107,62 @@ class DiaryPostController: UIViewController {
     }()
     
     //MARK: - OptionButtons Part
-    let plusButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "toolBoxButton"), for: .normal)
-        button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func plusButtonTapped() {
-        if toolBoxView.isHidden {
-            toolBoxView.isHidden = false
-        } else {
-            toolBoxView.isHidden = true
-        }
-    }
-    
-    let toolBoxView: UIView = {
-        let uiView = UIView()
-        uiView.backgroundColor = .white
-        uiView.layer.cornerRadius = 15
-        let contactRect = CGRect(x: 9, y: 8, width: 200, height: 50)
-        uiView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 15).cgPath
-        uiView.layer.shadowOffset = CGSize(width: 9, height: 8)
-        uiView.layer.shadowRadius = 8
-        uiView.layer.shadowOpacity = 0.2
-        uiView.isHidden = true
-        return uiView
-    }()
-    
-//    let buttonContainerImageView: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "ToolBoxView")
-//        return imageView
+//    let plusButton: UIButton = {
+//        let button = UIButton()
+//        button.setBackgroundImage(UIImage(named: "toolBoxButton"), for: .normal)
+//        button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
+//        return button
 //    }()
-    
-    let imageLibraryButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "Photo"), for: .normal)
-        button.addTarget(self, action: #selector(imageLibrayButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
-    @objc func imageLibrayButtonTapped() {
-        self.present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    let takePhotoButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "Camera"), for: .normal)
-        return button
-    }()
-    
-    let recordLibraryButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "Voice"), for: .normal)
-        return button
-    }()
-    
-    let takeLocationButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundImage(UIImage(named: "Location"), for: .normal)
-        return button
-    }()
+//
+//    @objc func plusButtonTapped() {
+//        if toolBoxView.isHidden {
+//            toolBoxView.isHidden = false
+//        } else {
+//            toolBoxView.isHidden = true
+//        }
+//    }
+//
+//    let toolBoxView: UIView = {
+//        let uiView = UIView()
+//        uiView.backgroundColor = .white
+//        uiView.layer.cornerRadius = 15
+//        let contactRect = CGRect(x: 9, y: 8, width: 200, height: 50)
+//        uiView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 15).cgPath
+//        uiView.layer.shadowOffset = CGSize(width: 9, height: 8)
+//        uiView.layer.shadowRadius = 8
+//        uiView.layer.shadowOpacity = 0.2
+//        uiView.isHidden = true
+//        return uiView
+//    }()
+//
+//    let imageLibraryButton: UIButton = {
+//        let button = UIButton()
+//        button.setBackgroundImage(UIImage(named: "Photo"), for: .normal)
+//        button.addTarget(self, action: #selector(imageLibrayButtonTapped), for: .touchUpInside)
+//        return button
+//    }()
+//
+//    @objc func imageLibrayButtonTapped() {
+//        self.present(imagePickerController, animated: true, completion: nil)
+//    }
+//
+//    let takePhotoButton: UIButton = {
+//        let button = UIButton()
+//        button.setBackgroundImage(UIImage(named: "Camera"), for: .normal)
+//        return button
+//    }()
+//
+//    let recordLibraryButton: UIButton = {
+//        let button = UIButton()
+//        button.setBackgroundImage(UIImage(named: "Voice"), for: .normal)
+//        return button
+//    }()
+//
+//    let takeLocationButton: UIButton = {
+//        let button = UIButton()
+//        button.setBackgroundImage(UIImage(named: "Location"), for: .normal)
+//        return button
+//    }()
     
     //MARK: - ContentContainerView
     let contentContainerSeperatorView: UIView = {
@@ -286,8 +280,8 @@ class DiaryPostController: UIViewController {
         postContainerView.anchor(top: navigationSeperatorView.bottomAnchor, left: safeLayoutArea.leftAnchor, bottom: nil, right: safeLayoutArea.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: postContainerViewHeight)
         
         self.postContainerView.addSubview(postView)
-        self.postContainerView.addSubview(plusButton)
-        self.postContainerView.addSubview(toolBoxView)
+//        self.postContainerView.addSubview(plusButton)
+//        self.postContainerView.addSubview(toolBoxView)
         
         //PostView
         postView.anchor(top: postContainerView.topAnchor, left: postContainerView.leftAnchor, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -303,19 +297,19 @@ class DiaryPostController: UIViewController {
             diaryContentTextView.anchor(top: profileImageView.bottomAnchor, left: postView.leftAnchor, bottom: postView.bottomAnchor, right: postView.rightAnchor, paddingTop: 8, paddingLeft: 5, paddingBottom: 5, paddingRight: 5, width: 0, height: 0)
         
         //Plus Button
-            plusButton.anchor(top: nil, left: nil, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 35, height: 35)
+//            plusButton.anchor(top: nil, left: nil, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 35, height: 35)
         
         //Tool box
-        toolBoxView.anchor(top: nil, left: nil, bottom: plusButton.centerYAnchor, right: plusButton.centerXAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 5, paddingRight: 5, width: 200, height: 50)
-        
-        imageLibraryButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: buttonWidth, height: buttonWidth)
-        let buttonStakView = UIStackView(arrangedSubviews: [imageLibraryButton, recordLibraryButton, takeLocationButton])
-        buttonStakView.axis = .horizontal
-        buttonStakView.distribution = .fillEqually
-        buttonStakView.spacing = 20
-        
-            self.toolBoxView.addSubview(buttonStakView)
-            buttonStakView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 4, paddingLeft: 18, paddingBottom: 4, paddingRight: 18, width: 0, height: 0)
+//        toolBoxView.anchor(top: nil, left: nil, bottom: plusButton.centerYAnchor, right: plusButton.centerXAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 5, paddingRight: 5, width: 200, height: 50)
+//
+//        imageLibraryButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: buttonWidth, height: buttonWidth)
+//        let buttonStakView = UIStackView(arrangedSubviews: [imageLibraryButton, recordLibraryButton, takeLocationButton])
+//        buttonStakView.axis = .horizontal
+//        buttonStakView.distribution = .fillEqually
+//        buttonStakView.spacing = 20
+//
+//            self.toolBoxView.addSubview(buttonStakView)
+//            buttonStakView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 4, paddingLeft: 18, paddingBottom: 4, paddingRight: 18, width: 0, height: 0)
 //            buttonStakView.centerXAnchor.constraint(equalToSystemSpacingAfter: toolBoxView.centerXAnchor, multiplier: 0).isActive = true
 //            buttonStakView.centerYAnchor.constraint(equalToSystemSpacingBelow: toolBoxView.centerYAnchor, multiplier: 0).isActive = true
             //In ToolBoxView
