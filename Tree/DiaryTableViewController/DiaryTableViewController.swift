@@ -45,6 +45,7 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         let userEditAction = UIAlertAction(title: "Edit User Information", style: .default) { (action) in
             let signUpController = SignupController()
             signUpController.editMode = true
+            signUpController.editModeView()
             self.present(signUpController, animated: true, completion: nil)
         }
         //3.UIAlertController 에 생성한 UIAction 객체를 넣는다.
