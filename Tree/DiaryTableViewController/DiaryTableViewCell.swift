@@ -21,32 +21,26 @@ class DiaryTableViewCell: UITableViewCell {
      작성일자: 2019.07.15
      수정일자: 2020.02.18
      */
-    var diarypage: DiaryPage? {
+    var diarypageViewModel: DiaryPageViewModel? {
         didSet {
-            guard let date = self.diarypage?.getDate() else {return}
-            guard let title = self.diarypage?.getTitle() else {return}
-            guard let text = self.diarypage?.getText() else {return}
-            
+            guard let date = self.diarypageViewModel?.date else {return}
+            guard let title = self.diarypageViewModel?.title else {return}
+            guard let text = self.diarypageViewModel?.text else {return}
+
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd, hh:mm:ss"
+            dateFormatter.dateFormat = "yyyy-MM-dd"
             let dateString = dateFormatter.string(from: date)
-            
             titleLable.text = title
             dateLabel.text = dateString
             diaryTextView.text = text
             
-            //diary 에 이미지가 있다면, 이미지를 가져와 붙인다.
-            if self.diarypage?.images != nil {
-                guard let images = self.diarypage?.images else {return}
-                
-                images.forEach { (image) in
-                    guard let imageFile = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: image.getUrl()) else {return}
-                    diaryImageView.image = imageFile
-                }
-
-            }
+//            if let diarypageImages = self.diarypageViewModel?.images, diarypageImages.count != 0 {
+//                self.setupSlideImageOnScrollView(slides: diarypageImages)
+//            }
             
+            setviews()
         }
+
     }
  
     
@@ -59,19 +53,23 @@ class DiaryTableViewCell: UITableViewCell {
     let profileImageView: UIImageView = {
         let profileImageView = UIImageView()
         profileImageView.image = UIImage(named: "ProfileIcon")
+        profileImageView.layer.cornerRadius = 35/2
+        profileImageView.layer.masksToBounds = true
         return profileImageView
     }()
     
     let titleLable: UILabel = {
         let titleLabel = UILabel()
         titleLabel.text = "Diary Title"
-        
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         return titleLabel
     }()
     
     let dateLabel: UILabel = {
         let dateLabel = UILabel()
         dateLabel.text = "date"
+        dateLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        dateLabel.textColor = .darkGray
         return dateLabel
     }()
     
@@ -83,20 +81,62 @@ class DiaryTableViewCell: UITableViewCell {
     }()
     
     @objc func handleEditButton() {
-        self.diaryTableViewCellDelegate?.didTapEditButton(diaryPage: self.diarypage!)
+        guard let diaryPageViewModel = self.diarypageViewModel else {return}
+        var diaryPageImages = [DiaryPageImage]()
+        
+        diaryPageViewModel.images.forEach { (image) in
+            let diaryPageImage = DiaryPageImage(image: image, createdDate: Date())
+            diaryPageImages.append(diaryPageImage)
+        }
+        
+        let diaryPage = DiaryPage(title: diaryPageViewModel.title, date: diaryPageViewModel.date, text: diaryPageViewModel.text, images: diaryPageImages)
+        
+        self.diaryTableViewCellDelegate?.didTapEditButton(diaryPage: diaryPage)
     }
     
     //MARK: - diaryImageView
     let diaryImageView: UIImageView = {
         let diaryImageView = UIImageView()
-        diaryImageView.backgroundColor = .green
         return diaryImageView
     }()
+    
+    let diaryImageViews: [UIImageView] = {
+        let diaryImageView = [UIImageView]()
+        return diaryImageView
+    }()
+    
+    let pagenationScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        return scrollView
+    }()
+    
+    let pageController: UIPageControl = {
+        let pageNation = UIPageControl()
+        return pageNation
+    }()
+    
+    private func setupSlideImageOnScrollView(slides: [UIImage]) {
+        pagenationScrollView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 350)
+        pagenationScrollView.contentSize = CGSize(width: self.frame.width * CGFloat(slides.count), height: 350)
+        pagenationScrollView.isPagingEnabled = true
+        
+        for i in 0...slides.count - 1 {
+            let imageView = UIImageView()
+            imageView.backgroundColor = .white
+            imageView.image = slides[i]
+            
+            imageView.frame = CGRect(x: self.pagenationScrollView.frame.width * CGFloat(i), y: 0, width: self.pagenationScrollView.frame.width, height: 350)
+            pagenationScrollView.addSubview(imageView)
+        }
+    }
     
     //MARK: - diaryTextView
     let diaryTextView: UITextView = {
         let diaryTextView = UITextView()
         diaryTextView.allowsEditingTextAttributes = false
+        diaryTextView.isEditable = false
+        diaryTextView.font = UIFont.systemFont(ofSize: 18)
         diaryTextView.text = "test"
         return diaryTextView
     }()
@@ -133,54 +173,58 @@ class DiaryTableViewCell: UITableViewCell {
     //MARK: - diaryTableCellSeperatorView
     let diaryTableCellSeparatorView: UIView = {
        let diaryTableCellSeparatorView = UIView()
+        diaryTableCellSeparatorView.backgroundColor = .lightGray
         return diaryTableCellSeparatorView
     }()
     
-    func setviews() {
+    private func setviews() {
         addSubview(diaryHeadView)
+//        addSubview(pagenationScrollView)
+        addSubview(diaryTextView)
+        addSubview(stackButtonSeperatView)
+        
         diaryHeadView.anchor(top: topAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height:48)
         
-        diaryHeadView.addSubview(profileImageView)
-        diaryHeadView.addSubview(titleLable)
-        diaryHeadView.addSubview(dateLabel)
-        diaryHeadView.addSubview(editButton)
+            diaryHeadView.addSubview(profileImageView)
+            diaryHeadView.addSubview(titleLable)
+            diaryHeadView.addSubview(dateLabel)
+            diaryHeadView.addSubview(editButton)
         
-        profileImageView.anchor(top: nil, left: diaryHeadView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
-        profileImageView.centerYAnchor.constraint(equalToSystemSpacingBelow: diaryHeadView.centerYAnchor, multiplier: 0).isActive = true
+            profileImageView.anchor(top: nil, left: diaryHeadView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 35, height: 35)
+            profileImageView.centerYAnchor.constraint(equalToSystemSpacingBelow: diaryHeadView.centerYAnchor, multiplier: 0).isActive = true
+            titleLable.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            dateLabel.anchor(top: titleLable.bottomAnchor, left: titleLable.leftAnchor, bottom: nil, right: nil, paddingTop: 2.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            editButton.anchor(top: diaryHeadView.topAnchor, left: nil, bottom: diaryHeadView.bottomAnchor, right: diaryHeadView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 0)
         
-        titleLable.anchor(top: profileImageView.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        dateLabel.anchor(top: titleLable.bottomAnchor, left: titleLable.leftAnchor, bottom: nil, right: nil, paddingTop: 2.5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-        editButton.anchor(top: diaryHeadView.topAnchor, left: nil, bottom: diaryHeadView.bottomAnchor, right: diaryHeadView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 50, height: 0)
-        
-        addSubview(diaryTableCellSeparatorView)
-        diaryTableCellSeparatorView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 5)
-        
+        diaryTextView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
+        stackButtonSeperatView.anchor(top: diaryTextView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
+
         let diaryOptionStackView = UIStackView(arrangedSubviews: [commentButton,favoriteButton,shareButton])
         diaryOptionStackView.axis = .horizontal
         diaryOptionStackView.distribution = .fillEqually
-        
+
         addSubview(diaryOptionStackView)
-        diaryOptionStackView.anchor(top: nil, left: leftAnchor, bottom: diaryTableCellSeparatorView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 44)
+        addSubview(diaryTableCellSeparatorView)
+        diaryOptionStackView.anchor(top: stackButtonSeperatView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 44)
+        diaryTableCellSeparatorView.anchor(top: diaryOptionStackView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
+
         
-        addSubview(stackButtonSeperatView)
-        stackButtonSeperatView.anchor(top: nil, left: leftAnchor, bottom: diaryOptionStackView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
-        
-        addSubview(diaryTextView)
-        diaryTextView.anchor(top: nil, left: leftAnchor, bottom: stackButtonSeperatView.topAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
-        
-        addSubview(diaryImageView)
-        diaryImageView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: diaryTextView.topAnchor, right: rightAnchor, paddingTop: 2, paddingLeft: 0, paddingBottom: 8, paddingRight: 0, width: 0, height: 500)
-    
+        //        if let diaryImages = self.diarypageViewModel?.images, diaryImages.count != 0 {
+        //            pagenationScrollView.isHidden = false
+        //            pagenationScrollView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 12, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 350)
+        //            diaryTextView.anchor(top: pagenationScrollView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
+        //            stackButtonSeperatView.anchor(top: diaryTextView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
+        //        } else {
+        //            pagenationScrollView.isHidden = true
+        //            diaryTextView.anchor(top: diaryHeadView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 5, paddingLeft: 12, paddingBottom: 0, paddingRight: 50, width: 0, height: 150)
+        //            stackButtonSeperatView.anchor(top: diaryTextView.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 1)
+        //        }
+
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setviews()
-        
-        print("\(self.frame.height)")
+    
         
     }
     

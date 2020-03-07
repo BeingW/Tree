@@ -34,7 +34,6 @@ class UserDAO: FMDBHelper {
         
         fmdbQueue?.inTransaction({ (db, rollback) in
             do {
-                let userId = self.makeUserId()
                 //3.입력받을 데이터를 넣을 쿼리를 작성한다.
                 insertQuery = "INSERT INTO user (user_name, user_profileImage) VALUES (?, ?)"
 //                parmeters.append(userId)
@@ -71,10 +70,10 @@ class UserDAO: FMDBHelper {
                 
                 if resultSet.next() {
                     //3.user Table 에 data 를 가져온다.
-                    let userName = resultSet.string(forColumn: "user_name")
-                    let userProfileImage = resultSet.string(forColumn: "user_profileImage")
+                    let userName = resultSet.string(forColumn: "user_name") ?? ""
+                    let userProfileImage = resultSet.string(forColumn: "user_profileImage") ?? ""
                     //4.useTable 객체를 가져온 data를 이용해 만든다.
-                    userTableData = UserTableData(userName: userName ?? "", userProfileImage: userProfileImage ?? "")
+                    userTableData = UserTableData(userName: userName, userProfileImage: userProfileImage)
                 }
             } catch {
                 self.fmdb.rollback()
