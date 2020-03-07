@@ -216,10 +216,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     override func viewWillAppear(_ animated: Bool) {
-//        //1.editMode 가 true 일 때.
-//        if editMode == true {
-//            editModeView()
-//        }
+
     }
     
     
