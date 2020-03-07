@@ -189,6 +189,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
         self.profileButton.setImage(userProfileImage.withRenderingMode(.alwaysOriginal), for: .normal)
         self.profileButton.layer.cornerRadius = 125/2
         self.profileButton.layer.masksToBounds = true;
+        
         //1.2.SignupButton 의 text를 Save 바꾼다.
         let attirbutedString = NSAttributedString(string: "Save", attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 24, weight: .bold), NSAttributedString.Key.foregroundColor : UIColor.white])
         self.signupButton.setAttributedTitle(attirbutedString, for: .normal)
@@ -215,10 +216,7 @@ class SignupController: UIViewController, UIImagePickerControllerDelegate, UINav
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        //1.editMode 가 true 일 때.
-        if editMode == true {
-            editModeView()
-        }
+
     }
     
     

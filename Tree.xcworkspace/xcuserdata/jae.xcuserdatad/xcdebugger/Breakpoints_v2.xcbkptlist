@@ -2,8 +2,6 @@
 <Bucket
    type = "0"
    version = "2.0">
-<<<<<<< HEAD
-=======
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
@@ -11,62 +9,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Tree/DiaryPostController/DiaryPostController.swift"
-            timestampString = "605269486.609843"
+            filePath = "Tree/SignupLogninController/SignupController.swift"
+            timestampString = "605281180.332741"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "424"
-            endingLineNumber = "424"
-            landmarkName = "collectionView(_:cellForItemAt:)"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "imagePickerController(_:didFinishPickingMediaWithInfo:)"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Tree/DiaryTableViewController/DiaryTableViewController.swift"
-            timestampString = "605269486.609947"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "loadDiaryPage()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in Tree.DiaryTableViewController.(loadDiaryPage in _8141411B5353D49255AA7295FEC18E74)() -&gt; ()"
-                  moduleName = "Tree"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/Tree/DiaryTableViewController/DiaryTableViewController.swift"
-                  timestampString = "605269486.7757519"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "194"
-                  endingLineNumber = "194"
-                  offsetFromSymbolStart = "421">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;__C.NSError&gt;) -&gt; () in Tree.DiaryTableViewController.(loadDiaryPage in _8141411B5353D49255AA7295FEC18E74)() -&gt; ()"
-                  moduleName = "Tree"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jae/root/workspace/swift/src/github.com/Tree/Tree/DiaryTableViewController/DiaryTableViewController.swift"
-                  timestampString = "605269486.778613"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "148">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -76,15 +26,14 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tree/SignupLogninController/SignupController.swift"
-            timestampString = "605269486.610038"
+            timestampString = "605281180.333087"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "signUpButtonTapped()"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "editModeView()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
->>>>>>> feat/FixViews
 </Bucket>
