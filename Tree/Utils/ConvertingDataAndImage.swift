@@ -14,7 +14,7 @@ struct ConvertingDataAndImage {
         //1. UIImage 를 입력받는다.
         //2. Image 의 고유아이디를 만든다(확장자와 같이)
         let uuid = UUID().uuidString
-        let uuidWithTypeOfFile: String = "\(uuid).png"
+        let uuidWithTypeOfFile: String = "\(uuid).jpg"
         
         //3.유저 홈 디렉토리 url 를 가져온다.
         let fileManger = FileManager.default
@@ -25,7 +25,7 @@ struct ConvertingDataAndImage {
         
         do{
             //5.이미지를 데이터로 전환한다.
-            let selectedImageData: Data? = image.pngData()
+            let selectedImageData: Data? = image.jpegData(compressionQuality: 1.0)
             //6.전환된 데이터에 도메인을 쓴다.
             try selectedImageData?.write(to: fileUrl)
         } catch {

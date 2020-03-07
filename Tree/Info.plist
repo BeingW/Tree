@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Could you fine this app access your library?</string>
+	<string>Tree access camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Tree access photo library </string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
