@@ -23,7 +23,7 @@ class FMDBHelper {
         var documentPath = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first
         //2.경로뒤에 파일을 붙여 파일경로를 완성한다.
         dbPath = documentPath!.appendingPathComponent(file).path
-        print("\(dbPath)")
+//        print("\(dbPath)")
         //3.파일경로내에 데이터베이스가 존재하는지 확인한다.
         if fileManager.fileExists(atPath: dbPath) == false {
             //3.1.데이터베이스가 존재하지 않는다면

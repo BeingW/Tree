@@ -216,7 +216,6 @@ class DiaryPostController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print("viewWillAppear")
     }
     
     @objc func handleLongPress(longPressGesture: UILongPressGestureRecognizer) {
