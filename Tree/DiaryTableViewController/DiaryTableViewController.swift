@@ -13,7 +13,8 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     let diaryTableView = UITableView()
     let diaryTableCellId = "diaryCellId"
 
-    let diary = Diary()
+//    let diary = Diary()
+    fileprivate let diaryPageViewModelController = DiaryPageViewModelController()
     
     //MARK: - NavigationBar
     func navigationBar() {
@@ -143,6 +144,8 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         
         setView()
         setTableView()
+//        loadUserInfo()
+//        loadDiaryPage()
         
         self.tabBarController?.tabBar.isHidden = true
         
@@ -151,7 +154,9 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        loadDiary()
+        loadUserInfo()
+        loadDiaryPage()
+        
         
     }
     
@@ -171,16 +176,32 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     //MARK: - Set Data
-   private func loadDiary() {
+    private func loadUserInfo() {
         let userInfo = UserDAO().getUserTableData()
-        self.diary.setUserName(userName: userInfo.userName)
-        self.diary.setUserProfilImageUrl(userProfileImageUrl: userInfo.userProfileImage)
-        self.diary.pages = DiaryPageDAO().fetchDiaryPage() ?? [DiaryPage]()
-        self.diary.pages = self.diary.pages.sorted(by: { $0.getDate().compare($1.getDate()) == .orderedAscending })
-        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
+        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: userInfo.userProfileImage)
         self.recordTumbnailImageView.image = userProfileImage
-        self.diaryTableView.reloadData()
+//        self.diaryTableView.reloadData()
+    }
     
+    private func loadDiaryPage() {
+        self.diaryPageViewModelController.retrieveDiaryPages { [weak self] (success, error) in
+            guard let strongSelf = self else { return }
+            
+            if !success {
+                DispatchQueue.main.async {
+                    let title = "Error"
+                    if let error = error {
+                        strongSelf.showError(title, message: error.localizedDescription)
+                    } else {
+                        strongSelf.showError(title, message: NSLocalizedString("Can't retrieve contacts.", comment: "Can't retrieve contacts."))
+                    }
+                }
+            } else {
+                DispatchQueue.main.async {
+                    strongSelf.diaryTableView.reloadData()
+                }
+            }
+        }
     }
     
     /*
@@ -196,7 +217,8 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
     //MARK: - TableView DataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.diary.getPages().count
+//        return self.diary.getPages().count
+        return self.diaryPageViewModelController.viewModelCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -204,10 +226,26 @@ class DiaryTableViewController: UIViewController, UITableViewDelegate, UITableVi
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: diaryTableCellId, for: indexPath) as? DiaryTableViewCell else {fatalError()}
         
         cell.diaryTableViewCellDelegate = self
-        cell.diarypage = self.diary.getPages()[indexPath.item]
-        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
         
-        cell.profileImageView.image = userProfileImage
+        if let diarypageViewModel = self.diaryPageViewModelController.getDiaryPageViewModel(at: indexPath.row){
+            
+            if diarypageViewModel.images.count > 0 {
+                cell.diarypageViewModel = diarypageViewModel
+                cell.hasPhotos = true
+//                cell.configureWithImageView(viewModel: diarypageViewModel)
+            } else {
+                cell.diarypageViewModel = diarypageViewModel
+                cell.hasPhotos = false
+//                cell.configureView(viewModel: diarypageViewModel)
+            }
+        }
+        
+//        cell.diarypageViewModel = self.diaryPageViewModelController.getDiaryPageViewModel(at: indexPath.row)
+        
+//        cell.diarypage = self.diary.getPages()[indexPath.item]
+//        let userProfileImage = ConvertingDataAndImage().convertingFromUrlToImage(uniqueId: self.diary.getUserProfileImageUrl())
+        
+//        cell.profileImageView.image = userProfileImage
         
         return cell
     }
@@ -227,7 +265,7 @@ extension DiaryTableViewController: DiaryTableViewCellDelegate {
             //2.DiaryPageDAO 객체의 deleteDiaryPage() 함수를 호출하여 원하는 diaryPage 를 지운다.
             DiaryPageDAO().deleteDiaryPage(diaryPageDate: diaryPage.getDate())
             //3.TableView 를 갱신한다.
-            self.loadDiary()
+            self.loadUserInfo()
         }
         
         let editPostAction = UIAlertAction(title: "Edit Post", style: .default) { (action) in

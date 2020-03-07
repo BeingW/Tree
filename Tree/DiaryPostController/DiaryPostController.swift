@@ -22,7 +22,7 @@ class DiaryPostController: UIViewController {
     let imagePickerController: ImagePickerController = {
         let config = Configuration()
         config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry there are no images"
+        config.noImagesTitle = "Please wait a second"
         config.recordLocation = false
         let imagePickerController = ImagePickerController(configuration: config)
         imagePickerController.imageLimit = 10
@@ -110,19 +110,36 @@ class DiaryPostController: UIViewController {
     let plusButton: UIButton = {
         let button = UIButton()
         button.setBackgroundImage(UIImage(named: "toolBoxButton"), for: .normal)
+        button.addTarget(self, action: #selector(plusButtonTapped), for: .touchUpInside)
         return button
     }()
     
+    @objc func plusButtonTapped() {
+        if toolBoxView.isHidden {
+            toolBoxView.isHidden = false
+        } else {
+            toolBoxView.isHidden = true
+        }
+    }
+    
     let toolBoxView: UIView = {
         let uiView = UIView()
+        uiView.backgroundColor = .white
+        uiView.layer.cornerRadius = 15
+        let contactRect = CGRect(x: 9, y: 8, width: 200, height: 50)
+        uiView.layer.shadowPath = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 200, height: 50), cornerRadius: 15).cgPath
+        uiView.layer.shadowOffset = CGSize(width: 9, height: 8)
+        uiView.layer.shadowRadius = 8
+        uiView.layer.shadowOpacity = 0.2
+        uiView.isHidden = true
         return uiView
     }()
     
-    let buttonContainerImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "ToolBoxView")
-        return imageView
-    }()
+//    let buttonContainerImageView: UIImageView = {
+//        let imageView = UIImageView()
+//        imageView.image = UIImage(named: "ToolBoxView")
+//        return imageView
+//    }()
     
     let imageLibraryButton: UIButton = {
         let button = UIButton()
@@ -188,6 +205,7 @@ class DiaryPostController: UIViewController {
             if let diaryPage = self.diaryPage {
                 self.diaryTitleTextField.text = diaryPage.getTitle()
                 self.diaryContentTextView.text = diaryPage.getText()
+                self.diaryContentTextView.textColor = .black
                 if let diaryImages = diaryPage.getDiaryPageImages(), diaryImages.count != 0 {
                     self.diaryImages = diaryImages
                     self.diaryImageCollectionView.reloadData()
@@ -223,6 +241,9 @@ class DiaryPostController: UIViewController {
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             self.diaryImages.remove(at: indexPath!.row)
             self.diaryImageCollectionView.reloadData()
+            if self.diaryImages.count == 0 {
+                self.selectedImageView.image = UIImage()
+            }
         }
         
         alertController.addAction(deleteAction)
@@ -285,20 +306,22 @@ class DiaryPostController: UIViewController {
             plusButton.anchor(top: nil, left: nil, bottom: postContainerView.bottomAnchor, right: postContainerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 10, paddingRight: 10, width: 35, height: 35)
         
         //Tool box
-        toolBoxView.anchor(top: nil, left: nil, bottom: plusButton.centerYAnchor, right: plusButton.centerXAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -13, paddingRight: -14, width: buttonContainerImageViewWidth, height: buttonContainerImageViewHight)
+        toolBoxView.anchor(top: nil, left: nil, bottom: plusButton.centerYAnchor, right: plusButton.centerXAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 5, paddingRight: 5, width: 200, height: 50)
         
         imageLibraryButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: buttonWidth, height: buttonWidth)
-        let buttonStakView = UIStackView(arrangedSubviews: [imageLibraryButton, takePhotoButton, recordLibraryButton, takeLocationButton])
+        let buttonStakView = UIStackView(arrangedSubviews: [imageLibraryButton, recordLibraryButton, takeLocationButton])
         buttonStakView.axis = .horizontal
         buttonStakView.distribution = .fillEqually
-        buttonStakView.spacing = 10
+        buttonStakView.spacing = 20
         
-            //In ToolBoxView
-            self.toolBoxView.addSubview(buttonContainerImageView)
             self.toolBoxView.addSubview(buttonStakView)
-            buttonContainerImageView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
-        
-            buttonStakView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+            buttonStakView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 4, paddingLeft: 18, paddingBottom: 4, paddingRight: 18, width: 0, height: 0)
+//            buttonStakView.centerXAnchor.constraint(equalToSystemSpacingAfter: toolBoxView.centerXAnchor, multiplier: 0).isActive = true
+//            buttonStakView.centerYAnchor.constraint(equalToSystemSpacingBelow: toolBoxView.centerYAnchor, multiplier: 0).isActive = true
+            //In ToolBoxView
+//            self.toolBoxView.addSubview(buttonContainerImageView)
+//            buttonContainerImageView.anchor(top: toolBoxView.topAnchor, left: toolBoxView.leftAnchor, bottom: toolBoxView.bottomAnchor, right: toolBoxView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+
         
         //ContentContainerView
         self.view.addSubview(contentContainerSeperatorView)
@@ -363,9 +386,11 @@ extension DiaryPostController: ImagePickerDelegate, UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.textColor == UIColor.lightGray {
+        if !isEdit && textView.textColor == UIColor.lightGray {
             textView.text = nil
             textView.textColor = UIColor.black
+        } else  {
+            textView.textColor = .black
         }
     }
     
